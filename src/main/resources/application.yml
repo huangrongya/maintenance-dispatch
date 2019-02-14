@@ -1,0 +1,19 @@
+logging:
+  config: classpath:logback.xml
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.39:3307/tepth?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Hongkong&useSSL=false
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+url:
+  login: http://127.0.0.1:8081
