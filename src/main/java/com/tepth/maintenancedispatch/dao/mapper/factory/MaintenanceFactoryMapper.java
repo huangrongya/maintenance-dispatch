@@ -1,7 +1,7 @@
-package com.tepth.maintenancedispatch.dao.mapper.organization;
+package com.tepth.maintenancedispatch.dao.mapper.factory;
 
-import com.tepth.maintenancedispatch.dao.model.organization.MaintenanceFactory;
-import com.tepth.maintenancedispatch.dao.model.organization.MaintenanceFactoryExample;
+import com.tepth.maintenancedispatch.dao.model.factory.MaintenanceFactory;
+import com.tepth.maintenancedispatch.dao.model.factory.MaintenanceFactoryExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

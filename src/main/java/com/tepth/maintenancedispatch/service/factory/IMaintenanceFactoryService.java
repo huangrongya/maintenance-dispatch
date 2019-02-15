@@ -1,6 +1,6 @@
-package com.tepth.maintenancedispatch.service.organization;
+package com.tepth.maintenancedispatch.service.factory;
 
-import com.tepth.maintenancedispatch.dao.model.organization.MaintenanceFactory;
+import com.tepth.maintenancedispatch.dto.inner.MaintenanceFactoryVO;
 
 /**
  * @Author royle.huang
@@ -13,5 +13,5 @@ public interface IMaintenanceFactoryService {
      * @Date 2019/2/14 17:01
      * @Description 通过组织id 查询维修厂信息
      **/
-    MaintenanceFactory queryFactoryByOrganizationId(Integer organizationId);
+    MaintenanceFactoryVO queryFactoryByOrganizationId(Integer organizationId);
 }

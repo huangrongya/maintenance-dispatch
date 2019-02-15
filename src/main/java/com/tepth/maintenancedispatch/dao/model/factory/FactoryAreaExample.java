@@ -1,16 +1,16 @@
-package com.tepth.maintenancedispatch.dao.model.organization;
+package com.tepth.maintenancedispatch.dao.model.factory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaintenanceFactoryExample {
+public class FactoryAreaExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public MaintenanceFactoryExample() {
+    public FactoryAreaExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,186 +164,6 @@ public class MaintenanceFactoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdIsNull() {
-            addCriterion("organization_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdIsNotNull() {
-            addCriterion("organization_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdEqualTo(Integer value) {
-            addCriterion("organization_id =", value, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdNotEqualTo(Integer value) {
-            addCriterion("organization_id <>", value, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdGreaterThan(Integer value) {
-            addCriterion("organization_id >", value, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("organization_id >=", value, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdLessThan(Integer value) {
-            addCriterion("organization_id <", value, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdLessThanOrEqualTo(Integer value) {
-            addCriterion("organization_id <=", value, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdIn(List<Integer> values) {
-            addCriterion("organization_id in", values, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdNotIn(List<Integer> values) {
-            addCriterion("organization_id not in", values, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdBetween(Integer value1, Integer value2) {
-            addCriterion("organization_id between", value1, value2, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("organization_id not between", value1, value2, "organizationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatIsNull() {
-            addCriterion("lat is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatIsNotNull() {
-            addCriterion("lat is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatEqualTo(Double value) {
-            addCriterion("lat =", value, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatNotEqualTo(Double value) {
-            addCriterion("lat <>", value, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatGreaterThan(Double value) {
-            addCriterion("lat >", value, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatGreaterThanOrEqualTo(Double value) {
-            addCriterion("lat >=", value, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatLessThan(Double value) {
-            addCriterion("lat <", value, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatLessThanOrEqualTo(Double value) {
-            addCriterion("lat <=", value, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatIn(List<Double> values) {
-            addCriterion("lat in", values, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatNotIn(List<Double> values) {
-            addCriterion("lat not in", values, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatBetween(Double value1, Double value2) {
-            addCriterion("lat between", value1, value2, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLatNotBetween(Double value1, Double value2) {
-            addCriterion("lat not between", value1, value2, "lat");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngIsNull() {
-            addCriterion("lng is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngIsNotNull() {
-            addCriterion("lng is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngEqualTo(Double value) {
-            addCriterion("lng =", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngNotEqualTo(Double value) {
-            addCriterion("lng <>", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngGreaterThan(Double value) {
-            addCriterion("lng >", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngGreaterThanOrEqualTo(Double value) {
-            addCriterion("lng >=", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngLessThan(Double value) {
-            addCriterion("lng <", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngLessThanOrEqualTo(Double value) {
-            addCriterion("lng <=", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngIn(List<Double> values) {
-            addCriterion("lng in", values, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngNotIn(List<Double> values) {
-            addCriterion("lng not in", values, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngBetween(Double value1, Double value2) {
-            addCriterion("lng between", value1, value2, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngNotBetween(Double value1, Double value2) {
-            addCriterion("lng not between", value1, value2, "lng");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIsNull() {
             addCriterion("`name` is null");
             return (Criteria) this;
@@ -411,6 +231,126 @@ public class MaintenanceFactoryExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("`name` not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("`type` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("`type` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(Byte value) {
+            addCriterion("`type` =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(Byte value) {
+            addCriterion("`type` <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(Byte value) {
+            addCriterion("`type` >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("`type` >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(Byte value) {
+            addCriterion("`type` <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(Byte value) {
+            addCriterion("`type` <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<Byte> values) {
+            addCriterion("`type` in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<Byte> values) {
+            addCriterion("`type` not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(Byte value1, Byte value2) {
+            addCriterion("`type` between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(Byte value1, Byte value2) {
+            addCriterion("`type` not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdIsNull() {
+            addCriterion("organization_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdIsNotNull() {
+            addCriterion("organization_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdEqualTo(Integer value) {
+            addCriterion("organization_id =", value, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdNotEqualTo(Integer value) {
+            addCriterion("organization_id <>", value, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdGreaterThan(Integer value) {
+            addCriterion("organization_id >", value, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("organization_id >=", value, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdLessThan(Integer value) {
+            addCriterion("organization_id <", value, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdLessThanOrEqualTo(Integer value) {
+            addCriterion("organization_id <=", value, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdIn(List<Integer> values) {
+            addCriterion("organization_id in", values, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdNotIn(List<Integer> values) {
+            addCriterion("organization_id not in", values, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdBetween(Integer value1, Integer value2) {
+            addCriterion("organization_id between", value1, value2, "organizationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizationIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("organization_id not between", value1, value2, "organizationId");
             return (Criteria) this;
         }
     }

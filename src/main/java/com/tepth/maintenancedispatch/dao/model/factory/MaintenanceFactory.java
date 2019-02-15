@@ -1,4 +1,4 @@
-package com.tepth.maintenancedispatch.dao.model.organization;
+package com.tepth.maintenancedispatch.dao.model.factory;
 
 import java.io.Serializable;
 

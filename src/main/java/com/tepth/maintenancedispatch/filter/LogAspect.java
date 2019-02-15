@@ -28,7 +28,7 @@ public class LogAspect {
     private ThreadLocal<String> traceId = new ThreadLocal<>();
     private static final String PROJECT_NAME = "tepth-manager";
 
-    @Pointcut("execution(public * com.tepth.manager.controller.*.*(..))")
+    @Pointcut("execution(public * com.tepth.maintenancedispatch.controller..*.*(..))")
     public void controllerLog(){ }
 
     @Before("controllerLog()")
@@ -78,7 +78,7 @@ public class LogAspect {
     }
 
 
-    @AfterThrowing(pointcut="execution(* com.tepth.manager.service..*.*(..))",throwing="e")
+    @AfterThrowing(pointcut="execution(* com.tepth.maintenancedispatch.service..*.*(..))",throwing="e")
     public void afterThrowing(JoinPoint jp, RuntimeException e){
         long timeStamp = System.currentTimeMillis();
         JSONObject logJson = new JSONObject();

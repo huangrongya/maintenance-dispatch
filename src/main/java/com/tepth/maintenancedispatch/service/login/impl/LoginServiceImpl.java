@@ -2,13 +2,12 @@ package com.tepth.maintenancedispatch.service.login.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.comm.ErrorConstant;
-import com.tepth.maintenancedispatch.dao.model.organization.MaintenanceFactory;
 import com.tepth.maintenancedispatch.dto.UserLoginResponse;
 import com.tepth.maintenancedispatch.dto.inner.MaintenanceFactoryVO;
 import com.tepth.maintenancedispatch.dto.inner.UserInfo;
 import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.login.ILoginService;
-import com.tepth.maintenancedispatch.service.organization.IMaintenanceFactoryService;
+import com.tepth.maintenancedispatch.service.factory.IMaintenanceFactoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,11 +62,7 @@ public class LoginServiceImpl implements ILoginService {
             log.info("未获取到用户组织信息： "+ userInfo.getId());
             throw new ServiceException(ErrorConstant.PARAM_INCOMPLETE_CODE, ErrorConstant.PARAM_INCOMPLETE_MSG);
         }
-        MaintenanceFactory maintenanceFactory = maintenanceFactoryService.queryFactoryByOrganizationId(userInfo.getOrganizationId());
-        MaintenanceFactoryVO maintenanceFactoryVO = new MaintenanceFactoryVO();
-        maintenanceFactoryVO.setName(maintenanceFactory.getName());
-        maintenanceFactoryVO.setLat(maintenanceFactory.getLat());
-        maintenanceFactoryVO.setLng(maintenanceFactory.getLng());
+        MaintenanceFactoryVO maintenanceFactoryVO = maintenanceFactoryService.queryFactoryByOrganizationId(userInfo.getOrganizationId());
         response.setMaintenanceFactory(maintenanceFactoryVO);
         return response;
     }

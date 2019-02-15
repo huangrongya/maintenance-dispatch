@@ -1,6 +1,9 @@
 package com.tepth.maintenancedispatch.dto.inner;
 
+import com.tepth.maintenancedispatch.dao.model.factory.FactoryArea;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @Author royle.huang
@@ -29,4 +32,6 @@ public class MaintenanceFactoryVO {
      * 纬度
      */
     private Double lng;
+    /**维修厂区域**/
+    private List<FactoryArea> factoryAreas;
 }

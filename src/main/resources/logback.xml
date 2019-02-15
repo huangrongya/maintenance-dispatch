@@ -12,9 +12,7 @@
             <FileNamePattern>D:/var/log/tomcat/depth-manager/depth-manager.%d{yyyy-MM-dd}.log</FileNamePattern>
             <maxHistory>48</maxHistory>
         </rollingPolicy>
-        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <!--<layout class="com.etekcity.vbmp.timing.util.MyLogLayout"/>-->
-        </encoder>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder"/>
     </appender>
     <!-- root 默认日志配置 -->
     <root level="INFO">
