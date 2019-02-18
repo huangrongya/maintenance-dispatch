@@ -29,6 +29,18 @@ public class VehicleServiceImpl implements IVehicleService {
         Integer organizationId = request.getUser().getOrganizationId();
         List<VehicleVo> vehicleVoList = vehicleMapper.selectVehicleRepairingByOrganizationId(organizationId);
         //TODO 展示车辆不同状态数量信息， 等产品确认有哪些状态
+        int toBeConfirmed= 0;
+        int toBeExchanged= 0;
+        int isNotIn= 0;
+        int isIn=0;
+        for (VehicleVo vehicleVo : vehicleVoList) {
+            int status = vehicleVo.getRepairStatus();
+
+        }
+        response.setToBeConfirmed(toBeConfirmed);
+        response.setToBeExchanged(toBeExchanged);
+        response.setIsNotIn(isNotIn);
+        response.setIsIn(isIn);
         response.setVehicleList(vehicleVoList);
         return response;
     }

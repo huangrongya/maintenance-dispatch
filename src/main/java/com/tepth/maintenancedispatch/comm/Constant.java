@@ -7,5 +7,6 @@ package com.tepth.maintenancedispatch.comm;
  **/
 public class Constant {
 
-
+    /**机调员角色id**/
+    public static int MAINTENANCE_DISPATCHER_ROLE_ID = 9;
 }

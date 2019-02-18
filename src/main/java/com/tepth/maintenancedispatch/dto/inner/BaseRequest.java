@@ -15,6 +15,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BaseRequest {
     private String token;
-    private String jobNo;
     private UserInfo user;
 }
