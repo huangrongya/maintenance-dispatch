@@ -10,14 +10,15 @@ public class Constant {
     /**机调员角色id**/
     public static int MAINTENANCE_DISPATCHER_ROLE_ID = 9;
 
-    /**待领料**/
+    /**物料待领料**/
     public static byte MATERIAL_WAITING = 1;
-    /**已领料**/
+    /**物料已领料**/
     public static byte MATERIAL_RECIEVE = 2;
-    /**已退料**/
+    /**物料已退料**/
     public static byte MATERIAL_BACK = 3;
 
-    /**车辆状态数组**/
+    /**车辆状态数组 作业中**/
     public static Integer[] REPAIR_STATUS_WAITING = {1, 2};
+    /**车辆状态数组 待作业**/
     public static Integer[] REPAIR_STATUS_WORKING = {3, 4};
 }

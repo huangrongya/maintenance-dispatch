@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Max;
+import java.util.List;
+
 /**
  * @Author royle.huang
  * @Date 2019/2/15 17:05
@@ -25,6 +28,8 @@ public class WorkerController {
 
     @Autowired
     IWorkerService workerService;
+
+
 
     /**
      * @Author royle.huang

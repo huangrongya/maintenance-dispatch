@@ -3,10 +3,9 @@ package com.tepth.maintenancedispatch.service.factory.impl;
 import com.tepth.maintenancedispatch.comm.ErrorConstant;
 import com.tepth.maintenancedispatch.dao.mapper.factory.FactoryAreaMapper;
 import com.tepth.maintenancedispatch.dao.mapper.factory.MaintenanceFactoryMapper;
-import com.tepth.maintenancedispatch.dao.model.factory.FactoryArea;
-import com.tepth.maintenancedispatch.dao.model.factory.FactoryAreaExample;
-import com.tepth.maintenancedispatch.dao.model.factory.MaintenanceFactory;
-import com.tepth.maintenancedispatch.dao.model.factory.MaintenanceFactoryExample;
+import com.tepth.maintenancedispatch.dao.mapper.factory.OrganizationMapper;
+import com.tepth.maintenancedispatch.dao.model.factory.*;
+import com.tepth.maintenancedispatch.dto.GetGroupListResponse;
 import com.tepth.maintenancedispatch.dto.inner.MaintenanceFactoryVO;
 import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.factory.IMaintenanceFactoryService;
@@ -27,6 +26,8 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
     MaintenanceFactoryMapper maintenanceFactoryMapper;
     @Autowired
     FactoryAreaMapper factoryAreaMapper;
+    @Autowired
+    OrganizationMapper organizationMapper;
 
     @Override
     public MaintenanceFactoryVO queryFactoryByOrganizationId(Integer organizationId) {
@@ -51,5 +52,13 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
         vo.setId(factory.getId());
         vo.setFactoryAreas(factoryAreaList);
         return vo;
+    }
+
+    @Override
+    public GetGroupListResponse queryOrgGroupListByOrgId(Integer organizationId) {
+        GetGroupListResponse response = new GetGroupListResponse();
+        List<Organization> organizationList = organizationMapper.queryOrgGroupByPid(organizationId);
+        response.setOrganizationList(organizationList);
+        return response;
     }
 }
