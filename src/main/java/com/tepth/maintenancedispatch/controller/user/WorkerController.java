@@ -2,6 +2,7 @@ package com.tepth.maintenancedispatch.controller.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.dto.GetWorkerInfoResponse;
+import com.tepth.maintenancedispatch.dto.GetWorkerListMainPageRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.service.user.IWorkerService;
@@ -30,10 +31,11 @@ public class WorkerController {
      * @Date 2019/2/15 17:11
      * @Description 查询主页面显示的技工信息
      **/
-    @PostMapping("/workerInfo")
+    @PostMapping("/count")
     public BaseResponse queryWorkersMainPage(@RequestBody String json) {
         BaseRequest request = JSONObject.parseObject(json, BaseRequest.class);
         GetWorkerInfoResponse response = workerService.queryWorkersMainPage(request);
         return response;
     }
+
 }

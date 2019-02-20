@@ -71,6 +71,11 @@ public class Repair implements Serializable {
     private String faultId;
 
     /**
+     * 临时故障id（，隔开）
+     */
+    private String tempFaultId;
+
+    /**
      * 用户id（司机、机调员）
      */
     private Integer userId;
@@ -219,6 +224,14 @@ public class Repair implements Serializable {
 
     public void setFaultId(String faultId) {
         this.faultId = faultId;
+    }
+
+    public String getTempFaultId() {
+        return tempFaultId;
+    }
+
+    public void setTempFaultId(String tempFaultId) {
+        this.tempFaultId = tempFaultId;
     }
 
     public Integer getUserId() {

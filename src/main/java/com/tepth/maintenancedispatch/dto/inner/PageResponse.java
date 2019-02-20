@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class PageResponse<T> extends BaseResponse {
 
-    private Integer totalCount;
-    private Integer totalPage;
+    private Long totalCount;
+    private Long totalPage;
     private List<T> pageList;
 }

@@ -3,6 +3,7 @@ package com.tepth.maintenancedispatch.dao.mapper.repair;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
 import com.tepth.maintenancedispatch.dao.model.repair.RepairExample;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,4 +31,18 @@ public interface RepairMapper {
     int updateByPrimaryKeySelective(Repair record);
 
     int updateByPrimaryKey(Repair record);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/19 16:03
+     * @Description 首页工单待作业
+     **/
+    List<Repair> queryListByPageWithStatusArr(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/19 16:05
+     * @Description 首页工单待作业
+     **/
+    long queryListByPageCountWithStatusArr(Map<String, Object> map);
 }

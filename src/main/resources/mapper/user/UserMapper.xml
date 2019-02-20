@@ -321,4 +321,21 @@
     </if>
 
   </select>
+
+  <select id="selectDriverByVehicleId" resultMap="BaseResultMap" >
+    select
+    a.id,
+    a.job_no,
+    a.mobile_no,
+    a.user_name,
+    a.head_img_url,
+    a.scheduling,
+    a.online_status,
+    a.organization_id
+    from
+      tb_user a left join tb_user_vehicle b
+    on
+      a.id = b.user_id
+    where b.vehicle_id = #{vehicleId}
+  </select>
 </mapper>

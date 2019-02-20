@@ -44,13 +44,13 @@ public class PermissionAspect {
             user.setUserName("李狗蛋");
             user.setOrganizationId(4);
             user.setOrganizationName("新牌坊维修厂");
-            for (int i = 0; i < params.length; i++) {
-                if (params[i].toString().contains("token")){
-                    Map<String, UserInfo> userMap = new HashMap<>();
-                    userMap.put("user", user);
-                    params[i] = JSONObject.toJSONString(userMap);
-                }
+            if (params != null && params.length != 0){
+                String param = (String) params[0];
+                JSONObject paramJson = JSONObject.parseObject(param);
+                paramJson.put("user", user);
+                params[0] = JSONObject.toJSONString(paramJson);
             }
+
         }
         return joinPoint.proceed(params);
     }

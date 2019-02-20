@@ -32,4 +32,11 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> selectByOrganizationAndRole(@Param("organizationId") Integer organizationId, @Param("roleId") Integer roleId);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/20 9:06
+     * @Description 通过车辆查询司机信息
+     **/
+    List<User> selectDriverByVehicleId(@Param("vehicleId") Integer vehicleId);
 }

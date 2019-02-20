@@ -11,7 +11,7 @@ import com.tepth.maintenancedispatch.util.CommonUtil;
 public class Global {
 
 
-    public QueryPage getQueryPage(PageRequest pager) {
+    public static QueryPage getQueryPage(PageRequest pager) {
         QueryPage queryPage = new QueryPage();
         if (CommonUtil.isNotEmpty(pager.getPage())) {
             queryPage.setTargetPage(pager.getPage());

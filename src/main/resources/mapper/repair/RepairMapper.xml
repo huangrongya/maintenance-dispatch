@@ -471,4 +471,41 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 公共的分页 -->
+  <sql id="limit">
+    <if test="queryPage != null">
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
+  <!--排序的分页-->
+  <sql id="orderLimit">
+    <if test="queryPage != null">
+      <if test="queryPage.order != null and queryPage.sort != null">
+        order by ${queryPage.sort} ${queryPage.order}
+      </if>
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
+
+  <select id="queryListByPageWithStatusArr" resultMap="BaseResultMap">
+    <foreach collection="statusArr" separator="union all" item="item">
+      select
+      <include refid="Base_Column_List"/>
+      from tb_repair a
+      where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
+    </foreach>
+    order by gmt_create desc
+    <include refid="limit"/>
+  </select>
+
+  <select id="queryListByPageCountWithStatusArr" resultType="long">
+    select
+    <foreach collection="statusArr" separator=")+(" item="item" open="((" close="))">
+      select count(1)
+      from tb_repair a
+      where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
+    </foreach>
+    from dual
+  </select>
 </mapper>

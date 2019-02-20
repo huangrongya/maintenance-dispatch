@@ -9,9 +9,7 @@ import com.tepth.maintenancedispatch.dao.model.user.User;
 import com.tepth.maintenancedispatch.dto.GetWorkerInfoResponse;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
 import com.tepth.maintenancedispatch.dto.inner.UserInfo;
-import com.tepth.maintenancedispatch.dto.inner.WorkerVo;
 import com.tepth.maintenancedispatch.service.user.IWorkerService;
-import javafx.concurrent.Worker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +38,6 @@ public class WorkerServiceImpl implements IWorkerService {
         GetWorkerInfoResponse response = new GetWorkerInfoResponse();
         UserInfo user = request.getUser();
         //查找组织下面的技工
-        Integer id1 = user.getOrganizationId();
-        Integer id2 = Constant.MAINTENANCE_DISPATCHER_ROLE_ID;
         List<User> workers = userMapper.selectByOrganizationAndRole(user.getOrganizationId(), Constant.MAINTENANCE_DISPATCHER_ROLE_ID);
         response.setWorkers(workers);
         int online=0, offline=0;

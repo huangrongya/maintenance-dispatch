@@ -37,7 +37,7 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
         criteria.andOrganizationIdEqualTo(organizationId);
         List<MaintenanceFactory> list = maintenanceFactoryMapper.selectByExample(example);
         if (list.isEmpty()){
-            throw new ServiceException(ErrorConstant.DATABASE_NO_DATA_CODE, ErrorConstant.DATABASE_NO_DATA_MSG);
+            throw new ServiceException(ErrorConstant.DATABASE_NO_DATA_CODE+"", ErrorConstant.DATABASE_NO_DATA_MSG);
         }
         MaintenanceFactory factory = list.get(0);
         FactoryAreaExample factoryAreaExample = new FactoryAreaExample();

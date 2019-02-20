@@ -915,6 +915,76 @@ public class RepairExample {
             return (Criteria) this;
         }
 
+        public Criteria andTempFaultIdIsNull() {
+            addCriterion("temp_fault_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdIsNotNull() {
+            addCriterion("temp_fault_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdEqualTo(String value) {
+            addCriterion("temp_fault_id =", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdNotEqualTo(String value) {
+            addCriterion("temp_fault_id <>", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdGreaterThan(String value) {
+            addCriterion("temp_fault_id >", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdGreaterThanOrEqualTo(String value) {
+            addCriterion("temp_fault_id >=", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdLessThan(String value) {
+            addCriterion("temp_fault_id <", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdLessThanOrEqualTo(String value) {
+            addCriterion("temp_fault_id <=", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdLike(String value) {
+            addCriterion("temp_fault_id like", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdNotLike(String value) {
+            addCriterion("temp_fault_id not like", value, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdIn(List<String> values) {
+            addCriterion("temp_fault_id in", values, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdNotIn(List<String> values) {
+            addCriterion("temp_fault_id not in", values, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdBetween(String value1, String value2) {
+            addCriterion("temp_fault_id between", value1, value2, "tempFaultId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultIdNotBetween(String value1, String value2) {
+            addCriterion("temp_fault_id not between", value1, value2, "tempFaultId");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
