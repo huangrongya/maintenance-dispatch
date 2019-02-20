@@ -34,4 +34,16 @@ public class MaintenanceFactoryController {
         GetGroupListResponse response = maintenanceFactoryService.queryOrgGroupListByOrgId(request.getUser().getOrganizationId());
         return response;
     }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/20 16:07
+     * @Description 加载工位列表
+     **/
+    @PostMapping("/station")
+    public BaseResponse queryFactoryAreaStationList(@RequestBody String json){
+        BaseRequest request = JSONObject.parseObject(json, BaseRequest.class);
+        BaseResponse response = maintenanceFactoryService.queryFactoryAreaStationList(request.getUser().getOrganizationId());
+        return response;
+    }
 }

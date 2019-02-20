@@ -21,4 +21,7 @@ public class Constant {
     public static Integer[] REPAIR_STATUS_WAITING = {1, 2};
     /**车辆状态数组 待作业**/
     public static Integer[] REPAIR_STATUS_WORKING = {3, 4};
+
+    /**物料已退料**/
+    public static byte AREA_TYPE_WORK_STATION = 1;
 }

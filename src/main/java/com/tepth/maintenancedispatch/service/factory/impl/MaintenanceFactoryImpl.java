@@ -1,11 +1,14 @@
 package com.tepth.maintenancedispatch.service.factory.impl;
 
+import com.tepth.maintenancedispatch.comm.Constant;
 import com.tepth.maintenancedispatch.comm.ErrorConstant;
 import com.tepth.maintenancedispatch.dao.mapper.factory.FactoryAreaMapper;
 import com.tepth.maintenancedispatch.dao.mapper.factory.MaintenanceFactoryMapper;
 import com.tepth.maintenancedispatch.dao.mapper.factory.OrganizationMapper;
 import com.tepth.maintenancedispatch.dao.model.factory.*;
 import com.tepth.maintenancedispatch.dto.GetGroupListResponse;
+import com.tepth.maintenancedispatch.dto.GetWorkStationResponse;
+import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.MaintenanceFactoryVO;
 import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.factory.IMaintenanceFactoryService;
@@ -59,6 +62,17 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
         GetGroupListResponse response = new GetGroupListResponse();
         List<Organization> organizationList = organizationMapper.queryOrgGroupByPid(organizationId);
         response.setOrganizationList(organizationList);
+        return response;
+    }
+
+    @Override
+    public BaseResponse queryFactoryAreaStationList(Integer organizationId) {
+        GetWorkStationResponse response = new GetWorkStationResponse();
+        FactoryAreaExample example = new FactoryAreaExample();
+        FactoryAreaExample.Criteria criteria = example.createCriteria();
+        criteria.andOrganizationIdEqualTo(organizationId).andTypeEqualTo(Constant.AREA_TYPE_WORK_STATION);
+        List<FactoryArea> areaList = factoryAreaMapper.selectByExample(example);
+        response.setAreaList(areaList);
         return response;
     }
 }
