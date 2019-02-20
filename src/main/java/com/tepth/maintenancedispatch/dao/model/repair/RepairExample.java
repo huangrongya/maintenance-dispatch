@@ -605,6 +605,66 @@ public class RepairExample {
             return (Criteria) this;
         }
 
+        public Criteria andArrivalTimeIsNull() {
+            addCriterion("arrival_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeIsNotNull() {
+            addCriterion("arrival_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeEqualTo(Date value) {
+            addCriterion("arrival_time =", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeNotEqualTo(Date value) {
+            addCriterion("arrival_time <>", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeGreaterThan(Date value) {
+            addCriterion("arrival_time >", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("arrival_time >=", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeLessThan(Date value) {
+            addCriterion("arrival_time <", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeLessThanOrEqualTo(Date value) {
+            addCriterion("arrival_time <=", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeIn(List<Date> values) {
+            addCriterion("arrival_time in", values, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeNotIn(List<Date> values) {
+            addCriterion("arrival_time not in", values, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeBetween(Date value1, Date value2) {
+            addCriterion("arrival_time between", value1, value2, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeNotBetween(Date value1, Date value2) {
+            addCriterion("arrival_time not between", value1, value2, "arrivalTime");
+            return (Criteria) this;
+        }
+
         public Criteria andFinishTimeIsNull() {
             addCriterion("finish_time is null");
             return (Criteria) this;
@@ -1042,6 +1102,66 @@ public class RepairExample {
 
         public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdIsNull() {
+            addCriterion("dispatch_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdIsNotNull() {
+            addCriterion("dispatch_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdEqualTo(Integer value) {
+            addCriterion("dispatch_user_id =", value, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdNotEqualTo(Integer value) {
+            addCriterion("dispatch_user_id <>", value, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdGreaterThan(Integer value) {
+            addCriterion("dispatch_user_id >", value, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("dispatch_user_id >=", value, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdLessThan(Integer value) {
+            addCriterion("dispatch_user_id <", value, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("dispatch_user_id <=", value, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdIn(List<Integer> values) {
+            addCriterion("dispatch_user_id in", values, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdNotIn(List<Integer> values) {
+            addCriterion("dispatch_user_id not in", values, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("dispatch_user_id between", value1, value2, "dispatchUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("dispatch_user_id not between", value1, value2, "dispatchUserId");
             return (Criteria) this;
         }
 

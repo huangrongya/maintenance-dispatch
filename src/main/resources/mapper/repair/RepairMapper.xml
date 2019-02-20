@@ -10,12 +10,15 @@
     <result column="rescue" jdbcType="BIT" property="rescue" />
     <result column="accident" jdbcType="BIT" property="accident" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="arrival_time" jdbcType="TIMESTAMP" property="arrivalTime" />
     <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="rescue_status" jdbcType="TINYINT" property="rescueStatus" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="fault_id" jdbcType="VARCHAR" property="faultId" />
+    <result column="temp_fault_id" jdbcType="VARCHAR" property="tempFaultId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="dispatch_user_id" jdbcType="INTEGER" property="dispatchUserId" />
     <result column="vehicle_id" jdbcType="INTEGER" property="vehicleId" />
     <result column="org_maintenance_id" jdbcType="INTEGER" property="orgMaintenanceId" />
     <result column="org_group_id" jdbcType="INTEGER" property="orgGroupId" />
@@ -84,9 +87,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_no, additional, `type`, category, rescue, accident, add_time, finish_time, 
-    `status`, rescue_status, `state`, fault_id, user_id, vehicle_id, org_maintenance_id, 
-    org_group_id, worker_id, factory_area_id, process_instance_id, gmt_create, gmt_modified
+    id, order_no, additional, `type`, category, rescue, accident, add_time, arrival_time, 
+    finish_time, `status`, rescue_status, `state`, fault_id, temp_fault_id, user_id, 
+    dispatch_user_id, vehicle_id, org_maintenance_id, org_group_id, worker_id, factory_area_id, 
+    process_instance_id, gmt_create, gmt_modified
   </sql>
   <select id="selectByExample" parameterType="com.tepth.maintenancedispatch.dao.model.repair.RepairExample" resultMap="BaseResultMap">
     select
@@ -121,17 +125,19 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.tepth.maintenancedispatch.dao.model.repair.Repair" useGeneratedKeys="true">
     insert into tb_repair (order_no, additional, `type`, 
       category, rescue, accident, 
-      add_time, finish_time, `status`, 
-      rescue_status, `state`, fault_id, 
-      user_id, vehicle_id, org_maintenance_id, 
+      add_time, arrival_time, finish_time, 
+      `status`, rescue_status, `state`, 
+      fault_id, temp_fault_id, user_id, 
+      dispatch_user_id, vehicle_id, org_maintenance_id, 
       org_group_id, worker_id, factory_area_id, 
       process_instance_id, gmt_create, gmt_modified
       )
     values (#{orderNo,jdbcType=VARCHAR}, #{additional,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
       #{category,jdbcType=TINYINT}, #{rescue,jdbcType=BIT}, #{accident,jdbcType=BIT}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
-      #{rescueStatus,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{faultId,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, #{orgMaintenanceId,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{arrivalTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{rescueStatus,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
+      #{faultId,jdbcType=VARCHAR}, #{tempFaultId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{dispatchUserId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, #{orgMaintenanceId,jdbcType=INTEGER}, 
       #{orgGroupId,jdbcType=INTEGER}, #{workerId,jdbcType=VARCHAR}, #{factoryAreaId,jdbcType=INTEGER}, 
       #{processInstanceId,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
       )
@@ -160,6 +166,9 @@
       <if test="addTime != null">
         add_time,
       </if>
+      <if test="arrivalTime != null">
+        arrival_time,
+      </if>
       <if test="finishTime != null">
         finish_time,
       </if>
@@ -175,8 +184,14 @@
       <if test="faultId != null">
         fault_id,
       </if>
+      <if test="tempFaultId != null">
+        temp_fault_id,
+      </if>
       <if test="userId != null">
         user_id,
+      </if>
+      <if test="dispatchUserId != null">
+        dispatch_user_id,
       </if>
       <if test="vehicleId != null">
         vehicle_id,
@@ -225,6 +240,9 @@
       <if test="addTime != null">
         #{addTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="arrivalTime != null">
+        #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="finishTime != null">
         #{finishTime,jdbcType=TIMESTAMP},
       </if>
@@ -240,8 +258,14 @@
       <if test="faultId != null">
         #{faultId,jdbcType=VARCHAR},
       </if>
+      <if test="tempFaultId != null">
+        #{tempFaultId,jdbcType=VARCHAR},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchUserId != null">
+        #{dispatchUserId,jdbcType=INTEGER},
       </if>
       <if test="vehicleId != null">
         #{vehicleId,jdbcType=INTEGER},
@@ -302,6 +326,9 @@
       <if test="record.addTime != null">
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.arrivalTime != null">
+        arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.finishTime != null">
         finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
       </if>
@@ -317,8 +344,14 @@
       <if test="record.faultId != null">
         fault_id = #{record.faultId,jdbcType=VARCHAR},
       </if>
+      <if test="record.tempFaultId != null">
+        temp_fault_id = #{record.tempFaultId,jdbcType=VARCHAR},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dispatchUserId != null">
+        dispatch_user_id = #{record.dispatchUserId,jdbcType=INTEGER},
       </if>
       <if test="record.vehicleId != null">
         vehicle_id = #{record.vehicleId,jdbcType=INTEGER},
@@ -359,12 +392,15 @@
       rescue = #{record.rescue,jdbcType=BIT},
       accident = #{record.accident,jdbcType=BIT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
       finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
       `status` = #{record.status,jdbcType=TINYINT},
       rescue_status = #{record.rescueStatus,jdbcType=TINYINT},
       `state` = #{record.state,jdbcType=TINYINT},
       fault_id = #{record.faultId,jdbcType=VARCHAR},
+      temp_fault_id = #{record.tempFaultId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
+      dispatch_user_id = #{record.dispatchUserId,jdbcType=INTEGER},
       vehicle_id = #{record.vehicleId,jdbcType=INTEGER},
       org_maintenance_id = #{record.orgMaintenanceId,jdbcType=INTEGER},
       org_group_id = #{record.orgGroupId,jdbcType=INTEGER},
@@ -401,6 +437,9 @@
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="arrivalTime != null">
+        arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="finishTime != null">
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
       </if>
@@ -416,8 +455,14 @@
       <if test="faultId != null">
         fault_id = #{faultId,jdbcType=VARCHAR},
       </if>
+      <if test="tempFaultId != null">
+        temp_fault_id = #{tempFaultId,jdbcType=VARCHAR},
+      </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="dispatchUserId != null">
+        dispatch_user_id = #{dispatchUserId,jdbcType=INTEGER},
       </if>
       <if test="vehicleId != null">
         vehicle_id = #{vehicleId,jdbcType=INTEGER},
@@ -455,12 +500,15 @@
       rescue = #{rescue,jdbcType=BIT},
       accident = #{accident,jdbcType=BIT},
       add_time = #{addTime,jdbcType=TIMESTAMP},
+      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
       finish_time = #{finishTime,jdbcType=TIMESTAMP},
       `status` = #{status,jdbcType=TINYINT},
       rescue_status = #{rescueStatus,jdbcType=TINYINT},
       `state` = #{state,jdbcType=TINYINT},
       fault_id = #{faultId,jdbcType=VARCHAR},
+      temp_fault_id = #{tempFaultId,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
+      dispatch_user_id = #{dispatchUserId,jdbcType=INTEGER},
       vehicle_id = #{vehicleId,jdbcType=INTEGER},
       org_maintenance_id = #{orgMaintenanceId,jdbcType=INTEGER},
       org_group_id = #{orgGroupId,jdbcType=INTEGER},
@@ -472,40 +520,117 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <!-- 公共的分页 -->
-  <sql id="limit">
-    <if test="queryPage != null">
-      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
-    </if>
-  </sql>
-  <!--排序的分页-->
-  <sql id="orderLimit">
-    <if test="queryPage != null">
-      <if test="queryPage.order != null and queryPage.sort != null">
-        order by ${queryPage.sort} ${queryPage.order}
-      </if>
-      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
-    </if>
-  </sql>
+    <!-- 公共的分页 -->
+    <sql id="limit">
+        <if test="queryPage != null">
+            limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+        </if>
+    </sql>
+    <!--排序的分页-->
+    <sql id="orderLimit">
+        <if test="queryPage != null">
+            <if test="queryPage.order != null and queryPage.sort != null">
+                order by ${queryPage.sort} ${queryPage.order}
+            </if>
+            limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+        </if>
+    </sql>
+    <sql id="queryCondition">
+        <if test="status != null">
+            and a.status = #{status}
+        </if>
+        <if test="orgGroupId != null">
+            and a.orgGroupId = #{orgGroupId}
+        </if>
+        <if test="type != null">
+            and a.type = #{type}
+        </if>
+        <if test="areaId != null">
+            and a.areaId = #{areaId}
+        </if>
+        <if test="startDate != null">
+            <![CDATA[  and date (a.add_time) >= date(#{startDate}) ]]>
+        </if>
+        <if test="endDate != null">
+            <![CDATA[  and date (a.add_time) <= date(#{endDate}) ]]>
+        </if>
+        <!--<if test="isMyDeal != null">
+          and a.status in ();
+        </if>-->
+        <if test="keyword != null and keyword.trim() != ''">
+            and (
+            c.user_name like concat('%', #{keyword}, '%')
+            or d.vehicle_no = #{vehicleNo}
+            )
+        </if>
+    </sql>
 
-  <select id="queryListByPageWithStatusArr" resultMap="BaseResultMap">
-    <foreach collection="statusArr" separator="union all" item="item">
-      select
-      <include refid="Base_Column_List"/>
-      from tb_repair a
-      where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
-    </foreach>
-    order by gmt_create desc
-    <include refid="limit"/>
-  </select>
+    <select id="queryListByPageWithStatusArr" resultMap="BaseResultMap">
+        <foreach collection="statusArr" separator="union all" item="item">
+            select
+            <include refid="Base_Column_List"/>
+            from tb_repair a
+            where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
+        </foreach>
+        order by gmt_create desc
+        <include refid="limit"/>
+    </select>
 
-  <select id="queryListByPageCountWithStatusArr" resultType="long">
-    select
-    <foreach collection="statusArr" separator=")+(" item="item" open="((" close="))">
-      select count(1)
-      from tb_repair a
-      where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
-    </foreach>
-    from dual
+    <select id="queryListByPageCountWithStatusArr" resultType="long">
+        select
+        <foreach collection="statusArr" separator=")+(" item="item" open="((" close="))">
+            select count(1)
+            from tb_repair a
+            where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
+        </foreach>
+        from dual
+    </select>
+
+    <select id="queryListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.RepairVO">
+        select
+        a.id id,
+        a.order_no orderNo,a.
+        additional additional,
+        a.type `type`,
+        a.category category,
+        a.rescue rescue,
+        a.accident accident,
+        a.add_time addTime,
+        a.finish_time finishTime,
+        a.status `status`,
+        a.rescue_status rescueStatus,
+        a.state `state`,
+        a.fault_id faultId,
+        a.user_id userId,
+        a.vehicle_id vehicleId,
+        a.org_maintenance_id orgMaintenanceId,
+        a.org_group_id orgGroupId,
+        a.worker_id workerId,
+        a.factory_area_id factoryAreaId,
+        a.process_instance_id processInstanceId,
+        a.gmt_create gmtCreate,
+        a.gmt_modified gmtModified,
+        b.name groupName,
+        c.user_name driverName,
+        d.vehicle_no vehicleNo
+
+        from tb_repair a
+        left join tb_organization b on b.id = a.org_group_id
+        left join tb_user c on c.id = a.user_id
+        left join tb_vehicle d on d.id = a.vehicle_id
+        where a.category = 1 and a.org_maintenance_id = #{organizationId}
+        <include refid="queryCondition"/>
+        order by gmt_create desc
+        <include refid="limit"/>
+    </select>
+
+    <select id="queryListByPageCount" resultType="long">
+        select count(1)
+        from tb_repair a
+        left join tb_organization b on b.id = a.org_group_id
+        left join tb_user c on c.id = a.user_id
+        left join tb_vehicle d on d.id = a.vehicle_id
+        where a.category = 1 and a.org_maintenance_id = #{organizationId}
+    <include refid="queryCondition"/>
   </select>
 </mapper>

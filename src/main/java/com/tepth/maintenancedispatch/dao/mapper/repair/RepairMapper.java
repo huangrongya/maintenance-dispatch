@@ -5,6 +5,7 @@ import com.tepth.maintenancedispatch.dao.model.repair.RepairExample;
 import java.util.List;
 import java.util.Map;
 
+import com.tepth.maintenancedispatch.dto.inner.RepairVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -45,4 +46,18 @@ public interface RepairMapper {
      * @Description 首页工单待作业
      **/
     long queryListByPageCountWithStatusArr(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/20 10:50
+     * @Description 通用分页查询
+     **/
+    List<RepairVO> queryListByPage(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/20 10:50
+     * @Description 通用分页查询
+     **/
+    long queryListByPageCount(Map<String, Object> map);
 }

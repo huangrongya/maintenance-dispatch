@@ -362,7 +362,7 @@
         <![CDATA[  and date (a.arrival_time) >= date(#{startDate}) ]]>
     </if>
     <if test="endDate != null">
-        <![CDATA[  and date (a.arrival_time) >= date(#{endDate}) ]]>
+        <![CDATA[  and date (a.arrival_time) <= date(#{endDate}) ]]>
     </if>
     <if test="organizationId != null">
         and a.organization_id = #{organizationId}
@@ -385,7 +385,7 @@
         <![CDATA[  and date (a1.arrival_time) >= date(#{startDate}) ]]>
     </if>
     <if test="endDate != null">
-        <![CDATA[  and date (a1.arrival_time) >= date(#{endDate}) ]]>
+        <![CDATA[  and date (a1.arrival_time) <= date(#{endDate}) ]]>
     </if>
       <if test="organizationId != null">
           and a1.organization_id = #{organizationId}

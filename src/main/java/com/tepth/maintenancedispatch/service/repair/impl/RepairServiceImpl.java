@@ -9,6 +9,7 @@ import com.tepth.maintenancedispatch.dto.AddRepairRequest;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
+import com.tepth.maintenancedispatch.dto.inner.RepairVO;
 import com.tepth.maintenancedispatch.dto.inner.UserInfo;
 import com.tepth.maintenancedispatch.service.repair.IRepairService;
 import com.tepth.maintenancedispatch.util.PageUtil;
@@ -34,7 +35,7 @@ public class RepairServiceImpl implements IRepairService {
     RepairMapper repairMapper;
 
     @Override
-    public PageResponse<Repair> queryRepairListByPage(GetRepairListPagingRequest request) {
+    public PageResponse<Repair> queryRepairListByPageStatusArr(GetRepairListPagingRequest request) {
         PageResponse<Repair> response = new PageResponse<>();
         UserInfo userInfo = request.getUser();
         QueryPage page = Global.getQueryPage(request);
@@ -57,6 +58,30 @@ public class RepairServiceImpl implements IRepairService {
     public BaseResponse addRepairInfo(AddRepairRequest request) {
         BaseResponse response = new BaseResponse();
         //TODO 调用司机端接口 添加
+        return response;
+    }
+
+    @Override
+    public PageResponse<RepairVO> queryRepairListByPageComm(GetRepairListPagingRequest request) {
+        PageResponse<RepairVO> response = new PageResponse<>();
+        UserInfo userInfo = request.getUser();
+        QueryPage page = Global.getQueryPage(request);
+        Map<String, Object> map = new HashMap<>();
+        map.put("queryPage", page);
+        map.put("type", request.getType());
+        map.put("isMyDeal", request.getIsMyDeal());
+        map.put("areaId", request.getAreaId());
+        map.put("orgGroupId", request.getOrgGroupId());
+        map.put("keyword", request.getKeyWord());
+        map.put("status", request.getStatusArr());
+        map.put("organizationId", userInfo.getOrganizationId());
+        map.put("startDate", request.getStartDate());
+        map.put("endDate", request.getEndDate());
+        List<RepairVO> repairList = repairMapper.queryListByPage(map);
+        long total = repairMapper.queryListByPageCount(map);
+        response.setPageList(repairList);
+        response.setTotalCount(total);
+        response.setTotalPage(PageUtil.getTotalPage(total, page.getPageSize()));
         return response;
     }
 }

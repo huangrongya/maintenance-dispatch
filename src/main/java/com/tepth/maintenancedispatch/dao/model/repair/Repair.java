@@ -46,12 +46,17 @@ public class Repair implements Serializable {
     private Date addTime;
 
     /**
+     * 到厂时间
+     */
+    private Date arrivalTime;
+
+    /**
      * 完成时间
      */
     private Date finishTime;
 
     /**
-     * 维保作业状态：1-待回厂(站) 2-已回厂(站) 3-司机已交车 4-已过检 5-已竣检 6-司机已接车 7-已出厂
+     * 维保作业状态（维修厂）：1-待回厂(站) 2-已回厂(站) 3-司机已交车 4-已过检 5-已竣检 6-司机已接车 7-已出厂
      */
     private Byte status;
 
@@ -79,6 +84,11 @@ public class Repair implements Serializable {
      * 用户id（司机、机调员）
      */
     private Integer userId;
+
+    /**
+     * 机调员id 司机申请则无此字段
+     */
+    private Integer dispatchUserId;
 
     /**
      * 车辆id
@@ -186,6 +196,14 @@ public class Repair implements Serializable {
         this.addTime = addTime;
     }
 
+    public Date getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
     public Date getFinishTime() {
         return finishTime;
     }
@@ -240,6 +258,14 @@ public class Repair implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getDispatchUserId() {
+        return dispatchUserId;
+    }
+
+    public void setDispatchUserId(Integer dispatchUserId) {
+        this.dispatchUserId = dispatchUserId;
     }
 
     public Integer getVehicleId() {
