@@ -40,7 +40,14 @@ public interface IRepairService {
     /**
      * @Author royle.huang
      * @Date 2019/2/21 10:39
-     * @Description 交车
+     * @Description 交车给技工
      **/
     BaseResponse exchangeVehicleToWorker(ExchangeRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 10:55
+     * @Description 交车给司机
+     **/
+    BaseResponse exchangeVehicleToDriver(ExchangeRequest request);
 }

@@ -147,12 +147,24 @@ public class RepairController {
     /**
      * @Author royle.huang
      * @Date 2019/2/21 10:24
-     * @Description 交车
+     * @Description 司机交车给技工
      **/
-    @PostMapping("/exchange")
+    @PostMapping("/exchange/worker")
     public BaseResponse exchangeVehicleToWorker(@RequestBody String json){
         ExchangeRequest request = JSONObject.parseObject(json, ExchangeRequest.class);
         BaseResponse response = repairService.exchangeVehicleToWorker(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 10:24
+     * @Description 交车给司机
+     **/
+    @PostMapping("/exchange/driver")
+    public BaseResponse exchangeVehicleToDriver(@RequestBody String json){
+        ExchangeRequest request = JSONObject.parseObject(json, ExchangeRequest.class);
+        BaseResponse response = repairService.exchangeVehicleToDriver(request);
         return response;
     }
 

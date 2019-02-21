@@ -119,4 +119,20 @@ public class RepairServiceImpl implements IRepairService {
         repairMapper.updateByPrimaryKeySelective(repair);
         return response;
     }
+
+    @Override
+    public BaseResponse exchangeVehicleToDriver(ExchangeRequest request) {
+        BaseResponse response = new BaseResponse();
+        Repair repair = repairMapper.selectByPrimaryKey(request.getRepairId());
+        if (repair == null){
+            throw new ServiceException(RspCodeEnum.USER_NOT_EXISTS.getCode(), RspCodeEnum.USER_NOT_EXISTS.getDesc());
+        }
+        if (!RepairStatusEnum.VEHICLE_INSPECTION.getCode().equals(repair.getStatus())){
+            throw new ServiceException(RspCodeEnum.VEHICLE_WRONG_STATUS.getCode(), RspCodeEnum.VEHICLE_WRONG_STATUS.getDesc());
+        }
+        repair.setStatus(RepairStatusEnum.EXCHANGE_TO_DRIVER.getCode());
+        repair.setGmtModified(new Date());
+        repairMapper.updateByPrimaryKeySelective(repair);
+        return response;
+    }
 }
