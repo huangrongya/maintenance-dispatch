@@ -1,8 +1,10 @@
 package com.tepth.maintenancedispatch.service.factory;
 
 import com.tepth.maintenancedispatch.dto.GetGroupListResponse;
+import com.tepth.maintenancedispatch.dto.GetGroupRecommendResponse;
 import com.tepth.maintenancedispatch.dto.GetWorkStationRecommendResponse;
 import com.tepth.maintenancedispatch.dto.GetWorkStationResponse;
+import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
 import com.tepth.maintenancedispatch.dto.inner.MaintenanceFactoryVO;
 
 /**
@@ -38,4 +40,11 @@ public interface IMaintenanceFactoryService {
      * @Description 推荐工位
      **/
     GetWorkStationRecommendResponse queryWorkStationRecommend(Integer organizationId);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 9:31
+     * @Description 推荐班组
+     **/
+    GetGroupRecommendResponse queryOrgGroupRecommend(BaseRequest request);
 }

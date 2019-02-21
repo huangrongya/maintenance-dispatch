@@ -9,5 +9,5 @@ import java.util.List;
 @Data
 public class GetGroupListResponse extends BaseResponse {
 
-    List<Organization> organizationList;
+    List<Organization> groupList;
 }

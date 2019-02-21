@@ -9,8 +9,11 @@ import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.model.factory.*;
 import com.tepth.maintenancedispatch.dao.model.repair.RepairExample;
 import com.tepth.maintenancedispatch.dto.GetGroupListResponse;
+import com.tepth.maintenancedispatch.dto.GetGroupRecommendResponse;
 import com.tepth.maintenancedispatch.dto.GetWorkStationRecommendResponse;
 import com.tepth.maintenancedispatch.dto.GetWorkStationResponse;
+import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
+import com.tepth.maintenancedispatch.dto.inner.GroupVO;
 import com.tepth.maintenancedispatch.dto.inner.MaintenanceFactoryVO;
 import com.tepth.maintenancedispatch.dto.inner.WorkStation;
 import com.tepth.maintenancedispatch.exception.ServiceException;
@@ -66,7 +69,7 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
     public GetGroupListResponse queryOrgGroupListByOrgId(Integer organizationId) {
         GetGroupListResponse response = new GetGroupListResponse();
         List<Organization> organizationList = organizationMapper.queryOrgGroupByPid(organizationId);
-        response.setOrganizationList(organizationList);
+        response.setGroupList(organizationList);
         return response;
     }
 
@@ -128,5 +131,50 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
         response.setWorkStations(list);
         return response;
 
+    }
+
+    @Override
+    public GetGroupRecommendResponse queryOrgGroupRecommend(BaseRequest request) {
+        GetGroupRecommendResponse response = new GetGroupRecommendResponse();
+        List<Organization> organizationList = organizationMapper.queryOrgGroupByPid(request.getUser().getOrganizationId());
+        if (organizationList.isEmpty()){
+            return response;
+        }
+        List<GroupVO> groupList = new ArrayList<>();
+        for (Organization organization : organizationList) {
+            GroupVO groupVO = new GroupVO();
+            MyBeanUtils.copyPropertiesIgnoreCase(organization, groupVO);
+            groupVO.setRecommend(0);
+            groupList.add(groupVO);
+
+        }
+
+        //推荐
+        long min = 0;
+        List<Integer> idList = new ArrayList<>();
+        for (GroupVO groupVO : groupList) {
+            RepairExample example = new RepairExample();
+            RepairExample.Criteria criteria = example.createCriteria();
+            criteria.andOrgGroupIdEqualTo(groupVO.getId());
+            long count = repairMapper.countByExample(example);
+            if (min == count) {
+                idList.add(groupVO.getId());
+            }else if (min > count){
+                min = count;
+                idList.clear();
+                idList.add(groupVO.getId());
+            }
+        }
+        Random random = new Random();
+        int index = random.nextInt(idList.size());
+        long recommend = idList.get(index);
+        for (GroupVO groupVO : groupList) {
+            if (groupVO.getId()==recommend){
+                groupVO.setRecommend(1);
+                break;
+            }
+        }
+        response.setGroupList(groupList);
+        return response;
     }
 }

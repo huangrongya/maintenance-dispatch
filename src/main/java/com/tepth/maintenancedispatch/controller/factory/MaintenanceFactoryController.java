@@ -2,6 +2,7 @@ package com.tepth.maintenancedispatch.controller.factory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.dto.GetGroupListResponse;
+import com.tepth.maintenancedispatch.dto.GetGroupRecommendResponse;
 import com.tepth.maintenancedispatch.dto.GetWorkStationRecommendResponse;
 import com.tepth.maintenancedispatch.dto.GetWorkStationResponse;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
@@ -61,4 +62,17 @@ public class MaintenanceFactoryController {
         return response;
 
     }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 9:24
+     * @Description 推荐班组
+     **/
+    @PostMapping("/group/recommend")
+    public BaseResponse queryGroupRecommend(@RequestBody String json){
+        BaseRequest request = JSONObject.parseObject(json, BaseRequest.class);
+        GetGroupRecommendResponse response = maintenanceFactoryService.queryOrgGroupRecommend(request);
+        return response;
+    }
+
 }
