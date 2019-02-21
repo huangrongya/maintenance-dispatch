@@ -62,6 +62,7 @@ public class LoginServiceImpl implements ILoginService {
             throw new ServiceException(ErrorConstant.PARAM_INCOMPLETE_CODE+"", ErrorConstant.PARAM_INCOMPLETE_MSG);
         }
         MaintenanceFactoryVO maintenanceFactoryVO = maintenanceFactoryService.queryFactoryByOrganizationId(userInfo.getOrganizationId());
+//        MaintenanceFactoryVO maintenanceFactoryVO = maintenanceFactoryService.queryFactoryByOrganizationId(4);
         response.setMaintenanceFactory(maintenanceFactoryVO);
         return response;
     }

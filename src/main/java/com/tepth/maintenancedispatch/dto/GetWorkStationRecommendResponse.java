@@ -6,8 +6,12 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @Author royle.huang
+ * @Date 2019/2/20 19:40
+ * @Description 获取推荐工位
+ **/
 @Data
-public class GetWorkStationResponse extends BaseResponse {
-
-    List<WorkStation> workStation;
+public class GetWorkStationRecommendResponse extends BaseResponse {
+    List<WorkStation> workStations;
 }

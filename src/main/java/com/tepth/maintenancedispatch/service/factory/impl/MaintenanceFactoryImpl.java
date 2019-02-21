@@ -5,17 +5,23 @@ import com.tepth.maintenancedispatch.comm.ErrorConstant;
 import com.tepth.maintenancedispatch.dao.mapper.factory.FactoryAreaMapper;
 import com.tepth.maintenancedispatch.dao.mapper.factory.MaintenanceFactoryMapper;
 import com.tepth.maintenancedispatch.dao.mapper.factory.OrganizationMapper;
+import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.model.factory.*;
+import com.tepth.maintenancedispatch.dao.model.repair.RepairExample;
 import com.tepth.maintenancedispatch.dto.GetGroupListResponse;
+import com.tepth.maintenancedispatch.dto.GetWorkStationRecommendResponse;
 import com.tepth.maintenancedispatch.dto.GetWorkStationResponse;
-import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.MaintenanceFactoryVO;
+import com.tepth.maintenancedispatch.dto.inner.WorkStation;
 import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.factory.IMaintenanceFactoryService;
+import com.tepth.maintenancedispatch.util.MyBeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @Author royle.huang
@@ -31,6 +37,8 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
     FactoryAreaMapper factoryAreaMapper;
     @Autowired
     OrganizationMapper organizationMapper;
+    @Autowired
+    RepairMapper repairMapper;
 
     @Override
     public MaintenanceFactoryVO queryFactoryByOrganizationId(Integer organizationId) {
@@ -49,10 +57,7 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
         factoryCriteria.andOrganizationIdEqualTo(organizationId);
         List<FactoryArea> factoryAreaList = factoryAreaMapper.selectByExample(factoryAreaExample);
 
-        vo.setLng(factory.getLng());
-        vo.setLat(factory.getLat());
-        vo.setName(factory.getName());
-        vo.setId(factory.getId());
+        MyBeanUtils.copyPropertiesIgnoreCase(factory, vo);
         vo.setFactoryAreas(factoryAreaList);
         return vo;
     }
@@ -66,13 +71,62 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
     }
 
     @Override
-    public BaseResponse queryFactoryAreaStationList(Integer organizationId) {
+    public GetWorkStationResponse queryFactoryAreaStationList(Integer organizationId) {
         GetWorkStationResponse response = new GetWorkStationResponse();
+        List<WorkStation> list = getWorkStations(organizationId);
+        response.setWorkStation(list);
+        return response;
+    }
+
+    private List<WorkStation> getWorkStations(Integer organizationId) {
         FactoryAreaExample example = new FactoryAreaExample();
         FactoryAreaExample.Criteria criteria = example.createCriteria();
         criteria.andOrganizationIdEqualTo(organizationId).andTypeEqualTo(Constant.AREA_TYPE_WORK_STATION);
         List<FactoryArea> areaList = factoryAreaMapper.selectByExample(example);
-        response.setAreaList(areaList);
+        List<WorkStation> list = new ArrayList<>();
+        for (FactoryArea factoryArea : areaList) {
+            WorkStation workStation = new WorkStation();
+            workStation.setId(factoryArea.getId());
+            workStation.setName(factoryArea.getName());
+            workStation.setRecommend(0);
+            list.add(workStation);
+        }
+        return list;
+    }
+
+    @Override
+    public GetWorkStationRecommendResponse queryWorkStationRecommend(Integer organizationId) {
+        GetWorkStationRecommendResponse response = new GetWorkStationRecommendResponse();
+        List<WorkStation> list = getWorkStations(organizationId);
+        if (list.isEmpty()){
+            return response;
+        }
+        long min = 0;
+        List<Integer> idList = new ArrayList<>();
+        for (WorkStation workStation : list) {
+            RepairExample example = new RepairExample();
+            RepairExample.Criteria criteria = example.createCriteria();
+            criteria.andFactoryAreaIdEqualTo(workStation.getId());
+            long count = repairMapper.countByExample(example);
+            if (min == count) {
+                idList.add(workStation.getId());
+            }else if (min > count){
+                min = count;
+                idList.clear();
+                idList.add(workStation.getId());
+            }
+        }
+        Random random = new Random();
+        int index = random.nextInt(idList.size());
+        long recommend = idList.get(index);
+        for (WorkStation workStation : list) {
+            if (workStation.getId()==recommend){
+                workStation.setRecommend(1);
+                break;
+            }
+        }
+        response.setWorkStations(list);
         return response;
+
     }
 }

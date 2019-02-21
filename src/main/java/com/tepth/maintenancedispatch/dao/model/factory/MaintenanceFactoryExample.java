@@ -413,6 +413,266 @@ public class MaintenanceFactoryExample {
             addCriterion("`name` not between", value1, value2, "name");
             return (Criteria) this;
         }
+
+        public Criteria andImgPathIsNull() {
+            addCriterion("img_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathIsNotNull() {
+            addCriterion("img_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathEqualTo(String value) {
+            addCriterion("img_path =", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotEqualTo(String value) {
+            addCriterion("img_path <>", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathGreaterThan(String value) {
+            addCriterion("img_path >", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathGreaterThanOrEqualTo(String value) {
+            addCriterion("img_path >=", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathLessThan(String value) {
+            addCriterion("img_path <", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathLessThanOrEqualTo(String value) {
+            addCriterion("img_path <=", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathLike(String value) {
+            addCriterion("img_path like", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotLike(String value) {
+            addCriterion("img_path not like", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathIn(List<String> values) {
+            addCriterion("img_path in", values, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotIn(List<String> values) {
+            addCriterion("img_path not in", values, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathBetween(String value1, String value2) {
+            addCriterion("img_path between", value1, value2, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotBetween(String value1, String value2) {
+            addCriterion("img_path not between", value1, value2, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightIsNull() {
+            addCriterion("img_height is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightIsNotNull() {
+            addCriterion("img_height is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightEqualTo(Double value) {
+            addCriterion("img_height =", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightNotEqualTo(Double value) {
+            addCriterion("img_height <>", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightGreaterThan(Double value) {
+            addCriterion("img_height >", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightGreaterThanOrEqualTo(Double value) {
+            addCriterion("img_height >=", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightLessThan(Double value) {
+            addCriterion("img_height <", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightLessThanOrEqualTo(Double value) {
+            addCriterion("img_height <=", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightIn(List<Double> values) {
+            addCriterion("img_height in", values, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightNotIn(List<Double> values) {
+            addCriterion("img_height not in", values, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightBetween(Double value1, Double value2) {
+            addCriterion("img_height between", value1, value2, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightNotBetween(Double value1, Double value2) {
+            addCriterion("img_height not between", value1, value2, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthIsNull() {
+            addCriterion("img_width is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthIsNotNull() {
+            addCriterion("img_width is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthEqualTo(Double value) {
+            addCriterion("img_width =", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthNotEqualTo(Double value) {
+            addCriterion("img_width <>", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthGreaterThan(Double value) {
+            addCriterion("img_width >", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthGreaterThanOrEqualTo(Double value) {
+            addCriterion("img_width >=", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthLessThan(Double value) {
+            addCriterion("img_width <", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthLessThanOrEqualTo(Double value) {
+            addCriterion("img_width <=", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthIn(List<Double> values) {
+            addCriterion("img_width in", values, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthNotIn(List<Double> values) {
+            addCriterion("img_width not in", values, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthBetween(Double value1, Double value2) {
+            addCriterion("img_width between", value1, value2, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthNotBetween(Double value1, Double value2) {
+            addCriterion("img_width not between", value1, value2, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionIsNull() {
+            addCriterion("icon_position is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionIsNotNull() {
+            addCriterion("icon_position is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionEqualTo(String value) {
+            addCriterion("icon_position =", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionNotEqualTo(String value) {
+            addCriterion("icon_position <>", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionGreaterThan(String value) {
+            addCriterion("icon_position >", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionGreaterThanOrEqualTo(String value) {
+            addCriterion("icon_position >=", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionLessThan(String value) {
+            addCriterion("icon_position <", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionLessThanOrEqualTo(String value) {
+            addCriterion("icon_position <=", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionLike(String value) {
+            addCriterion("icon_position like", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionNotLike(String value) {
+            addCriterion("icon_position not like", value, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionIn(List<String> values) {
+            addCriterion("icon_position in", values, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionNotIn(List<String> values) {
+            addCriterion("icon_position not in", values, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionBetween(String value1, String value2) {
+            addCriterion("icon_position between", value1, value2, "iconPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconPositionNotBetween(String value1, String value2) {
+            addCriterion("icon_position not between", value1, value2, "iconPosition");
+            return (Criteria) this;
+        }
     }
 
     /**

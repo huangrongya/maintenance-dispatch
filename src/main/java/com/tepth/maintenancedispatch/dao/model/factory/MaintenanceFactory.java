@@ -32,6 +32,26 @@ public class MaintenanceFactory implements Serializable {
      */
     private String name;
 
+    /**
+     * 图片链接
+     */
+    private String imgPath;
+
+    /**
+     * 图片高度
+     */
+    private Double imgHeight;
+
+    /**
+     * 图片宽度
+     */
+    private Double imgWidth;
+
+    /**
+     * 厂区标位置信息 json
+     */
+    private String iconPosition;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -72,5 +92,37 @@ public class MaintenanceFactory implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public Double getImgHeight() {
+        return imgHeight;
+    }
+
+    public void setImgHeight(Double imgHeight) {
+        this.imgHeight = imgHeight;
+    }
+
+    public Double getImgWidth() {
+        return imgWidth;
+    }
+
+    public void setImgWidth(Double imgWidth) {
+        this.imgWidth = imgWidth;
+    }
+
+    public String getIconPosition() {
+        return iconPosition;
+    }
+
+    public void setIconPosition(String iconPosition) {
+        this.iconPosition = iconPosition;
     }
 }

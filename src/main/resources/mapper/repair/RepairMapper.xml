@@ -554,9 +554,9 @@
         <if test="endDate != null">
             <![CDATA[  and date (a.add_time) <= date(#{endDate}) ]]>
         </if>
-        <!--<if test="isMyDeal != null">
-          and a.status in ();
-        </if>-->
+        <if test="isMyDeal != null">
+          and (a.status = 2 or a.status = 5 or a.factory_area_id is null)
+        </if>
         <if test="keyword != null and keyword.trim() != ''">
             and (
             c.user_name like concat('%', #{keyword}, '%')

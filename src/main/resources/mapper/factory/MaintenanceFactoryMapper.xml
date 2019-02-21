@@ -6,6 +6,11 @@
     <result column="organization_id" jdbcType="INTEGER" property="organizationId" />
     <result column="lat" jdbcType="DOUBLE" property="lat" />
     <result column="lng" jdbcType="DOUBLE" property="lng" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="img_path" jdbcType="VARCHAR" property="imgPath" />
+    <result column="img_height" jdbcType="DOUBLE" property="imgHeight" />
+    <result column="img_width" jdbcType="DOUBLE" property="imgWidth" />
+    <result column="icon_position" jdbcType="VARCHAR" property="iconPosition" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, organization_id, lat, lng
+    id, organization_id, lat, lng, `name`, img_path, img_height, img_width, icon_position
   </sql>
   <select id="selectByExample" parameterType="com.tepth.maintenancedispatch.dao.model.factory.MaintenanceFactoryExample" resultMap="BaseResultMap">
     select
@@ -99,10 +104,12 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.tepth.maintenancedispatch.dao.model.factory.MaintenanceFactory" useGeneratedKeys="true">
-    insert into tb_maintenance_factory (organization_id, lat, lng
-      )
-    values (#{organizationId,jdbcType=INTEGER}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}
-      )
+    insert into tb_maintenance_factory (organization_id, lat, lng, 
+      `name`, img_path, img_height, 
+      img_width, icon_position)
+    values (#{organizationId,jdbcType=INTEGER}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, 
+      #{name,jdbcType=VARCHAR}, #{imgPath,jdbcType=VARCHAR}, #{imgHeight,jdbcType=DOUBLE}, 
+      #{imgWidth,jdbcType=DOUBLE}, #{iconPosition,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.tepth.maintenancedispatch.dao.model.factory.MaintenanceFactory" useGeneratedKeys="true">
     insert into tb_maintenance_factory
@@ -116,6 +123,21 @@
       <if test="lng != null">
         lng,
       </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="imgPath != null">
+        img_path,
+      </if>
+      <if test="imgHeight != null">
+        img_height,
+      </if>
+      <if test="imgWidth != null">
+        img_width,
+      </if>
+      <if test="iconPosition != null">
+        icon_position,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="organizationId != null">
@@ -126,6 +148,21 @@
       </if>
       <if test="lng != null">
         #{lng,jdbcType=DOUBLE},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPath != null">
+        #{imgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="imgHeight != null">
+        #{imgHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="imgWidth != null">
+        #{imgWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="iconPosition != null">
+        #{iconPosition,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -150,6 +187,21 @@
       <if test="record.lng != null">
         lng = #{record.lng,jdbcType=DOUBLE},
       </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgPath != null">
+        img_path = #{record.imgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgHeight != null">
+        img_height = #{record.imgHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.imgWidth != null">
+        img_width = #{record.imgWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="record.iconPosition != null">
+        icon_position = #{record.iconPosition,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -160,7 +212,12 @@
     set id = #{record.id,jdbcType=INTEGER},
       organization_id = #{record.organizationId,jdbcType=INTEGER},
       lat = #{record.lat,jdbcType=DOUBLE},
-      lng = #{record.lng,jdbcType=DOUBLE}
+      lng = #{record.lng,jdbcType=DOUBLE},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      img_path = #{record.imgPath,jdbcType=VARCHAR},
+      img_height = #{record.imgHeight,jdbcType=DOUBLE},
+      img_width = #{record.imgWidth,jdbcType=DOUBLE},
+      icon_position = #{record.iconPosition,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -177,6 +234,21 @@
       <if test="lng != null">
         lng = #{lng,jdbcType=DOUBLE},
       </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPath != null">
+        img_path = #{imgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="imgHeight != null">
+        img_height = #{imgHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="imgWidth != null">
+        img_width = #{imgWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="iconPosition != null">
+        icon_position = #{iconPosition,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -184,7 +256,12 @@
     update tb_maintenance_factory
     set organization_id = #{organizationId,jdbcType=INTEGER},
       lat = #{lat,jdbcType=DOUBLE},
-      lng = #{lng,jdbcType=DOUBLE}
+      lng = #{lng,jdbcType=DOUBLE},
+      `name` = #{name,jdbcType=VARCHAR},
+      img_path = #{imgPath,jdbcType=VARCHAR},
+      img_height = #{imgHeight,jdbcType=DOUBLE},
+      img_width = #{imgWidth,jdbcType=DOUBLE},
+      icon_position = #{iconPosition,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

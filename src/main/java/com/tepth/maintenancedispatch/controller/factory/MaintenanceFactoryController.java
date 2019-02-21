@@ -2,6 +2,8 @@ package com.tepth.maintenancedispatch.controller.factory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.dto.GetGroupListResponse;
+import com.tepth.maintenancedispatch.dto.GetWorkStationRecommendResponse;
+import com.tepth.maintenancedispatch.dto.GetWorkStationResponse;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.service.factory.IMaintenanceFactoryService;
@@ -43,7 +45,20 @@ public class MaintenanceFactoryController {
     @PostMapping("/station")
     public BaseResponse queryFactoryAreaStationList(@RequestBody String json){
         BaseRequest request = JSONObject.parseObject(json, BaseRequest.class);
-        BaseResponse response = maintenanceFactoryService.queryFactoryAreaStationList(request.getUser().getOrganizationId());
+        GetWorkStationResponse response = maintenanceFactoryService.queryFactoryAreaStationList(request.getUser().getOrganizationId());
         return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/20 19:34
+     * @Description 推荐工位
+     **/
+    @PostMapping("/station/recommend")
+    public BaseResponse queryFactoryAreaStationRecommend(@RequestBody String json){
+        BaseRequest request = JSONObject.parseObject(json, BaseRequest.class);
+        GetWorkStationRecommendResponse response = maintenanceFactoryService.queryWorkStationRecommend(request.getUser().getOrganizationId());
+        return response;
+
     }
 }
