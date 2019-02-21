@@ -2,7 +2,6 @@ package com.tepth.maintenancedispatch.controller.repair;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.comm.Constant;
-import com.tepth.maintenancedispatch.dao.model.repair.Repair;
 import com.tepth.maintenancedispatch.dto.*;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
@@ -151,7 +150,7 @@ public class RepairController {
      **/
     @PostMapping("/exchange/worker")
     public BaseResponse exchangeVehicleToWorker(@RequestBody String json){
-        ExchangeRequest request = JSONObject.parseObject(json, ExchangeRequest.class);
+        RepairIdRequest request = JSONObject.parseObject(json, RepairIdRequest.class);
         BaseResponse response = repairService.exchangeVehicleToWorker(request);
         return response;
     }
@@ -163,8 +162,20 @@ public class RepairController {
      **/
     @PostMapping("/exchange/driver")
     public BaseResponse exchangeVehicleToDriver(@RequestBody String json){
-        ExchangeRequest request = JSONObject.parseObject(json, ExchangeRequest.class);
+        RepairIdRequest request = JSONObject.parseObject(json, RepairIdRequest.class);
         BaseResponse response = repairService.exchangeVehicleToDriver(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 11:01
+     * @Description 故障信息
+     **/
+    @PostMapping("/faults")
+    public BaseResponse queryFaultList(@RequestBody String json){
+        RepairIdRequest request = JSONObject.parseObject(json, RepairIdRequest.class);
+        GetPhenamenonResponse response = repairService.queryFaultList(request);
         return response;
     }
 

@@ -4,18 +4,14 @@ import com.tepth.maintenancedispatch.comm.Global;
 import com.tepth.maintenancedispatch.comm.QueryPage;
 import com.tepth.maintenancedispatch.comm.RepairStatusEnum;
 import com.tepth.maintenancedispatch.comm.RspCodeEnum;
+import com.tepth.maintenancedispatch.dao.mapper.repair.FaultPhenomenonMapper;
 import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
-import com.tepth.maintenancedispatch.dto.AddRepairRequest;
-import com.tepth.maintenancedispatch.dto.DistributStationRequest;
-import com.tepth.maintenancedispatch.dto.ExchangeRequest;
-import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
-import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
-import com.tepth.maintenancedispatch.dto.inner.PageResponse;
-import com.tepth.maintenancedispatch.dto.inner.RepairVO;
-import com.tepth.maintenancedispatch.dto.inner.UserInfo;
+import com.tepth.maintenancedispatch.dto.*;
+import com.tepth.maintenancedispatch.dto.inner.*;
 import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.repair.IRepairService;
+import com.tepth.maintenancedispatch.util.CommonUtil;
 import com.tepth.maintenancedispatch.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +30,8 @@ public class RepairServiceImpl implements IRepairService {
 
     @Autowired
     RepairMapper repairMapper;
+    @Autowired
+    FaultPhenomenonMapper faultPhenomenonMapper;
 
     @Override
     public PageResponse<RepairVO> queryRepairListByPageStatusArr(GetRepairListPagingRequest request) {
@@ -105,7 +103,7 @@ public class RepairServiceImpl implements IRepairService {
     }
 
     @Override
-    public BaseResponse exchangeVehicleToWorker(ExchangeRequest request) {
+    public BaseResponse exchangeVehicleToWorker(RepairIdRequest request) {
         BaseResponse response = new BaseResponse();
         Repair repair = repairMapper.selectByPrimaryKey(request.getRepairId());
         if (repair == null){
@@ -121,7 +119,7 @@ public class RepairServiceImpl implements IRepairService {
     }
 
     @Override
-    public BaseResponse exchangeVehicleToDriver(ExchangeRequest request) {
+    public BaseResponse exchangeVehicleToDriver(RepairIdRequest request) {
         BaseResponse response = new BaseResponse();
         Repair repair = repairMapper.selectByPrimaryKey(request.getRepairId());
         if (repair == null){
@@ -133,6 +131,27 @@ public class RepairServiceImpl implements IRepairService {
         repair.setStatus(RepairStatusEnum.EXCHANGE_TO_DRIVER.getCode());
         repair.setGmtModified(new Date());
         repairMapper.updateByPrimaryKeySelective(repair);
+        return response;
+    }
+
+    @Override
+    public GetPhenamenonResponse queryFaultList(RepairIdRequest request) {
+        GetPhenamenonResponse response = new GetPhenamenonResponse();
+        Repair repair = repairMapper.selectByPrimaryKey(request.getRepairId());
+        if (repair == null){
+            throw new ServiceException(RspCodeEnum.USER_NOT_EXISTS.getCode(), RspCodeEnum.USER_NOT_EXISTS.getDesc());
+        }
+        String phenomenonStr = repair.getFaultPhenomenonId();
+        if (CommonUtil.isEmpty(phenomenonStr)){
+            return response;
+        }
+        String[] phenomenonArr = phenomenonStr.split(",");
+        List<Phenomenon> phenomenonList = new ArrayList<>();
+        for (String s : phenomenonArr) {
+            Phenomenon phenomenon = faultPhenomenonMapper.queryPhenomenonInfoById(Integer.parseInt(s));
+            phenomenonList.add(phenomenon);
+        }
+        response.setFaults(phenomenonList);
         return response;
     }
 }

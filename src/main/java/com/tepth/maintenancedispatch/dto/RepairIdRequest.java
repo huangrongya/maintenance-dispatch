@@ -10,7 +10,7 @@ import lombok.Data;
  **/
 
 @Data
-public class ExchangeRequest extends BaseRequest {
+public class RepairIdRequest extends BaseRequest {
 
     private Integer repairId;
 }

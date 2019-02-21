@@ -1,9 +1,6 @@
 package com.tepth.maintenancedispatch.service.repair;
 
-import com.tepth.maintenancedispatch.dto.AddRepairRequest;
-import com.tepth.maintenancedispatch.dto.DistributStationRequest;
-import com.tepth.maintenancedispatch.dto.ExchangeRequest;
-import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
+import com.tepth.maintenancedispatch.dto.*;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
 import com.tepth.maintenancedispatch.dto.inner.RepairVO;
@@ -42,12 +39,19 @@ public interface IRepairService {
      * @Date 2019/2/21 10:39
      * @Description 交车给技工
      **/
-    BaseResponse exchangeVehicleToWorker(ExchangeRequest request);
+    BaseResponse exchangeVehicleToWorker(RepairIdRequest request);
 
     /**
      * @Author royle.huang
      * @Date 2019/2/21 10:55
      * @Description 交车给司机
      **/
-    BaseResponse exchangeVehicleToDriver(ExchangeRequest request);
+    BaseResponse exchangeVehicleToDriver(RepairIdRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 11:03
+     * @Description 查询故障信息
+     **/
+    GetPhenamenonResponse queryFaultList(RepairIdRequest request);
 }

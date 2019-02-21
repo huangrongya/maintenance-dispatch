@@ -551,6 +551,13 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
+  <!-- 公共的分页 -->
+  <sql id="limit">
+    <if test="queryPage != null">
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
   <!--排序的分页-->
   <sql id="orderLimit">
     <if test="queryPage != null">
