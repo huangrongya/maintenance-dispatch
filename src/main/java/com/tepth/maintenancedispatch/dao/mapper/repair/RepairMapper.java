@@ -38,7 +38,7 @@ public interface RepairMapper {
      * @Date 2019/2/19 16:03
      * @Description 首页工单待作业
      **/
-    List<Repair> queryListByPageWithStatusArr(Map<String, Object> map);
+    List<RepairVO> queryListByPageWithStatusArr(Map<String, Object> map);
 
     /**
      * @Author royle.huang

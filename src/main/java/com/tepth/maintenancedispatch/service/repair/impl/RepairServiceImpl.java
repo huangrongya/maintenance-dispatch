@@ -1,12 +1,10 @@
 package com.tepth.maintenancedispatch.service.repair.impl;
 
 import com.tepth.maintenancedispatch.comm.Global;
-import com.tepth.maintenancedispatch.comm.Page;
 import com.tepth.maintenancedispatch.comm.QueryPage;
 import com.tepth.maintenancedispatch.comm.RspCodeEnum;
 import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
-import com.tepth.maintenancedispatch.dao.model.repair.RepairExample;
 import com.tepth.maintenancedispatch.dto.AddRepairRequest;
 import com.tepth.maintenancedispatch.dto.DistributStationRequest;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
@@ -39,17 +37,17 @@ public class RepairServiceImpl implements IRepairService {
     RepairMapper repairMapper;
 
     @Override
-    public PageResponse<Repair> queryRepairListByPageStatusArr(GetRepairListPagingRequest request) {
-        PageResponse<Repair> response = new PageResponse<>();
+    public PageResponse<RepairVO> queryRepairListByPageStatusArr(GetRepairListPagingRequest request) {
+        PageResponse<RepairVO> response = new PageResponse<>();
         UserInfo userInfo = request.getUser();
         QueryPage page = Global.getQueryPage(request);
         Map<String, Object> map = new HashMap<>();
         map.put("queryPage", page);
         map.put("statusArr", request.getStatusArr());
         map.put("organizationId", userInfo.getOrganizationId());
-        List<Repair> repairList = repairMapper.queryListByPageWithStatusArr(map);
+        List<RepairVO> repairList = repairMapper.queryListByPageWithStatusArr(map);
         if (repairList != null){
-            repairList.sort(Comparator.comparing(Repair::getGmtCreate));
+            repairList.sort(Comparator.comparing(RepairVO::getGmtCreate));
         }
         long total = repairMapper.queryListByPageCountWithStatusArr(map);
         response.setPageList(repairList);

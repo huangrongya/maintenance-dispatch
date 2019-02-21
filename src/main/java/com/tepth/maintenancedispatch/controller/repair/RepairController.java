@@ -97,12 +97,12 @@ public class RepairController {
      * @Description 正在作业列表
      **/
     @RequestMapping("/working")
-    public PageResponse<Repair> queryRepairListByPageWorking(@RequestBody String json){
+    public PageResponse<RepairVO> queryRepairListByPageWorking(@RequestBody String json){
         GetRepairListPagingRequest request = JSONObject.parseObject(json, GetRepairListPagingRequest.class);
         request.setPage(1);
         request.setRow(3);
         request.setStatusArr(Constant.REPAIR_STATUS_WORKING);
-        PageResponse<Repair> response = repairService.queryRepairListByPageStatusArr(request);
+        PageResponse<RepairVO> response = repairService.queryRepairListByPageStatusArr(request);
         return response;
     }
 
@@ -113,12 +113,12 @@ public class RepairController {
      * @Description 分页请求维修单列表 待作业
      **/
     @RequestMapping("/waiting")
-    public PageResponse<Repair> queryRepairListByPageWaiting(@RequestBody String json){
+    public PageResponse<RepairVO> queryRepairListByPageWaiting(@RequestBody String json){
         GetRepairListPagingRequest request = JSONObject.parseObject(json, GetRepairListPagingRequest.class);
         request.setPage(1);
         request.setRow(3);
         request.setStatusArr(Constant.REPAIR_STATUS_WAITING);
-        PageResponse<Repair> response = repairService.queryRepairListByPageStatusArr(request);
+        PageResponse<RepairVO> response = repairService.queryRepairListByPageStatusArr(request);
         return response;
     }
 

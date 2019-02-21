@@ -785,6 +785,66 @@ public class RepairExample {
             return (Criteria) this;
         }
 
+        public Criteria andJobProcessStatusIsNull() {
+            addCriterion("job_process_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusIsNotNull() {
+            addCriterion("job_process_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusEqualTo(Byte value) {
+            addCriterion("job_process_status =", value, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusNotEqualTo(Byte value) {
+            addCriterion("job_process_status <>", value, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusGreaterThan(Byte value) {
+            addCriterion("job_process_status >", value, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("job_process_status >=", value, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusLessThan(Byte value) {
+            addCriterion("job_process_status <", value, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("job_process_status <=", value, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusIn(List<Byte> values) {
+            addCriterion("job_process_status in", values, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusNotIn(List<Byte> values) {
+            addCriterion("job_process_status not in", values, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusBetween(Byte value1, Byte value2) {
+            addCriterion("job_process_status between", value1, value2, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andJobProcessStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("job_process_status not between", value1, value2, "jobProcessStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andRescueStatusIsNull() {
             addCriterion("rescue_status is null");
             return (Criteria) this;
@@ -905,143 +965,213 @@ public class RepairExample {
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdIsNull() {
-            addCriterion("fault_id is null");
+        public Criteria andFaultPhenomenonIdIsNull() {
+            addCriterion("fault_phenomenon_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdIsNotNull() {
-            addCriterion("fault_id is not null");
+        public Criteria andFaultPhenomenonIdIsNotNull() {
+            addCriterion("fault_phenomenon_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdEqualTo(String value) {
-            addCriterion("fault_id =", value, "faultId");
+        public Criteria andFaultPhenomenonIdEqualTo(String value) {
+            addCriterion("fault_phenomenon_id =", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdNotEqualTo(String value) {
-            addCriterion("fault_id <>", value, "faultId");
+        public Criteria andFaultPhenomenonIdNotEqualTo(String value) {
+            addCriterion("fault_phenomenon_id <>", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdGreaterThan(String value) {
-            addCriterion("fault_id >", value, "faultId");
+        public Criteria andFaultPhenomenonIdGreaterThan(String value) {
+            addCriterion("fault_phenomenon_id >", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdGreaterThanOrEqualTo(String value) {
-            addCriterion("fault_id >=", value, "faultId");
+        public Criteria andFaultPhenomenonIdGreaterThanOrEqualTo(String value) {
+            addCriterion("fault_phenomenon_id >=", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdLessThan(String value) {
-            addCriterion("fault_id <", value, "faultId");
+        public Criteria andFaultPhenomenonIdLessThan(String value) {
+            addCriterion("fault_phenomenon_id <", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdLessThanOrEqualTo(String value) {
-            addCriterion("fault_id <=", value, "faultId");
+        public Criteria andFaultPhenomenonIdLessThanOrEqualTo(String value) {
+            addCriterion("fault_phenomenon_id <=", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdLike(String value) {
-            addCriterion("fault_id like", value, "faultId");
+        public Criteria andFaultPhenomenonIdLike(String value) {
+            addCriterion("fault_phenomenon_id like", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdNotLike(String value) {
-            addCriterion("fault_id not like", value, "faultId");
+        public Criteria andFaultPhenomenonIdNotLike(String value) {
+            addCriterion("fault_phenomenon_id not like", value, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdIn(List<String> values) {
-            addCriterion("fault_id in", values, "faultId");
+        public Criteria andFaultPhenomenonIdIn(List<String> values) {
+            addCriterion("fault_phenomenon_id in", values, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdNotIn(List<String> values) {
-            addCriterion("fault_id not in", values, "faultId");
+        public Criteria andFaultPhenomenonIdNotIn(List<String> values) {
+            addCriterion("fault_phenomenon_id not in", values, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdBetween(String value1, String value2) {
-            addCriterion("fault_id between", value1, value2, "faultId");
+        public Criteria andFaultPhenomenonIdBetween(String value1, String value2) {
+            addCriterion("fault_phenomenon_id between", value1, value2, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andFaultIdNotBetween(String value1, String value2) {
-            addCriterion("fault_id not between", value1, value2, "faultId");
+        public Criteria andFaultPhenomenonIdNotBetween(String value1, String value2) {
+            addCriterion("fault_phenomenon_id not between", value1, value2, "faultPhenomenonId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdIsNull() {
-            addCriterion("temp_fault_id is null");
+        public Criteria andSysFaultDiagnosticIdIsNull() {
+            addCriterion("sys_fault_diagnostic_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdIsNotNull() {
-            addCriterion("temp_fault_id is not null");
+        public Criteria andSysFaultDiagnosticIdIsNotNull() {
+            addCriterion("sys_fault_diagnostic_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdEqualTo(String value) {
-            addCriterion("temp_fault_id =", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdEqualTo(String value) {
+            addCriterion("sys_fault_diagnostic_id =", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdNotEqualTo(String value) {
-            addCriterion("temp_fault_id <>", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdNotEqualTo(String value) {
+            addCriterion("sys_fault_diagnostic_id <>", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdGreaterThan(String value) {
-            addCriterion("temp_fault_id >", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdGreaterThan(String value) {
+            addCriterion("sys_fault_diagnostic_id >", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdGreaterThanOrEqualTo(String value) {
-            addCriterion("temp_fault_id >=", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdGreaterThanOrEqualTo(String value) {
+            addCriterion("sys_fault_diagnostic_id >=", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdLessThan(String value) {
-            addCriterion("temp_fault_id <", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdLessThan(String value) {
+            addCriterion("sys_fault_diagnostic_id <", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdLessThanOrEqualTo(String value) {
-            addCriterion("temp_fault_id <=", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdLessThanOrEqualTo(String value) {
+            addCriterion("sys_fault_diagnostic_id <=", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdLike(String value) {
-            addCriterion("temp_fault_id like", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdLike(String value) {
+            addCriterion("sys_fault_diagnostic_id like", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdNotLike(String value) {
-            addCriterion("temp_fault_id not like", value, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdNotLike(String value) {
+            addCriterion("sys_fault_diagnostic_id not like", value, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdIn(List<String> values) {
-            addCriterion("temp_fault_id in", values, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdIn(List<String> values) {
+            addCriterion("sys_fault_diagnostic_id in", values, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdNotIn(List<String> values) {
-            addCriterion("temp_fault_id not in", values, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdNotIn(List<String> values) {
+            addCriterion("sys_fault_diagnostic_id not in", values, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdBetween(String value1, String value2) {
-            addCriterion("temp_fault_id between", value1, value2, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdBetween(String value1, String value2) {
+            addCriterion("sys_fault_diagnostic_id between", value1, value2, "sysFaultDiagnosticId");
             return (Criteria) this;
         }
 
-        public Criteria andTempFaultIdNotBetween(String value1, String value2) {
-            addCriterion("temp_fault_id not between", value1, value2, "tempFaultId");
+        public Criteria andSysFaultDiagnosticIdNotBetween(String value1, String value2) {
+            addCriterion("sys_fault_diagnostic_id not between", value1, value2, "sysFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdIsNull() {
+            addCriterion("temp_fault_diagnostic_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdIsNotNull() {
+            addCriterion("temp_fault_diagnostic_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdEqualTo(String value) {
+            addCriterion("temp_fault_diagnostic_id =", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdNotEqualTo(String value) {
+            addCriterion("temp_fault_diagnostic_id <>", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdGreaterThan(String value) {
+            addCriterion("temp_fault_diagnostic_id >", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdGreaterThanOrEqualTo(String value) {
+            addCriterion("temp_fault_diagnostic_id >=", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdLessThan(String value) {
+            addCriterion("temp_fault_diagnostic_id <", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdLessThanOrEqualTo(String value) {
+            addCriterion("temp_fault_diagnostic_id <=", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdLike(String value) {
+            addCriterion("temp_fault_diagnostic_id like", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdNotLike(String value) {
+            addCriterion("temp_fault_diagnostic_id not like", value, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdIn(List<String> values) {
+            addCriterion("temp_fault_diagnostic_id in", values, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdNotIn(List<String> values) {
+            addCriterion("temp_fault_diagnostic_id not in", values, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdBetween(String value1, String value2) {
+            addCriterion("temp_fault_diagnostic_id between", value1, value2, "tempFaultDiagnosticId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultDiagnosticIdNotBetween(String value1, String value2) {
+            addCriterion("temp_fault_diagnostic_id not between", value1, value2, "tempFaultDiagnosticId");
             return (Criteria) this;
         }
 

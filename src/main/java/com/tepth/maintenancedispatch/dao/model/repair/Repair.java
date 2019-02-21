@@ -61,6 +61,11 @@ public class Repair implements Serializable {
     private Byte status;
 
     /**
+     * 作业过程状态：1-待作业 2-作业中 3-已完成 4-已失效（当工单被逻辑删除或取消后状态）
+     */
+    private Byte jobProcessStatus;
+
+    /**
      * 救援作业状态：1-已报救援 2-已安排 3-施救已出发 4-施救已到达 6-施救已接车 7-施救已交车 8-施救待回厂 9-施救已回厂
      */
     private Byte rescueStatus;
@@ -71,14 +76,19 @@ public class Repair implements Serializable {
     private Byte state;
 
     /**
-     * 现象故障id（，隔开）
+     * 故障现象id（，隔开）
      */
-    private String faultId;
+    private String faultPhenomenonId;
 
     /**
-     * 临时故障id（，隔开）
+     * 系统诊断id（，隔开）
      */
-    private String tempFaultId;
+    private String sysFaultDiagnosticId;
+
+    /**
+     * 临时诊断id（，隔开）
+     */
+    private String tempFaultDiagnosticId;
 
     /**
      * 用户id（司机、机调员）
@@ -220,6 +230,14 @@ public class Repair implements Serializable {
         this.status = status;
     }
 
+    public Byte getJobProcessStatus() {
+        return jobProcessStatus;
+    }
+
+    public void setJobProcessStatus(Byte jobProcessStatus) {
+        this.jobProcessStatus = jobProcessStatus;
+    }
+
     public Byte getRescueStatus() {
         return rescueStatus;
     }
@@ -236,20 +254,28 @@ public class Repair implements Serializable {
         this.state = state;
     }
 
-    public String getFaultId() {
-        return faultId;
+    public String getFaultPhenomenonId() {
+        return faultPhenomenonId;
     }
 
-    public void setFaultId(String faultId) {
-        this.faultId = faultId;
+    public void setFaultPhenomenonId(String faultPhenomenonId) {
+        this.faultPhenomenonId = faultPhenomenonId;
     }
 
-    public String getTempFaultId() {
-        return tempFaultId;
+    public String getSysFaultDiagnosticId() {
+        return sysFaultDiagnosticId;
     }
 
-    public void setTempFaultId(String tempFaultId) {
-        this.tempFaultId = tempFaultId;
+    public void setSysFaultDiagnosticId(String sysFaultDiagnosticId) {
+        this.sysFaultDiagnosticId = sysFaultDiagnosticId;
+    }
+
+    public String getTempFaultDiagnosticId() {
+        return tempFaultDiagnosticId;
+    }
+
+    public void setTempFaultDiagnosticId(String tempFaultDiagnosticId) {
+        this.tempFaultDiagnosticId = tempFaultDiagnosticId;
     }
 
     public Integer getUserId() {

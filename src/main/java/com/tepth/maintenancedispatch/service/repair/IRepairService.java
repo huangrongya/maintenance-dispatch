@@ -1,6 +1,5 @@
 package com.tepth.maintenancedispatch.service.repair;
 
-import com.tepth.maintenancedispatch.dao.model.repair.Repair;
 import com.tepth.maintenancedispatch.dto.AddRepairRequest;
 import com.tepth.maintenancedispatch.dto.DistributStationRequest;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
@@ -14,7 +13,7 @@ public interface IRepairService {
      * @Date 2019/2/19 14:29
      * @Description 分页查询维修单
      **/
-    PageResponse<Repair> queryRepairListByPageStatusArr(GetRepairListPagingRequest request);
+    PageResponse<RepairVO> queryRepairListByPageStatusArr(GetRepairListPagingRequest request);
 
     /**
      * @Author royle.huang

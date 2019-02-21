@@ -63,25 +63,12 @@ public class RepairVO {
      */
     private Byte state;
 
-    /**
-     * 现象故障id（，隔开）
-     */
-    private String faultId;
 
     /**
      * 临时故障id（，隔开）
      */
     private String tempFaultId;
 
-    /**
-     * 用户id（司机、机调员）
-     */
-//    private Integer userId;
-
-    /**
-     * 车辆id
-     */
-//    private Integer vehicleId;
 
     /**
      * 维保组织id：组织编码
@@ -98,15 +85,6 @@ public class RepairVO {
      */
     private String workerId;
 
-    /**
-     * 作业工位id：维修厂区域id
-     */
-    private Integer factoryAreaId;
-
-    /**
-     * activiti流程实例id
-     */
-    private String processInstanceId;
 
     /**
      * 此行创建时间
@@ -119,6 +97,8 @@ public class RepairVO {
     private Date gmtModified;
     /**班组名称**/
     private String groupName;
+    /**班组名称**/
+    private String workStation;
     /**司机名**/
     private String driverName;
     /**车辆编号**/
