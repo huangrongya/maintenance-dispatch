@@ -2,6 +2,7 @@ package com.tepth.maintenancedispatch.service.repair;
 
 import com.tepth.maintenancedispatch.dto.AddRepairRequest;
 import com.tepth.maintenancedispatch.dto.DistributStationRequest;
+import com.tepth.maintenancedispatch.dto.ExchangeRequest;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
@@ -35,4 +36,11 @@ public interface IRepairService {
      * @Description 分配工位、班组
      **/
     BaseResponse distributeWorkStation(DistributStationRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 10:39
+     * @Description 交车
+     **/
+    BaseResponse exchangeVehicleToWorker(ExchangeRequest request);
 }

@@ -3,10 +3,7 @@ package com.tepth.maintenancedispatch.controller.repair;
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.comm.Constant;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
-import com.tepth.maintenancedispatch.dto.AddRepairRequest;
-import com.tepth.maintenancedispatch.dto.DistributStationRequest;
-import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
-import com.tepth.maintenancedispatch.dto.SearchFaultRequest;
+import com.tepth.maintenancedispatch.dto.*;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
 import com.tepth.maintenancedispatch.dto.inner.RepairVO;
@@ -144,6 +141,18 @@ public class RepairController {
     public BaseResponse distributionWorkStations(@RequestBody String json){
         DistributStationRequest request = JSONObject.parseObject(json, DistributStationRequest.class);
         BaseResponse response = repairService.distributeWorkStation(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 10:24
+     * @Description 交车
+     **/
+    @PostMapping("/exchange")
+    public BaseResponse exchangeVehicleToWorker(@RequestBody String json){
+        ExchangeRequest request = JSONObject.parseObject(json, ExchangeRequest.class);
+        BaseResponse response = repairService.exchangeVehicleToWorker(request);
         return response;
     }
 

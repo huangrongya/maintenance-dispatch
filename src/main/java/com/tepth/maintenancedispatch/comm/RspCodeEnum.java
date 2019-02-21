@@ -48,6 +48,7 @@ public enum RspCodeEnum{
     ORGANIZATION_TYPE_PARAMETER_INVALID("0502","组织类型参数无效"),
     CURRENT_REPAIR_NOT_EXISTS("0503","用户当前不存在报修记录"),
     VEHICLE_REPAIR_NOT_EXISTS("0601","当前无报修车辆"),
+    VEHICLE_WRONG_STATUS("0602","车辆状态错误"),
     FAIL("9999", "系统发生未知错误");
     String code;
     String desc;

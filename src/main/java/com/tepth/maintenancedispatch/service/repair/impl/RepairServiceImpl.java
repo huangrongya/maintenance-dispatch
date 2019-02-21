@@ -2,11 +2,13 @@ package com.tepth.maintenancedispatch.service.repair.impl;
 
 import com.tepth.maintenancedispatch.comm.Global;
 import com.tepth.maintenancedispatch.comm.QueryPage;
+import com.tepth.maintenancedispatch.comm.RepairStatusEnum;
 import com.tepth.maintenancedispatch.comm.RspCodeEnum;
 import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
 import com.tepth.maintenancedispatch.dto.AddRepairRequest;
 import com.tepth.maintenancedispatch.dto.DistributStationRequest;
+import com.tepth.maintenancedispatch.dto.ExchangeRequest;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
@@ -19,10 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author royle.huang
@@ -99,8 +98,25 @@ public class RepairServiceImpl implements IRepairService {
         }
         repair.setOrgGroupId(groupId);
         repair.setFactoryAreaId(stationId);
+        repair.setGmtModified(new Date());
         repairMapper.updateByPrimaryKeySelective(repair);
         return response;
 
+    }
+
+    @Override
+    public BaseResponse exchangeVehicleToWorker(ExchangeRequest request) {
+        BaseResponse response = new BaseResponse();
+        Repair repair = repairMapper.selectByPrimaryKey(request.getRepairId());
+        if (repair == null){
+            throw new ServiceException(RspCodeEnum.USER_NOT_EXISTS.getCode(), RspCodeEnum.USER_NOT_EXISTS.getDesc());
+        }
+        if (!RepairStatusEnum.BACK_TO_FACTORY.getCode().equals(repair.getStatus())){
+            throw new ServiceException(RspCodeEnum.VEHICLE_WRONG_STATUS.getCode(), RspCodeEnum.VEHICLE_WRONG_STATUS.getDesc());
+        }
+        repair.setStatus(RepairStatusEnum.EXCHANGE_TO_WORKER.getCode());
+        repair.setGmtModified(new Date());
+        repairMapper.updateByPrimaryKeySelective(repair);
+        return response;
     }
 }
