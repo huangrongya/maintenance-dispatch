@@ -3,14 +3,18 @@ package com.tepth.maintenancedispatch.service.repair.impl;
 import com.tepth.maintenancedispatch.comm.Global;
 import com.tepth.maintenancedispatch.comm.Page;
 import com.tepth.maintenancedispatch.comm.QueryPage;
+import com.tepth.maintenancedispatch.comm.RspCodeEnum;
 import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
+import com.tepth.maintenancedispatch.dao.model.repair.RepairExample;
 import com.tepth.maintenancedispatch.dto.AddRepairRequest;
+import com.tepth.maintenancedispatch.dto.DistributStationRequest;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
 import com.tepth.maintenancedispatch.dto.inner.RepairVO;
 import com.tepth.maintenancedispatch.dto.inner.UserInfo;
+import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.repair.IRepairService;
 import com.tepth.maintenancedispatch.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -83,5 +87,22 @@ public class RepairServiceImpl implements IRepairService {
         response.setTotalCount(total);
         response.setTotalPage(PageUtil.getTotalPage(total, page.getPageSize()));
         return response;
+    }
+
+    @Override
+    public BaseResponse distributeWorkStation(DistributStationRequest request) {
+        BaseResponse response = new BaseResponse();
+        Integer repairId = request.getRepair();
+        Integer groupId = request.getGroup();
+        Integer stationId = request.getStation();
+        Repair repair = repairMapper.selectByPrimaryKey(repairId);
+        if (repair == null){
+            throw new ServiceException(RspCodeEnum.USER_NOT_EXISTS.getCode(), RspCodeEnum.USER_NOT_EXISTS.getDesc());
+        }
+        repair.setOrgGroupId(groupId);
+        repair.setFactoryAreaId(stationId);
+        repairMapper.updateByPrimaryKeySelective(repair);
+        return response;
+
     }
 }

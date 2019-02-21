@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.comm.Constant;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
 import com.tepth.maintenancedispatch.dto.AddRepairRequest;
+import com.tepth.maintenancedispatch.dto.DistributStationRequest;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
 import com.tepth.maintenancedispatch.dto.SearchFaultRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
@@ -131,6 +132,18 @@ public class RepairController {
     public PageResponse<RepairVO> queryRepairListByPageComm(@RequestBody String json){
         GetRepairListPagingRequest request = JSONObject.parseObject(json, GetRepairListPagingRequest.class);
         PageResponse<RepairVO> response = repairService.queryRepairListByPageComm(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/21 9:44
+     * @Description 分配工位和班组
+     **/
+    @PostMapping("/station/add")
+    public BaseResponse distributionWorkStations(@RequestBody String json){
+        DistributStationRequest request = JSONObject.parseObject(json, DistributStationRequest.class);
+        BaseResponse response = repairService.distributeWorkStation(request);
         return response;
     }
 
