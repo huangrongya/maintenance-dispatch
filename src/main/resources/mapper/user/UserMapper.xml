@@ -298,6 +298,23 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
+  <!-- 公共的分页 -->
+  <sql id="limit">
+    <if test="queryPage != null">
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
+  <!--排序的分页-->
+  <sql id="orderLimit">
+    <if test="queryPage != null">
+      <if test="queryPage.order != null and queryPage.sort != null">
+        order by ${queryPage.sort} ${queryPage.order}
+      </if>
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
+
   <select id="selectByOrganizationAndRole" resultMap="BaseResultMap" >
     select
     a.id,
@@ -321,6 +338,24 @@
     </if>
 
   </select>
+  <select id="countByOrganizationAndRoleAndStatus" resultType="long" >
+    select count(1)
+    from
+      tb_user a left join tb_user_role b
+    on
+      a.id = b.user_id
+    where 1=1
+    <if test="organizationId != null and organizationId != 0">
+      and a.organization_id = #{organizationId,jdbcType=INTEGER}
+    </if>
+    <if test="roleId != null and roleId != 0">
+      and b.role_id = #{roleId,jdbcType=INTEGER}
+    </if>
+    <if test="onlineStatus != null and onlineStatus != 0">
+      and a.online_status = #{onlineStatus,jdbcType=INTEGER}
+    </if>
+
+  </select>
 
   <select id="selectDriverByVehicleId" resultMap="BaseResultMap" >
     select
@@ -337,5 +372,32 @@
     on
       a.id = b.user_id
     where b.vehicle_id = #{vehicleId}
+  </select>
+
+
+  <select id="queryWorkerListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.Worker">
+    select
+    a.id,
+    a.job_no jobNo,
+    a.mobile_no mobileNo,
+    a.user_name userName,
+    a.head_img_url headImgUrl,
+    a.online_status onlineStatus,
+    c.name groupName
+    from tb_user a
+    left join tb_user_role b on a.id = b.user_id
+    left join tb_organization c on c.id = a.organization_id
+    where b.role_id = #{roleId,jdbcType=INTEGER}
+    and (a.organization_id = #{organizationId} or c.p_organization_id like concat('%/', #{organizationId}))
+    <include refid="limit"/>
+  </select>
+
+  <select id="queryWorkerListByPageCount" resultType="long">
+    select count(1)
+    from tb_user a
+    left join tb_user_role b on a.id = b.user_id
+    left join tb_organization c on c.id = a.organization_id
+    where b.role_id = #{roleId,jdbcType=INTEGER}
+    and (a.organization_id = #{organizationId} or c.p_organization_id like concat('%/', #{organizationId}))
   </select>
 </mapper>

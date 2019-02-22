@@ -1035,6 +1035,76 @@ public class RepairExample {
             return (Criteria) this;
         }
 
+        public Criteria andTempFaultPhenomenonIdIsNull() {
+            addCriterion("temp_fault_phenomenon_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdIsNotNull() {
+            addCriterion("temp_fault_phenomenon_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdEqualTo(String value) {
+            addCriterion("temp_fault_phenomenon_id =", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdNotEqualTo(String value) {
+            addCriterion("temp_fault_phenomenon_id <>", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdGreaterThan(String value) {
+            addCriterion("temp_fault_phenomenon_id >", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdGreaterThanOrEqualTo(String value) {
+            addCriterion("temp_fault_phenomenon_id >=", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdLessThan(String value) {
+            addCriterion("temp_fault_phenomenon_id <", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdLessThanOrEqualTo(String value) {
+            addCriterion("temp_fault_phenomenon_id <=", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdLike(String value) {
+            addCriterion("temp_fault_phenomenon_id like", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdNotLike(String value) {
+            addCriterion("temp_fault_phenomenon_id not like", value, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdIn(List<String> values) {
+            addCriterion("temp_fault_phenomenon_id in", values, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdNotIn(List<String> values) {
+            addCriterion("temp_fault_phenomenon_id not in", values, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdBetween(String value1, String value2) {
+            addCriterion("temp_fault_phenomenon_id between", value1, value2, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTempFaultPhenomenonIdNotBetween(String value1, String value2) {
+            addCriterion("temp_fault_phenomenon_id not between", value1, value2, "tempFaultPhenomenonId");
+            return (Criteria) this;
+        }
+
         public Criteria andSysFaultDiagnosticIdIsNull() {
             addCriterion("sys_fault_diagnostic_id is null");
             return (Criteria) this;
@@ -1602,6 +1672,146 @@ public class RepairExample {
 
         public Criteria andFactoryAreaIdNotBetween(Integer value1, Integer value2) {
             addCriterion("factory_area_id not between", value1, value2, "factoryAreaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdIsNull() {
+            addCriterion("pass_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdIsNotNull() {
+            addCriterion("pass_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdEqualTo(String value) {
+            addCriterion("pass_user_id =", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdNotEqualTo(String value) {
+            addCriterion("pass_user_id <>", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdGreaterThan(String value) {
+            addCriterion("pass_user_id >", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("pass_user_id >=", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdLessThan(String value) {
+            addCriterion("pass_user_id <", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdLessThanOrEqualTo(String value) {
+            addCriterion("pass_user_id <=", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdLike(String value) {
+            addCriterion("pass_user_id like", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdNotLike(String value) {
+            addCriterion("pass_user_id not like", value, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdIn(List<String> values) {
+            addCriterion("pass_user_id in", values, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdNotIn(List<String> values) {
+            addCriterion("pass_user_id not in", values, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdBetween(String value1, String value2) {
+            addCriterion("pass_user_id between", value1, value2, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassUserIdNotBetween(String value1, String value2) {
+            addCriterion("pass_user_id not between", value1, value2, "passUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdIsNull() {
+            addCriterion("complete_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdIsNotNull() {
+            addCriterion("complete_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdEqualTo(String value) {
+            addCriterion("complete_user_id =", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdNotEqualTo(String value) {
+            addCriterion("complete_user_id <>", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdGreaterThan(String value) {
+            addCriterion("complete_user_id >", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("complete_user_id >=", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdLessThan(String value) {
+            addCriterion("complete_user_id <", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdLessThanOrEqualTo(String value) {
+            addCriterion("complete_user_id <=", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdLike(String value) {
+            addCriterion("complete_user_id like", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdNotLike(String value) {
+            addCriterion("complete_user_id not like", value, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdIn(List<String> values) {
+            addCriterion("complete_user_id in", values, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdNotIn(List<String> values) {
+            addCriterion("complete_user_id not in", values, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdBetween(String value1, String value2) {
+            addCriterion("complete_user_id between", value1, value2, "completeUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompleteUserIdNotBetween(String value1, String value2) {
+            addCriterion("complete_user_id not between", value1, value2, "completeUserId");
             return (Criteria) this;
         }
 

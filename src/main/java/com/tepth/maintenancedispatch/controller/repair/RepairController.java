@@ -97,7 +97,7 @@ public class RepairController {
         GetRepairListPagingRequest request = JSONObject.parseObject(json, GetRepairListPagingRequest.class);
         request.setPage(1);
         request.setRow(3);
-        request.setStatusArr(Constant.REPAIR_STATUS_WORKING);
+        request.setProcessStatus((int) Constant.PROCESS_STATUS_WORKING);
         PageResponse<RepairVO> response = repairService.queryRepairListByPageStatusArr(request);
         return response;
     }
@@ -113,7 +113,7 @@ public class RepairController {
         GetRepairListPagingRequest request = JSONObject.parseObject(json, GetRepairListPagingRequest.class);
         request.setPage(1);
         request.setRow(3);
-        request.setStatusArr(Constant.REPAIR_STATUS_WAITING);
+        request.setProcessStatus((int) Constant.PROCESS_STATUS_WAITING);
         PageResponse<RepairVO> response = repairService.queryRepairListByPageStatusArr(request);
         return response;
     }

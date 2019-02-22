@@ -17,6 +17,7 @@
     <result column="rescue_status" jdbcType="TINYINT" property="rescueStatus" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="fault_phenomenon_id" jdbcType="VARCHAR" property="faultPhenomenonId" />
+    <result column="temp_fault_phenomenon_id" jdbcType="VARCHAR" property="tempFaultPhenomenonId" />
     <result column="sys_fault_diagnostic_id" jdbcType="VARCHAR" property="sysFaultDiagnosticId" />
     <result column="temp_fault_diagnostic_id" jdbcType="VARCHAR" property="tempFaultDiagnosticId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -26,6 +27,8 @@
     <result column="org_group_id" jdbcType="INTEGER" property="orgGroupId" />
     <result column="worker_id" jdbcType="VARCHAR" property="workerId" />
     <result column="factory_area_id" jdbcType="INTEGER" property="factoryAreaId" />
+    <result column="pass_user_id" jdbcType="VARCHAR" property="passUserId" />
+    <result column="complete_user_id" jdbcType="VARCHAR" property="completeUserId" />
     <result column="process_instance_id" jdbcType="VARCHAR" property="processInstanceId" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -91,9 +94,9 @@
   <sql id="Base_Column_List">
     id, order_no, additional, `type`, category, rescue, accident, add_time, arrival_time, 
     finish_time, `status`, job_process_status, rescue_status, `state`, fault_phenomenon_id, 
-    sys_fault_diagnostic_id, temp_fault_diagnostic_id, user_id, dispatch_user_id, vehicle_id, 
-    org_maintenance_id, org_group_id, worker_id, factory_area_id, process_instance_id, 
-    gmt_create, gmt_modified
+    temp_fault_phenomenon_id, sys_fault_diagnostic_id, temp_fault_diagnostic_id, user_id, 
+    dispatch_user_id, vehicle_id, org_maintenance_id, org_group_id, worker_id, factory_area_id, 
+    pass_user_id, complete_user_id, process_instance_id, gmt_create, gmt_modified
   </sql>
   <select id="selectByExample" parameterType="com.tepth.maintenancedispatch.dao.model.repair.RepairExample" resultMap="BaseResultMap">
     select
@@ -130,20 +133,24 @@
       category, rescue, accident, 
       add_time, arrival_time, finish_time, 
       `status`, job_process_status, rescue_status, 
-      `state`, fault_phenomenon_id, sys_fault_diagnostic_id, 
-      temp_fault_diagnostic_id, user_id, dispatch_user_id, 
-      vehicle_id, org_maintenance_id, org_group_id, 
-      worker_id, factory_area_id, process_instance_id, 
-      gmt_create, gmt_modified)
+      `state`, fault_phenomenon_id, temp_fault_phenomenon_id, 
+      sys_fault_diagnostic_id, temp_fault_diagnostic_id, 
+      user_id, dispatch_user_id, vehicle_id, 
+      org_maintenance_id, org_group_id, worker_id, 
+      factory_area_id, pass_user_id, complete_user_id, 
+      process_instance_id, gmt_create, gmt_modified
+      )
     values (#{orderNo,jdbcType=VARCHAR}, #{additional,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
       #{category,jdbcType=TINYINT}, #{rescue,jdbcType=BIT}, #{accident,jdbcType=BIT}, 
       #{addTime,jdbcType=TIMESTAMP}, #{arrivalTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=TINYINT}, #{jobProcessStatus,jdbcType=TINYINT}, #{rescueStatus,jdbcType=TINYINT}, 
-      #{state,jdbcType=TINYINT}, #{faultPhenomenonId,jdbcType=VARCHAR}, #{sysFaultDiagnosticId,jdbcType=VARCHAR}, 
-      #{tempFaultDiagnosticId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{dispatchUserId,jdbcType=INTEGER}, 
-      #{vehicleId,jdbcType=INTEGER}, #{orgMaintenanceId,jdbcType=INTEGER}, #{orgGroupId,jdbcType=INTEGER}, 
-      #{workerId,jdbcType=VARCHAR}, #{factoryAreaId,jdbcType=INTEGER}, #{processInstanceId,jdbcType=VARCHAR}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+      #{state,jdbcType=TINYINT}, #{faultPhenomenonId,jdbcType=VARCHAR}, #{tempFaultPhenomenonId,jdbcType=VARCHAR}, 
+      #{sysFaultDiagnosticId,jdbcType=VARCHAR}, #{tempFaultDiagnosticId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{dispatchUserId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, 
+      #{orgMaintenanceId,jdbcType=INTEGER}, #{orgGroupId,jdbcType=INTEGER}, #{workerId,jdbcType=VARCHAR}, 
+      #{factoryAreaId,jdbcType=INTEGER}, #{passUserId,jdbcType=VARCHAR}, #{completeUserId,jdbcType=VARCHAR}, 
+      #{processInstanceId,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.tepth.maintenancedispatch.dao.model.repair.Repair" useGeneratedKeys="true">
     insert into tb_repair
@@ -190,6 +197,9 @@
       <if test="faultPhenomenonId != null">
         fault_phenomenon_id,
       </if>
+      <if test="tempFaultPhenomenonId != null">
+        temp_fault_phenomenon_id,
+      </if>
       <if test="sysFaultDiagnosticId != null">
         sys_fault_diagnostic_id,
       </if>
@@ -216,6 +226,12 @@
       </if>
       <if test="factoryAreaId != null">
         factory_area_id,
+      </if>
+      <if test="passUserId != null">
+        pass_user_id,
+      </if>
+      <if test="completeUserId != null">
+        complete_user_id,
       </if>
       <if test="processInstanceId != null">
         process_instance_id,
@@ -270,6 +286,9 @@
       <if test="faultPhenomenonId != null">
         #{faultPhenomenonId,jdbcType=VARCHAR},
       </if>
+      <if test="tempFaultPhenomenonId != null">
+        #{tempFaultPhenomenonId,jdbcType=VARCHAR},
+      </if>
       <if test="sysFaultDiagnosticId != null">
         #{sysFaultDiagnosticId,jdbcType=VARCHAR},
       </if>
@@ -296,6 +315,12 @@
       </if>
       <if test="factoryAreaId != null">
         #{factoryAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="passUserId != null">
+        #{passUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="completeUserId != null">
+        #{completeUserId,jdbcType=VARCHAR},
       </if>
       <if test="processInstanceId != null">
         #{processInstanceId,jdbcType=VARCHAR},
@@ -362,6 +387,9 @@
       <if test="record.faultPhenomenonId != null">
         fault_phenomenon_id = #{record.faultPhenomenonId,jdbcType=VARCHAR},
       </if>
+      <if test="record.tempFaultPhenomenonId != null">
+        temp_fault_phenomenon_id = #{record.tempFaultPhenomenonId,jdbcType=VARCHAR},
+      </if>
       <if test="record.sysFaultDiagnosticId != null">
         sys_fault_diagnostic_id = #{record.sysFaultDiagnosticId,jdbcType=VARCHAR},
       </if>
@@ -388,6 +416,12 @@
       </if>
       <if test="record.factoryAreaId != null">
         factory_area_id = #{record.factoryAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.passUserId != null">
+        pass_user_id = #{record.passUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.completeUserId != null">
+        complete_user_id = #{record.completeUserId,jdbcType=VARCHAR},
       </if>
       <if test="record.processInstanceId != null">
         process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
@@ -420,6 +454,7 @@
       rescue_status = #{record.rescueStatus,jdbcType=TINYINT},
       `state` = #{record.state,jdbcType=TINYINT},
       fault_phenomenon_id = #{record.faultPhenomenonId,jdbcType=VARCHAR},
+      temp_fault_phenomenon_id = #{record.tempFaultPhenomenonId,jdbcType=VARCHAR},
       sys_fault_diagnostic_id = #{record.sysFaultDiagnosticId,jdbcType=VARCHAR},
       temp_fault_diagnostic_id = #{record.tempFaultDiagnosticId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
@@ -429,6 +464,8 @@
       org_group_id = #{record.orgGroupId,jdbcType=INTEGER},
       worker_id = #{record.workerId,jdbcType=VARCHAR},
       factory_area_id = #{record.factoryAreaId,jdbcType=INTEGER},
+      pass_user_id = #{record.passUserId,jdbcType=VARCHAR},
+      complete_user_id = #{record.completeUserId,jdbcType=VARCHAR},
       process_instance_id = #{record.processInstanceId,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
@@ -481,6 +518,9 @@
       <if test="faultPhenomenonId != null">
         fault_phenomenon_id = #{faultPhenomenonId,jdbcType=VARCHAR},
       </if>
+      <if test="tempFaultPhenomenonId != null">
+        temp_fault_phenomenon_id = #{tempFaultPhenomenonId,jdbcType=VARCHAR},
+      </if>
       <if test="sysFaultDiagnosticId != null">
         sys_fault_diagnostic_id = #{sysFaultDiagnosticId,jdbcType=VARCHAR},
       </if>
@@ -507,6 +547,12 @@
       </if>
       <if test="factoryAreaId != null">
         factory_area_id = #{factoryAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="passUserId != null">
+        pass_user_id = #{passUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="completeUserId != null">
+        complete_user_id = #{completeUserId,jdbcType=VARCHAR},
       </if>
       <if test="processInstanceId != null">
         process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
@@ -536,6 +582,7 @@
       rescue_status = #{rescueStatus,jdbcType=TINYINT},
       `state` = #{state,jdbcType=TINYINT},
       fault_phenomenon_id = #{faultPhenomenonId,jdbcType=VARCHAR},
+      temp_fault_phenomenon_id = #{tempFaultPhenomenonId,jdbcType=VARCHAR},
       sys_fault_diagnostic_id = #{sysFaultDiagnosticId,jdbcType=VARCHAR},
       temp_fault_diagnostic_id = #{tempFaultDiagnosticId,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
@@ -545,6 +592,8 @@
       org_group_id = #{orgGroupId,jdbcType=INTEGER},
       worker_id = #{workerId,jdbcType=VARCHAR},
       factory_area_id = #{factoryAreaId,jdbcType=INTEGER},
+      pass_user_id = #{passUserId,jdbcType=VARCHAR},
+      complete_user_id = #{completeUserId,jdbcType=VARCHAR},
       process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
@@ -629,22 +678,20 @@
         left join tb_vehicle d on d.id = a.vehicle_id
         left join tb_factory_area e on a.factory_area_id
   </sql>
-  <select id="queryListByPageWithStatusArr" resultMap="BaseResultMap">
-    <foreach collection="statusArr" separator="union all" item="item">
+  <select id="queryListByPageWithProcessStatus" resultMap="BaseResultMap">
       select
       <include refid="repair_vo_list"/>
-      where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
-    </foreach>
+      where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
     order by gmt_create desc
     <include refid="limit"/>
   </select>
 
-  <select id="queryListByPageCountWithStatusArr" resultType="long">
+  <select id="queryListByPageCountWithProcessStatus" resultType="long">
     select
     <foreach collection="statusArr" separator=")+(" item="item" open="((" close="))">
       select count(1)
       from tb_repair a
-      where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId}
+      where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
     </foreach>
     from dual
   </select>
@@ -652,7 +699,7 @@
   <select id="queryListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.RepairVO">
     select
     <include refid="repair_vo_list"/>
-    where a.category = 1 and a.org_maintenance_id = #{organizationId}
+    where a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
     <include refid="queryCondition"/>
     order by gmt_create desc
     <include refid="limit"/>
@@ -664,7 +711,7 @@
     left join tb_organization b on b.id = a.org_group_id
     left join tb_user c on c.id = a.user_id
     left join tb_vehicle d on d.id = a.vehicle_id
-    where a.category = 1 and a.org_maintenance_id = #{organizationId}
+    where a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
     <include refid="queryCondition"/>
   </select>
 </mapper>

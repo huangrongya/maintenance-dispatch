@@ -1,5 +1,7 @@
 package com.tepth.maintenancedispatch.dto.inner;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.dao.model.factory.FactoryArea;
 import lombok.Data;
 
@@ -50,7 +52,7 @@ public class MaintenanceFactoryVO {
     /**
      * 厂区标位置信息 json
      */
-    private String iconPosition;
+    private JSONArray iconPosition;
     /**维修厂区域**/
     private List<FactoryArea> factoryAreas;
 }

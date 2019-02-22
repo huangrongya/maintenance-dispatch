@@ -38,14 +38,14 @@ public interface RepairMapper {
      * @Date 2019/2/19 16:03
      * @Description 首页工单待作业
      **/
-    List<RepairVO> queryListByPageWithStatusArr(Map<String, Object> map);
+    List<RepairVO> queryListByPageWithProcessStatus(Map<String, Object> map);
 
     /**
      * @Author royle.huang
      * @Date 2019/2/19 16:05
      * @Description 首页工单待作业
      **/
-    long queryListByPageCountWithStatusArr(Map<String, Object> map);
+    long queryListByPageCountWithProcessStatus(Map<String, Object> map);
 
     /**
      * @Author royle.huang

@@ -15,10 +15,9 @@ import java.util.Map;
 @Data
 public class GetWorkerInfoResponse extends BaseResponse {
 
-    List<User> workers;
 
-    Map<String, String> areaWorkers;
+//    Map<String, String> areaWorkers;
 
     Integer online;
-    Integer offline;
+    Integer idle;
 }

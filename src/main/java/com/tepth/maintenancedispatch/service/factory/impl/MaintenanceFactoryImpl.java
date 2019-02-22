@@ -1,5 +1,7 @@
 package com.tepth.maintenancedispatch.service.factory.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.comm.Constant;
 import com.tepth.maintenancedispatch.comm.ErrorConstant;
 import com.tepth.maintenancedispatch.dao.mapper.factory.FactoryAreaMapper;
@@ -61,6 +63,7 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
         List<FactoryArea> factoryAreaList = factoryAreaMapper.selectByExample(factoryAreaExample);
 
         MyBeanUtils.copyPropertiesIgnoreCase(factory, vo);
+        vo.setIconPosition(JSONArray.parseArray(factory.getIconPosition().replace("\\", "")));
         vo.setFactoryAreas(factoryAreaList);
         return vo;
     }

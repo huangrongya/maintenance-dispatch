@@ -76,9 +76,14 @@ public class Repair implements Serializable {
     private Byte state;
 
     /**
-     * 故障现象id（，隔开）
+     * 系统故障现象id（，隔开）
      */
     private String faultPhenomenonId;
+
+    /**
+     * 临时故障现象id（，隔开）
+     */
+    private String tempFaultPhenomenonId;
 
     /**
      * 系统诊断id（，隔开）
@@ -91,12 +96,12 @@ public class Repair implements Serializable {
     private String tempFaultDiagnosticId;
 
     /**
-     * 用户id（司机、机调员）
+     * 用户id（司机）
      */
     private Integer userId;
 
     /**
-     * 机调员id 司机申请则无此字段
+     * 机调员id：司机申请则此字段为空
      */
     private Integer dispatchUserId;
 
@@ -124,6 +129,16 @@ public class Repair implements Serializable {
      * 作业工位id：维修厂区域id
      */
     private Integer factoryAreaId;
+
+    /**
+     * 过检人员id ，隔开
+     */
+    private String passUserId;
+
+    /**
+     * 竣检人员id ，隔开
+     */
+    private String completeUserId;
 
     /**
      * activiti流程实例id
@@ -262,6 +277,14 @@ public class Repair implements Serializable {
         this.faultPhenomenonId = faultPhenomenonId;
     }
 
+    public String getTempFaultPhenomenonId() {
+        return tempFaultPhenomenonId;
+    }
+
+    public void setTempFaultPhenomenonId(String tempFaultPhenomenonId) {
+        this.tempFaultPhenomenonId = tempFaultPhenomenonId;
+    }
+
     public String getSysFaultDiagnosticId() {
         return sysFaultDiagnosticId;
     }
@@ -332,6 +355,22 @@ public class Repair implements Serializable {
 
     public void setFactoryAreaId(Integer factoryAreaId) {
         this.factoryAreaId = factoryAreaId;
+    }
+
+    public String getPassUserId() {
+        return passUserId;
+    }
+
+    public void setPassUserId(String passUserId) {
+        this.passUserId = passUserId;
+    }
+
+    public String getCompleteUserId() {
+        return completeUserId;
+    }
+
+    public void setCompleteUserId(String completeUserId) {
+        this.completeUserId = completeUserId;
     }
 
     public String getProcessInstanceId() {

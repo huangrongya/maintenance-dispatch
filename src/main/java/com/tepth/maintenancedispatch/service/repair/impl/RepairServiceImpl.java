@@ -40,13 +40,13 @@ public class RepairServiceImpl implements IRepairService {
         QueryPage page = Global.getQueryPage(request);
         Map<String, Object> map = new HashMap<>();
         map.put("queryPage", page);
-        map.put("statusArr", request.getStatusArr());
+        map.put("processStatus", request.getProcessStatus());
         map.put("organizationId", userInfo.getOrganizationId());
-        List<RepairVO> repairList = repairMapper.queryListByPageWithStatusArr(map);
+        List<RepairVO> repairList = repairMapper.queryListByPageWithProcessStatus(map);
         if (repairList != null){
             repairList.sort(Comparator.comparing(RepairVO::getGmtCreate));
         }
-        long total = repairMapper.queryListByPageCountWithStatusArr(map);
+        long total = repairMapper.queryListByPageCountWithProcessStatus(map);
         response.setPageList(repairList);
         response.setTotalCount(total);
         response.setTotalPage(PageUtil.getTotalPage(total, request.getRow()));
@@ -72,7 +72,7 @@ public class RepairServiceImpl implements IRepairService {
         map.put("areaId", request.getAreaId());
         map.put("orgGroupId", request.getOrgGroupId());
         map.put("keyword", request.getKeyWord());
-        map.put("status", request.getStatusArr());
+        map.put("status", request.getStatus());
         map.put("organizationId", userInfo.getOrganizationId());
         map.put("startDate", request.getStartDate());
         map.put("endDate", request.getEndDate());
@@ -125,7 +125,7 @@ public class RepairServiceImpl implements IRepairService {
         if (repair == null){
             throw new ServiceException(RspCodeEnum.USER_NOT_EXISTS.getCode(), RspCodeEnum.USER_NOT_EXISTS.getDesc());
         }
-        if (!RepairStatusEnum.VEHICLE_INSPECTION.getCode().equals(repair.getStatus())){
+        if (!RepairStatusEnum.COMPLETE_CHECK.getCode().equals(repair.getStatus())){
             throw new ServiceException(RspCodeEnum.VEHICLE_WRONG_STATUS.getCode(), RspCodeEnum.VEHICLE_WRONG_STATUS.getDesc());
         }
         repair.setStatus(RepairStatusEnum.EXCHANGE_TO_DRIVER.getCode());
