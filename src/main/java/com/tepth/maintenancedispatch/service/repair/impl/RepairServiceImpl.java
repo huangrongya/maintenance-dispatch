@@ -16,6 +16,7 @@ import com.tepth.maintenancedispatch.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -76,6 +77,8 @@ public class RepairServiceImpl implements IRepairService {
         map.put("organizationId", userInfo.getOrganizationId());
         map.put("startDate", request.getStartDate());
         map.put("endDate", request.getEndDate());
+        map.put("workerId", request.getEndDate());
+        map.put("driverId", request.getEndDate());
         List<RepairVO> repairList = repairMapper.queryListByPage(map);
         long total = repairMapper.queryListByPageCount(map);
         response.setPageList(repairList);
@@ -152,6 +155,46 @@ public class RepairServiceImpl implements IRepairService {
             phenomenonList.add(phenomenon);
         }
         response.setFaults(phenomenonList);
+        return response;
+    }
+
+    @Override
+    public GetRepairDetailResponse queryRepairDetail(Integer repairId) {
+        GetRepairDetailResponse response = new GetRepairDetailResponse();
+        //工单
+        RepairDetail repairDetail = repairMapper.selectRepairDetailById(repairId);
+        if (repairDetail!= null){
+            //故障
+            String faultIdStr = repairDetail.getFaultPhenomenonId();
+            if (!StringUtils.isEmpty(faultIdStr)){
+                List<Phenomenon> phenomenonList = new ArrayList<>();
+                String[] faultArr = faultIdStr.split(",");
+                for (String s : faultArr) {
+                    Phenomenon phenomenon = faultPhenomenonMapper.queryPhenomenonInfoById(Integer.parseInt(s));
+                    phenomenonList.add(phenomenon);
+                }
+                repairDetail.setFaults(phenomenonList);
+            }
+            //作业项
+            List<RepairPlan> plans = new ArrayList<>();
+            String sysIdStr = repairDetail.getSysFaultDiagnosticId();
+            if (!StringUtils.isEmpty(sysIdStr)){
+                String[] sysIdArr = sysIdStr.split(",");
+                for (String s : sysIdArr) {
+                    List<RepairPlan> list = repairMapper.selectSysRepairPlanByDiaId(Integer.parseInt(s));
+                    plans.addAll(list);
+                }
+            }
+            String tempIdStr = repairDetail.getTempFaultDiagnosticId();
+            if (!StringUtils.isEmpty(tempIdStr)){
+                String[] tempIdArr = tempIdStr.split(",");
+                for (String s : tempIdArr) {
+                    List<RepairPlan> list = repairMapper.selectTempRepairPlanByDiaId(Integer.parseInt(s));
+                    plans.addAll(list);
+                }
+            }
+            //TODO 操作记录 领料记录
+        }
         return response;
     }
 }

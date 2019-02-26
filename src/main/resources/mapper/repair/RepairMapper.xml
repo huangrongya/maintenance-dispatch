@@ -10,8 +10,10 @@
     <result column="rescue" jdbcType="BIT" property="rescue" />
     <result column="accident" jdbcType="BIT" property="accident" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
-    <result column="arrival_time" jdbcType="TIMESTAMP" property="arrivalTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="arrival_time" jdbcType="TIMESTAMP" property="arrivalTime" />
+    <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="job_process_status" jdbcType="TINYINT" property="jobProcessStatus" />
     <result column="rescue_status" jdbcType="TINYINT" property="rescueStatus" />
@@ -92,11 +94,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_no, additional, `type`, category, rescue, accident, add_time, arrival_time, 
-    finish_time, `status`, job_process_status, rescue_status, `state`, fault_phenomenon_id, 
-    temp_fault_phenomenon_id, sys_fault_diagnostic_id, temp_fault_diagnostic_id, user_id, 
-    dispatch_user_id, vehicle_id, org_maintenance_id, org_group_id, worker_id, factory_area_id, 
-    pass_user_id, complete_user_id, process_instance_id, gmt_create, gmt_modified
+    id, order_no, additional, `type`, category, rescue, accident, add_time, start_time, 
+    finish_time, arrival_time, leave_time, `status`, job_process_status, rescue_status, 
+    `state`, fault_phenomenon_id, temp_fault_phenomenon_id, sys_fault_diagnostic_id, 
+    temp_fault_diagnostic_id, user_id, dispatch_user_id, vehicle_id, org_maintenance_id, 
+    org_group_id, worker_id, factory_area_id, pass_user_id, complete_user_id, process_instance_id, 
+    gmt_create, gmt_modified
   </sql>
   <select id="selectByExample" parameterType="com.tepth.maintenancedispatch.dao.model.repair.RepairExample" resultMap="BaseResultMap">
     select
@@ -131,9 +134,10 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.tepth.maintenancedispatch.dao.model.repair.Repair" useGeneratedKeys="true">
     insert into tb_repair (order_no, additional, `type`, 
       category, rescue, accident, 
-      add_time, arrival_time, finish_time, 
-      `status`, job_process_status, rescue_status, 
-      `state`, fault_phenomenon_id, temp_fault_phenomenon_id, 
+      add_time, start_time, finish_time, 
+      arrival_time, leave_time, `status`, 
+      job_process_status, rescue_status, `state`, 
+      fault_phenomenon_id, temp_fault_phenomenon_id, 
       sys_fault_diagnostic_id, temp_fault_diagnostic_id, 
       user_id, dispatch_user_id, vehicle_id, 
       org_maintenance_id, org_group_id, worker_id, 
@@ -142,9 +146,10 @@
       )
     values (#{orderNo,jdbcType=VARCHAR}, #{additional,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
       #{category,jdbcType=TINYINT}, #{rescue,jdbcType=BIT}, #{accident,jdbcType=BIT}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{arrivalTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT}, #{jobProcessStatus,jdbcType=TINYINT}, #{rescueStatus,jdbcType=TINYINT}, 
-      #{state,jdbcType=TINYINT}, #{faultPhenomenonId,jdbcType=VARCHAR}, #{tempFaultPhenomenonId,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
+      #{arrivalTime,jdbcType=TIMESTAMP}, #{leaveTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{jobProcessStatus,jdbcType=TINYINT}, #{rescueStatus,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
+      #{faultPhenomenonId,jdbcType=VARCHAR}, #{tempFaultPhenomenonId,jdbcType=VARCHAR}, 
       #{sysFaultDiagnosticId,jdbcType=VARCHAR}, #{tempFaultDiagnosticId,jdbcType=VARCHAR}, 
       #{userId,jdbcType=INTEGER}, #{dispatchUserId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, 
       #{orgMaintenanceId,jdbcType=INTEGER}, #{orgGroupId,jdbcType=INTEGER}, #{workerId,jdbcType=VARCHAR}, 
@@ -176,11 +181,17 @@
       <if test="addTime != null">
         add_time,
       </if>
-      <if test="arrivalTime != null">
-        arrival_time,
+      <if test="startTime != null">
+        start_time,
       </if>
       <if test="finishTime != null">
         finish_time,
+      </if>
+      <if test="arrivalTime != null">
+        arrival_time,
+      </if>
+      <if test="leaveTime != null">
+        leave_time,
       </if>
       <if test="status != null">
         `status`,
@@ -265,11 +276,17 @@
       <if test="addTime != null">
         #{addTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="arrivalTime != null">
-        #{arrivalTime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="finishTime != null">
         #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalTime != null">
+        #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null">
+        #{leaveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -366,11 +383,17 @@
       <if test="record.addTime != null">
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.arrivalTime != null">
-        arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.finishTime != null">
         finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.arrivalTime != null">
+        arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaveTime != null">
+        leave_time = #{record.leaveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=TINYINT},
@@ -447,8 +470,10 @@
       rescue = #{record.rescue,jdbcType=BIT},
       accident = #{record.accident,jdbcType=BIT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
-      arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
       finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      leave_time = #{record.leaveTime,jdbcType=TIMESTAMP},
       `status` = #{record.status,jdbcType=TINYINT},
       job_process_status = #{record.jobProcessStatus,jdbcType=TINYINT},
       rescue_status = #{record.rescueStatus,jdbcType=TINYINT},
@@ -497,11 +522,17 @@
       <if test="addTime != null">
         add_time = #{addTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="arrivalTime != null">
-        arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="finishTime != null">
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalTime != null">
+        arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null">
+        leave_time = #{leaveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
@@ -575,8 +606,10 @@
       rescue = #{rescue,jdbcType=BIT},
       accident = #{accident,jdbcType=BIT},
       add_time = #{addTime,jdbcType=TIMESTAMP},
-      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
       finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
       `status` = #{status,jdbcType=TINYINT},
       job_process_status = #{jobProcessStatus,jdbcType=TINYINT},
       rescue_status = #{rescueStatus,jdbcType=TINYINT},
@@ -599,7 +632,6 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
 
   <!-- 公共的分页 -->
   <sql id="limit">
@@ -629,6 +661,9 @@
     <if test="areaId != null">
       and a.areaId = #{areaId}
     </if>
+    <if test="driverId != null">
+      and a.user_id = #{driverId}
+    </if>
     <if test="startDate != null">
       <![CDATA[  and date (a.add_time) >= date(#{startDate}) ]]>
     </if>
@@ -637,6 +672,9 @@
     </if>
     <if test="isMyDeal != null">
       and (a.status = 2 or a.status = 5 or a.factory_area_id is null)
+    </if>
+    <if test="workerId != null">
+      and (a.worker_id = like concat('%', #{keyword}, '%') or )
     </if>
     <if test="keyword != null and keyword.trim() != ''">
       and (
@@ -679,9 +717,9 @@
         left join tb_factory_area e on a.factory_area_id
   </sql>
   <select id="queryListByPageWithProcessStatus" resultMap="BaseResultMap">
-      select
-      <include refid="repair_vo_list"/>
-      where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
+    select
+    <include refid="repair_vo_list"/>
+    where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
     order by gmt_create desc
     <include refid="limit"/>
   </select>
@@ -714,4 +752,92 @@
     where a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
     <include refid="queryCondition"/>
   </select>
+
+  <select id="selectRepairDetailById" resultType="com.tepth.maintenancedispatch.dto.inner.RepairDetail">
+    select
+      a.id id,
+      a.order_no orderNo,
+      a.additional additional,
+      a.type type,
+      a.category category,
+      a.rescue rescue,
+      a.accident accident,
+      a.add_time addTime,
+      a.start_time startTime,
+      a.finish_time finishTime,
+      a.arrival_time arrivalTime,
+      a.leave_time leaveTime,
+      a.status status,
+      a.job_process_status jobProcessStatus,
+      a.rescue_status rescueStatus,
+      a.state state,
+      a.fault_phenomenon_id faultPhenomenonId,
+      a.temp_fault_phenomenon_id tempFaultPhenomenonId,
+      a.sys_fault_diagnostic_id sysFaultDiagnosticId,
+      a.temp_fault_diagnostic_id tempFaultDiagnosticId,
+      a.user_id userId,
+      a.dispatch_user_id dispatchUserId,
+      a.vehicle_id vehicleId,
+      a.org_maintenance_id orgMaintenanceId,
+      a.org_group_id orgGroupId,
+      a.worker_id workerId,
+      a.factory_area_id factoryAreaId,
+      a.pass_user_id passUserId,
+      a.complete_user_id completeUserId,
+      a.process_instance_id processInstanceId,
+      a.gmt_create gmtCreate,
+      a.gmt_modified gmtModified,
+      b.name groupName,
+      c.user_name driverName,
+      d.vehicle_no vehicleNo,
+      e.name workStation,
+      (a.finish_time - a.start_time) workingTime
+
+      from tb_repair a
+      left join tb_organization b on b.id = a.org_group_id
+      left join tb_user c on c.id = a.user_id
+      left join tb_vehicle d on d.id = a.vehicle_id
+      left join tb_factory_area e on a.factory_area_id
+      where a.id = #{id} and a.state != -1
+  </select>
+  <select id="selectSysRepairPlanByDiaId" resultType="com.tepth.maintenancedispatch.dto.inner.RepairPlan">
+    SELECT
+	  d.action_name `action`, c.material_name part
+    FROM
+        tb_system_repair_plan a
+    LEFT JOIN tb_system_repair_plan_parts b ON a.id = b.repair_plan_id
+    LEFT JOIN tb_components_parts c ON c.id = b.parts_id
+    LEFT JOIN tb_maintenance_action d ON d.id = a.maintenance_action_id
+    WHERE b.type = 1 and a.fault_diagnostic_id = #{diaId}
+    UNION ALL
+    SELECT
+        d.action_name `action`, c.material_name part
+    FROM
+        tb_system_repair_plan a
+    LEFT JOIN tb_system_repair_plan_parts b ON a.id = b.repair_plan_id
+    LEFT JOIN tb_consumptive_material c ON c.id = b.parts_id
+    LEFT JOIN tb_maintenance_action d ON d.id = a.maintenance_action_id
+    WHERE b.type = 2 and  a.fault_diagnostic_id = #{diaId}
+  </select>
+
+  <select id="selectTempRepairPlanByDiaId" resultType="com.tepth.maintenancedispatch.dto.inner.RepairPlan">
+    SELECT
+	  d.action_name `action`, c.material_name part
+    FROM
+        tb_scene_repair_plan a
+    LEFT JOIN tb_scene_repair_plan_parts b ON a.id = b.scene_repair_plan_id
+    LEFT JOIN tb_components_parts c ON c.id = b.parts_id
+    LEFT JOIN tb_maintenance_action d ON d.id = a.maintenance_action_id
+    WHERE b.type = 1 and  a.fault_diagnostic_id = #{diaId}
+    UNION ALL
+    SELECT
+        d.action_name `action`, c.material_name part
+    FROM
+        tb_scene_repair_plan a
+    LEFT JOIN tb_scene_repair_plan_parts b ON a.id = b.scene_repair_plan_id
+    LEFT JOIN tb_consumptive_material c ON c.id = b.parts_id
+    LEFT JOIN tb_maintenance_action d ON d.id = a.maintenance_action_id
+    WHERE b.type = 2 and  a.fault_diagnostic_id = #{diaId}
+  </select>
+
 </mapper>

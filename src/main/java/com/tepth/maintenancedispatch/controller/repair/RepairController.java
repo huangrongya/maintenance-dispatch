@@ -133,6 +133,18 @@ public class RepairController {
 
     /**
      * @Author royle.huang
+     * @Date 2019/2/26 9:07
+     * @Description 作业详情
+     **/
+    @PostMapping("/detail")
+    public BaseResponse queryRepairDetail(@RequestBody String json){
+        GetRepairDetailRequest request = JSONObject.parseObject(json, GetRepairDetailRequest.class);
+        GetRepairDetailResponse response = repairService.queryRepairDetail(request.getRepairId());
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
      * @Date 2019/2/21 9:44
      * @Description 分配工位和班组
      **/

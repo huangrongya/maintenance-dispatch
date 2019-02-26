@@ -5,6 +5,8 @@ import com.tepth.maintenancedispatch.dao.model.repair.RepairExample;
 import java.util.List;
 import java.util.Map;
 
+import com.tepth.maintenancedispatch.dto.inner.RepairDetail;
+import com.tepth.maintenancedispatch.dto.inner.RepairPlan;
 import com.tepth.maintenancedispatch.dto.inner.RepairVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -60,4 +62,25 @@ public interface RepairMapper {
      * @Description 通用分页查询
      **/
     long queryListByPageCount(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/26 14:29
+     * @Description 获取工单详情
+     **/
+    RepairDetail selectRepairDetailById(Integer id);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/26 17:04
+     * @Description 系统作业项
+     **/
+    List<RepairPlan> selectSysRepairPlanByDiaId(@Param("diaId")Integer diaId);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/26 17:05
+     * @Description 临时作业项
+     **/
+    List<RepairPlan> selectTempRepairPlanByDiaId(@Param("diaId")Integer diaId);
 }

@@ -605,63 +605,63 @@ public class RepairExample {
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeIsNull() {
-            addCriterion("arrival_time is null");
+        public Criteria andStartTimeIsNull() {
+            addCriterion("start_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeIsNotNull() {
-            addCriterion("arrival_time is not null");
+        public Criteria andStartTimeIsNotNull() {
+            addCriterion("start_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeEqualTo(Date value) {
-            addCriterion("arrival_time =", value, "arrivalTime");
+        public Criteria andStartTimeEqualTo(Date value) {
+            addCriterion("start_time =", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeNotEqualTo(Date value) {
-            addCriterion("arrival_time <>", value, "arrivalTime");
+        public Criteria andStartTimeNotEqualTo(Date value) {
+            addCriterion("start_time <>", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeGreaterThan(Date value) {
-            addCriterion("arrival_time >", value, "arrivalTime");
+        public Criteria andStartTimeGreaterThan(Date value) {
+            addCriterion("start_time >", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("arrival_time >=", value, "arrivalTime");
+        public Criteria andStartTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("start_time >=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeLessThan(Date value) {
-            addCriterion("arrival_time <", value, "arrivalTime");
+        public Criteria andStartTimeLessThan(Date value) {
+            addCriterion("start_time <", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeLessThanOrEqualTo(Date value) {
-            addCriterion("arrival_time <=", value, "arrivalTime");
+        public Criteria andStartTimeLessThanOrEqualTo(Date value) {
+            addCriterion("start_time <=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeIn(List<Date> values) {
-            addCriterion("arrival_time in", values, "arrivalTime");
+        public Criteria andStartTimeIn(List<Date> values) {
+            addCriterion("start_time in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeNotIn(List<Date> values) {
-            addCriterion("arrival_time not in", values, "arrivalTime");
+        public Criteria andStartTimeNotIn(List<Date> values) {
+            addCriterion("start_time not in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeBetween(Date value1, Date value2) {
-            addCriterion("arrival_time between", value1, value2, "arrivalTime");
+        public Criteria andStartTimeBetween(Date value1, Date value2) {
+            addCriterion("start_time between", value1, value2, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andArrivalTimeNotBetween(Date value1, Date value2) {
-            addCriterion("arrival_time not between", value1, value2, "arrivalTime");
+        public Criteria andStartTimeNotBetween(Date value1, Date value2) {
+            addCriterion("start_time not between", value1, value2, "startTime");
             return (Criteria) this;
         }
 
@@ -722,6 +722,126 @@ public class RepairExample {
 
         public Criteria andFinishTimeNotBetween(Date value1, Date value2) {
             addCriterion("finish_time not between", value1, value2, "finishTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeIsNull() {
+            addCriterion("arrival_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeIsNotNull() {
+            addCriterion("arrival_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeEqualTo(Date value) {
+            addCriterion("arrival_time =", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeNotEqualTo(Date value) {
+            addCriterion("arrival_time <>", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeGreaterThan(Date value) {
+            addCriterion("arrival_time >", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("arrival_time >=", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeLessThan(Date value) {
+            addCriterion("arrival_time <", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeLessThanOrEqualTo(Date value) {
+            addCriterion("arrival_time <=", value, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeIn(List<Date> values) {
+            addCriterion("arrival_time in", values, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeNotIn(List<Date> values) {
+            addCriterion("arrival_time not in", values, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeBetween(Date value1, Date value2) {
+            addCriterion("arrival_time between", value1, value2, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andArrivalTimeNotBetween(Date value1, Date value2) {
+            addCriterion("arrival_time not between", value1, value2, "arrivalTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeIsNull() {
+            addCriterion("leave_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeIsNotNull() {
+            addCriterion("leave_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeEqualTo(Date value) {
+            addCriterion("leave_time =", value, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeNotEqualTo(Date value) {
+            addCriterion("leave_time <>", value, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeGreaterThan(Date value) {
+            addCriterion("leave_time >", value, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("leave_time >=", value, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeLessThan(Date value) {
+            addCriterion("leave_time <", value, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeLessThanOrEqualTo(Date value) {
+            addCriterion("leave_time <=", value, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeIn(List<Date> values) {
+            addCriterion("leave_time in", values, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeNotIn(List<Date> values) {
+            addCriterion("leave_time not in", values, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeBetween(Date value1, Date value2) {
+            addCriterion("leave_time between", value1, value2, "leaveTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeaveTimeNotBetween(Date value1, Date value2) {
+            addCriterion("leave_time not between", value1, value2, "leaveTime");
             return (Criteria) this;
         }
 

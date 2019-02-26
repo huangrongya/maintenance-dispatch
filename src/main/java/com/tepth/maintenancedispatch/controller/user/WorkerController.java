@@ -1,8 +1,10 @@
 package com.tepth.maintenancedispatch.controller.user;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
 import com.tepth.maintenancedispatch.dto.GetWorkerInfoResponse;
 import com.tepth.maintenancedispatch.dto.inner.*;
+import com.tepth.maintenancedispatch.service.repair.IRepairService;
 import com.tepth.maintenancedispatch.service.user.IWorkerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,21 @@ public class WorkerController {
     @Autowired
     IWorkerService workerService;
 
+    @Autowired
+    IRepairService repairService;
+
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/22 17:35
+     * @Description 员工作业记录列表
+     **/
+    @PostMapping("/repair")
+    public PageResponse<RepairVO> queryRepairListByPage(@RequestBody String json){
+        GetRepairListPagingRequest request = JSONObject.parseObject(json, GetRepairListPagingRequest.class);
+        PageResponse<RepairVO> response  = repairService.queryRepairListByPageComm(request);
+        return response;
+    }
 
     /**
      * @Author royle.huang

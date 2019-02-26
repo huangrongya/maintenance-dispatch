@@ -46,9 +46,9 @@ public class Repair implements Serializable {
     private Date addTime;
 
     /**
-     * 到厂时间
+     * 作业开始时间
      */
-    private Date arrivalTime;
+    private Date startTime;
 
     /**
      * 完成时间
@@ -56,12 +56,22 @@ public class Repair implements Serializable {
     private Date finishTime;
 
     /**
+     * 到厂时间
+     */
+    private Date arrivalTime;
+
+    /**
+     * 离厂时间
+     */
+    private Date leaveTime;
+
+    /**
      * 维保作业状态（维修厂）：1-待回厂(站) 2-已回厂(站) 3-司机已交车 4-已过检 5-已竣检 6-司机已接车 7-已出厂
      */
     private Byte status;
 
     /**
-     * 作业过程状态：1-待作业 2-作业中 3-已完成 4-已失效（当工单被逻辑删除或取消后状态）
+     * 作业过程状态：1-待作业 2-作业中 3-已完成
      */
     private Byte jobProcessStatus;
 
@@ -221,12 +231,12 @@ public class Repair implements Serializable {
         this.addTime = addTime;
     }
 
-    public Date getArrivalTime() {
-        return arrivalTime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     public Date getFinishTime() {
@@ -235,6 +245,22 @@ public class Repair implements Serializable {
 
     public void setFinishTime(Date finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public Date getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public Date getLeaveTime() {
+        return leaveTime;
+    }
+
+    public void setLeaveTime(Date leaveTime) {
+        this.leaveTime = leaveTime;
     }
 
     public Byte getStatus() {

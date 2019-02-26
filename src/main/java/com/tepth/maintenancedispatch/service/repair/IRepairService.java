@@ -54,4 +54,11 @@ public interface IRepairService {
      * @Description 查询故障信息
      **/
     GetPhenamenonResponse queryFaultList(RepairIdRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/26 9:14
+     * @Description 查询工单详情
+     **/
+    GetRepairDetailResponse queryRepairDetail(Integer repairId);
 }
