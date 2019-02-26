@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:mysql://47.102.119.147:3306/tepth?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Hongkong&useSSL=false
     username: root
-    password:
+    password: tepth_666
     driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:

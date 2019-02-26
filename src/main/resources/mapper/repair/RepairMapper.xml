@@ -797,7 +797,7 @@
       left join tb_organization b on b.id = a.org_group_id
       left join tb_user c on c.id = a.user_id
       left join tb_vehicle d on d.id = a.vehicle_id
-      left join tb_factory_area e on a.factory_area_id
+      left join tb_factory_area e on a.factory_area_id = e.id
       where a.id = #{id} and a.state != -1
   </select>
   <select id="selectSysRepairPlanByDiaId" resultType="com.tepth.maintenancedispatch.dto.inner.RepairPlan">

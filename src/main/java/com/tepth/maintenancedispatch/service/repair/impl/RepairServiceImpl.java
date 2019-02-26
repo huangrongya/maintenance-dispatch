@@ -195,6 +195,7 @@ public class RepairServiceImpl implements IRepairService {
             }
             //TODO 操作记录 领料记录
         }
+        response.setRepairDetail(repairDetail);
         return response;
     }
 }
