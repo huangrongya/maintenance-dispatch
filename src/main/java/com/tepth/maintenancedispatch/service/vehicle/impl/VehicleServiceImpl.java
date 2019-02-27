@@ -98,6 +98,9 @@ public class VehicleServiceImpl implements IVehicleService {
         map.put("queryPage", page);
         UserInfo userInfo = request.getUser();
         map.put("organizationId", userInfo.getOrganizationId());
+        if ("rest".equals(request.getKeyWord())){
+            map.put("rest", "rest");
+        }
         List<VehicleVo> list = vehicleMapper.queryListByPage(map);
         long total = vehicleMapper.queryListByPageCount(map);
         response.setPageList(list);

@@ -30,6 +30,14 @@ public class VehicleController {
     IVehicleService vehicleService;
 
 
+    @PostMapping("/rest")
+    public PageResponse<VehicleVo> queryVehicleRestByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("rest");
+        PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
+        return response;
+    }
+
     /**
      * @Author royle.huang
      * @Date 2019/2/26 18:09
