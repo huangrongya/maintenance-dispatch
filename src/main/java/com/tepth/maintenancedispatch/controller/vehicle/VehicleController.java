@@ -6,6 +6,9 @@ import com.tepth.maintenancedispatch.dto.GetVehicleByNoRequest;
 import com.tepth.maintenancedispatch.dto.GetVehicleByNoResponse;
 import com.tepth.maintenancedispatch.dto.GetVehicleInfoRequest;
 import com.tepth.maintenancedispatch.dto.GetVehicleInfoResponse;
+import com.tepth.maintenancedispatch.dto.inner.PageRequest;
+import com.tepth.maintenancedispatch.dto.inner.PageResponse;
+import com.tepth.maintenancedispatch.dto.inner.VehicleVo;
 import com.tepth.maintenancedispatch.service.vehicle.IVehicleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,19 @@ public class VehicleController {
 
     @Autowired
     IVehicleService vehicleService;
+
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/26 18:09
+     * @Description 车辆列表
+     **/
+    @PostMapping("/list")
+    public PageResponse<VehicleVo> queryVehicleListByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
+        return response;
+    }
 
 
     /**

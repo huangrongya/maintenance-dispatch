@@ -3,6 +3,9 @@ package com.tepth.maintenancedispatch.service.vehicle;
 import com.tepth.maintenancedispatch.dto.GetVehicleByNoResponse;
 import com.tepth.maintenancedispatch.dto.GetVehicleInfoRequest;
 import com.tepth.maintenancedispatch.dto.GetVehicleInfoResponse;
+import com.tepth.maintenancedispatch.dto.inner.PageRequest;
+import com.tepth.maintenancedispatch.dto.inner.PageResponse;
+import com.tepth.maintenancedispatch.dto.inner.VehicleVo;
 
 /**
  * @Author royle.huang
@@ -23,4 +26,11 @@ public interface IVehicleService {
      * @Description 通过车辆编号查询车辆信息
      **/
     GetVehicleByNoResponse queryVehicleByNo(String vehicleNo);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/26 18:15
+     * @Description 分页查询厂区汽车列表
+     **/
+    PageResponse<VehicleVo> queryVehicleListByPage(PageRequest request);
 }

@@ -266,6 +266,22 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 <!--******************************自定义***********************************************-->
+
+  <!-- 公共的分页 -->
+  <sql id="limit">
+    <if test="queryPage != null">
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
+  <!--排序的分页-->
+  <sql id="orderLimit">
+    <if test="queryPage != null">
+      <if test="queryPage.order != null and queryPage.sort != null">
+        order by ${queryPage.sort} ${queryPage.order}
+      </if>
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
   <resultMap id="VehicleVoMap" type="com.tepth.maintenancedispatch.dto.inner.VehicleVo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="vehicle_no" jdbcType="VARCHAR" property="vehicleNo" />
@@ -300,5 +316,34 @@
       on v.id = r.vehicle_id
       where
       r.state = 1 and r.org_maintenance_id = #{organizationId}
+  </select>
+
+  <select id="queryListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.VehicleListVo">
+    select
+      v.id,
+      v.vehicle_no vehicleNo,
+      v.license_no licenseNo,
+      vl.line_name lineName,
+      vl.line_no lineNo,
+      o.name organization
+      from
+      tb_vehicle v
+      left join tb_repair r on v.id = r.vehicle_id
+      left join tb_vehicle_line vl on vl.id = v.vehicle_line_id
+      left join tb_organization o on o.id = vl.organization_id
+      where
+      r.state = 1 and r.org_maintenance_id = #{organizationId}
+      <include refid="limit"/>
+  </select>
+
+  <select id="queryListByPageCount" resultType="long">
+    select count(1)
+    from
+    tb_vehicle v
+    left join tb_repair r on v.id = r.vehicle_id
+    left join tb_vehicle_line vl on vl.id = v.vehicle_line_id
+    left join tb_organization o on o.id = vl.organization_id
+    where
+    r.state = 1 and r.org_maintenance_id = #{organizationId}
   </select>
 </mapper>

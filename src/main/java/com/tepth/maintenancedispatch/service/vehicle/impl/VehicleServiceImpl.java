@@ -1,5 +1,7 @@
 package com.tepth.maintenancedispatch.service.vehicle.impl;
 
+import com.tepth.maintenancedispatch.comm.Global;
+import com.tepth.maintenancedispatch.comm.QueryPage;
 import com.tepth.maintenancedispatch.comm.RspCodeEnum;
 import com.tepth.maintenancedispatch.dao.mapper.user.UserMapper;
 import com.tepth.maintenancedispatch.dao.mapper.vehicle.VehicleLineMapper;
@@ -12,14 +14,17 @@ import com.tepth.maintenancedispatch.dao.model.vehicle.VehicleLineExample;
 import com.tepth.maintenancedispatch.dto.GetVehicleByNoResponse;
 import com.tepth.maintenancedispatch.dto.GetVehicleInfoRequest;
 import com.tepth.maintenancedispatch.dto.GetVehicleInfoResponse;
-import com.tepth.maintenancedispatch.dto.inner.VehicleVo;
+import com.tepth.maintenancedispatch.dto.inner.*;
 import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.vehicle.IVehicleService;
+import com.tepth.maintenancedispatch.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author royle.huang
@@ -82,6 +87,22 @@ public class VehicleServiceImpl implements IVehicleService {
         }else {
             throw new ServiceException(RspCodeEnum.VEHICLE_NOT_EXIT.getCode(), RspCodeEnum.VEHICLE_NOT_EXIT.getDesc());
         }
+        return response;
+    }
+
+    @Override
+    public PageResponse<VehicleVo> queryVehicleListByPage(PageRequest request) {
+        PageResponse<VehicleVo> response = new PageResponse<>();
+        QueryPage page = Global.getQueryPage(request);
+        Map<String, Object> map = new HashMap<>();
+        map.put("queryPage", page);
+        UserInfo userInfo = request.getUser();
+        map.put("organizationId", userInfo.getOrganizationId());
+        List<VehicleVo> list = vehicleMapper.queryListByPage(map);
+        long total = vehicleMapper.queryListByPageCount(map);
+        response.setPageList(list);
+        response.setTotalCount(total);
+        response.setTotalPage(PageUtil.getTotalPage(total, page.getPageSize()));
         return response;
     }
 }
