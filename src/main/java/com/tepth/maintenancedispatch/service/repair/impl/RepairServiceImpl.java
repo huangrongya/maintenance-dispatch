@@ -6,6 +6,7 @@ import com.tepth.maintenancedispatch.comm.RepairStatusEnum;
 import com.tepth.maintenancedispatch.comm.RspCodeEnum;
 import com.tepth.maintenancedispatch.dao.mapper.repair.FaultPhenomenonMapper;
 import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
+import com.tepth.maintenancedispatch.dao.mapper.vehicle.VehicleAlarmMapper;
 import com.tepth.maintenancedispatch.dao.model.repair.Repair;
 import com.tepth.maintenancedispatch.dto.*;
 import com.tepth.maintenancedispatch.dto.inner.*;
@@ -33,6 +34,8 @@ public class RepairServiceImpl implements IRepairService {
     RepairMapper repairMapper;
     @Autowired
     FaultPhenomenonMapper faultPhenomenonMapper;
+    @Autowired
+    VehicleAlarmMapper vehicleAlarmMapper;
 
     @Override
     public PageResponse<RepairVO> queryRepairListByPageStatusArr(GetRepairListPagingRequest request) {
@@ -197,6 +200,20 @@ public class RepairServiceImpl implements IRepairService {
             //TODO 操作记录 领料记录
         }
         response.setRepairDetail(repairDetail);
+        return response;
+    }
+
+    @Override
+    public PageResponse<Alarm> queryAlarmListByPage(GetAlarmListRequest request) {
+        PageResponse<Alarm> response = new PageResponse<>();
+
+        QueryPage page = Global.getQueryPage(request);
+        Map<String, Object> map = new HashMap<>();
+        map.put("queryPage", page);
+        map.put("vehicleId", request.getVehicleId());
+
+        //TODO 调用.net接口 查询报警列表
+
         return response;
     }
 }

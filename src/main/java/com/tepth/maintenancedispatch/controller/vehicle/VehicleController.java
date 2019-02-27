@@ -1,19 +1,13 @@
 package com.tepth.maintenancedispatch.controller.vehicle;
 
 import com.alibaba.fastjson.JSONObject;
-import com.tepth.maintenancedispatch.dao.model.vehicle.Vehicle;
 import com.tepth.maintenancedispatch.dto.*;
-import com.tepth.maintenancedispatch.dto.inner.PageRequest;
-import com.tepth.maintenancedispatch.dto.inner.PageResponse;
-import com.tepth.maintenancedispatch.dto.inner.RepairVO;
-import com.tepth.maintenancedispatch.dto.inner.VehicleVo;
+import com.tepth.maintenancedispatch.dto.inner.*;
 import com.tepth.maintenancedispatch.service.repair.IRepairService;
 import com.tepth.maintenancedispatch.service.vehicle.IVehicleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @Author royle.huang
@@ -29,6 +23,19 @@ public class VehicleController {
     IVehicleService vehicleService;
     @Autowired
     IRepairService repairService;
+
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/27 10:32
+     * @Description 报警记录
+     **/
+    @PostMapping("/alarm")
+    public PageResponse<Alarm> queryAlarmListByPage(@RequestBody String json){
+        GetAlarmListRequest request = JSONObject.parseObject(json, GetAlarmListRequest.class);
+        PageResponse<Alarm> response = repairService.queryAlarmListByPage(request);
+        return response;
+    }
 
 
     /**

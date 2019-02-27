@@ -1,6 +1,7 @@
 package com.tepth.maintenancedispatch.service.repair;
 
 import com.tepth.maintenancedispatch.dto.*;
+import com.tepth.maintenancedispatch.dto.inner.Alarm;
 import com.tepth.maintenancedispatch.dto.inner.BaseResponse;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
 import com.tepth.maintenancedispatch.dto.inner.RepairVO;
@@ -61,4 +62,11 @@ public interface IRepairService {
      * @Description 查询工单详情
      **/
     GetRepairDetailResponse queryRepairDetail(Integer repairId);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/27 10:38
+     * @Description 获取报警记录列表
+     **/
+    PageResponse<Alarm> queryAlarmListByPage(GetAlarmListRequest request);
 }
