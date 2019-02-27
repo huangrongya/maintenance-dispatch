@@ -77,8 +77,9 @@ public class RepairServiceImpl implements IRepairService {
         map.put("organizationId", userInfo.getOrganizationId());
         map.put("startDate", request.getStartDate());
         map.put("endDate", request.getEndDate());
-        map.put("workerId", request.getEndDate());
-        map.put("driverId", request.getEndDate());
+        map.put("workerId", request.getWorkerId());
+        map.put("driverId", request.getDriverId());
+        map.put("vehicle_id", request.getVehicleId());
         List<RepairVO> repairList = repairMapper.queryListByPage(map);
         long total = repairMapper.queryListByPageCount(map);
         response.setPageList(repairList);
