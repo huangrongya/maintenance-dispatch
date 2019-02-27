@@ -2,13 +2,12 @@ package com.tepth.maintenancedispatch.controller.vehicle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.dao.model.vehicle.Vehicle;
-import com.tepth.maintenancedispatch.dto.GetVehicleByNoRequest;
-import com.tepth.maintenancedispatch.dto.GetVehicleByNoResponse;
-import com.tepth.maintenancedispatch.dto.GetVehicleInfoRequest;
-import com.tepth.maintenancedispatch.dto.GetVehicleInfoResponse;
+import com.tepth.maintenancedispatch.dto.*;
 import com.tepth.maintenancedispatch.dto.inner.PageRequest;
 import com.tepth.maintenancedispatch.dto.inner.PageResponse;
+import com.tepth.maintenancedispatch.dto.inner.RepairVO;
 import com.tepth.maintenancedispatch.dto.inner.VehicleVo;
+import com.tepth.maintenancedispatch.service.repair.IRepairService;
 import com.tepth.maintenancedispatch.service.vehicle.IVehicleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,28 @@ public class VehicleController {
 
     @Autowired
     IVehicleService vehicleService;
+    @Autowired
+    IRepairService repairService;
 
 
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/27 10:13
+     * @Description 车辆作业记录列表
+     **/
+    @PostMapping("/repair")
+    public PageResponse<RepairVO> queryRepairListByPage(@RequestBody String json){
+        GetRepairListPagingRequest request = JSONObject.parseObject(json, GetRepairListPagingRequest.class);
+        PageResponse<RepairVO> response  = repairService.queryRepairListByPageComm(request);
+        return response;
+    }
+
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/27 10:12
+     * @Description 不在工位的车辆列表
+     **/
     @PostMapping("/rest")
     public PageResponse<VehicleVo> queryVehicleRestByPage(@RequestBody String json){
         PageRequest request = JSONObject.parseObject(json, PageRequest.class);

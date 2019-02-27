@@ -674,7 +674,10 @@
       and (a.status = 2 or a.status = 5 or a.factory_area_id is null)
     </if>
     <if test="workerId != null">
-      and (a.worker_id = like concat('%', #{keyword}, '%') or )
+      and (a.worker_id like concat('%,', #{workerId}, ',%') or a.worker_id = like concat('%,', #{workerId}) or a.worker_id = like concat(#{workerId}, ',%'))
+    </if>
+    <if test="vehicle_id != null">
+      and (a.vehicleId = #{vehicleId})
     </if>
     <if test="keyword != null and keyword.trim() != ''">
       and (

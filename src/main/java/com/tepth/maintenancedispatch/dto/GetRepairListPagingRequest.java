@@ -19,6 +19,7 @@ public class GetRepairListPagingRequest extends PageRequest {
     private Integer orgGroupId;
     private Integer workerId;
     private Integer driverId;
+    private Integer vehicleId;
     private Byte type;
     private Integer areaId;
     private Integer isMyDeal;
