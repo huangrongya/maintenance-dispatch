@@ -1,9 +1,6 @@
 package com.tepth.maintenancedispatch.service.repair.impl;
 
-import com.tepth.maintenancedispatch.comm.Global;
-import com.tepth.maintenancedispatch.comm.QueryPage;
-import com.tepth.maintenancedispatch.comm.RepairStatusEnum;
-import com.tepth.maintenancedispatch.comm.RspCodeEnum;
+import com.tepth.maintenancedispatch.comm.*;
 import com.tepth.maintenancedispatch.dao.mapper.repair.FaultPhenomenonMapper;
 import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.mapper.vehicle.VehicleAlarmMapper;
@@ -118,6 +115,13 @@ public class RepairServiceImpl implements IRepairService {
         }
         if (!RepairStatusEnum.BACK_TO_FACTORY.getCode().equals(repair.getStatus())){
             throw new ServiceException(RspCodeEnum.VEHICLE_WRONG_STATUS.getCode(), RspCodeEnum.VEHICLE_WRONG_STATUS.getDesc());
+        }
+        //判断当前工位是否有作业中的车辆
+        long count = repairMapper.countByProcessStatusAndAreaId(Constant.PROCESS_STATUS_WORKING, repair.getFactoryAreaId());
+        if (count>0){
+            response.setCode(ErrorConstant.STATION_WORKING_CODE);
+            response.setMsg(ErrorConstant.STATION_WORKING_MSG);
+            return response;
         }
         repair.setStatus(RepairStatusEnum.EXCHANGE_TO_WORKER.getCode());
         repair.setGmtModified(new Date());

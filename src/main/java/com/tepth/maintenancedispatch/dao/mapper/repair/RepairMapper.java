@@ -83,4 +83,11 @@ public interface RepairMapper {
      * @Description 临时作业项
      **/
     List<RepairPlan> selectTempRepairPlanByDiaId(@Param("diaId")Integer diaId);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 17:58
+     * @Description 当前工位作业数量
+     **/
+    long countByProcessStatusAndAreaId(@Param("processStatus")byte processStatus, @Param("factoryAreaId")Integer factoryAreaId);
 }

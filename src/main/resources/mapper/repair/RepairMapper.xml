@@ -865,4 +865,8 @@
     WHERE b.type = 2 and  a.fault_diagnostic_id = #{diaId}
   </select>
 
+  <select id="countByProcessStatusAndAreaId" resultType="long">
+    select count(1) from tb_repair a where a.state != -1 and a.job_process_status = #{processStatus} and a.factory_area_id = #{factoryAreaId}
+  </select>
+
 </mapper>
