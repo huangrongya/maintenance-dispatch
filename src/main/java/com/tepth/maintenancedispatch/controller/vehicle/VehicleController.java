@@ -54,12 +54,25 @@ public class VehicleController {
     /**
      * @Author royle.huang
      * @Date 2019/2/27 10:12
-     * @Description 不在工位的车辆列表
+     * @Description 等待交车的车辆列表
      **/
-    @PostMapping("/rest")
-    public PageResponse<VehicleVo> queryVehicleRestByPage(@RequestBody String json){
+    @PostMapping("/waiting")
+    public PageResponse<VehicleVo> queryVehicleWaitingByPage(@RequestBody String json){
         PageRequest request = JSONObject.parseObject(json, PageRequest.class);
-        request.setKeyWord("rest");
+        request.setKeyWord("waiting");
+        PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 10:38
+     * @Description 等待出厂的车辆列表
+     **/
+    @PostMapping("/finish")
+    public PageResponse<VehicleVo> queryVehicleFinishByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("finish");
         PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
         return response;
     }

@@ -333,8 +333,11 @@
       left join tb_organization o on o.id = vl.organization_id
       where
       r.state = 1 and r.org_maintenance_id = #{organizationId}
-      <if test="rest != null">
-        and r.status != 3
+      <if test="waiting != null">
+        and r.status = 1
+      </if>
+      <if test="finish != null">
+        and r.status = 7
       </if>
       <include refid="limit"/>
   </select>
@@ -348,8 +351,11 @@
     left join tb_organization o on o.id = vl.organization_id
     where
     r.state = 1 and r.org_maintenance_id = #{organizationId}
-    <if test="rest != null">
-      and r.status != 3
+    <if test="waiting != null">
+      and r.status = 1
+    </if>
+    <if test="finish != null">
+      and r.status = 7
     </if>
   </select>
 </mapper>
