@@ -59,6 +59,9 @@ public class MaterialServiceImpl implements IMaterialService {
         QueryPage page = Global.getQueryPage(request);
         Map<String, Object> map = new HashMap<>();
         map.put("queryPage", page);
+        if ("short".equals(request.getKeyWord())){
+            map.put("materialStatus", 1);
+        }
         map.put("organizationId", userInfo.getOrganizationId());
         List<Material> list = materialApplyMapper.queryListByPage(map);
         long total = materialApplyMapper.queryListByPageCount(map);

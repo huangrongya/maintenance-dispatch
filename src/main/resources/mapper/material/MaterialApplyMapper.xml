@@ -376,6 +376,12 @@
     e.material_name materialName,
     e.head_img_url materialImg
   </sql>
+
+  <sql id="queryCondition">
+    <if test="short != null">
+      a.material_status = #{materialStatus}
+    </if>
+  </sql>
   <select id="selectCostByDate" resultType="double">
     SELECT
     ifnull((

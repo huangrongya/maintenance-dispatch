@@ -45,9 +45,10 @@ public class MaterialController {
      * @Date 2019/2/28 10:44
      * @Description 领料列表
      **/
-    @PostMapping("/list")
-    public PageResponse<Material> queryMaterialListByPage(@RequestBody String json){
+    @PostMapping("/short")
+    public PageResponse<Material> queryMaterialShortListByPage(@RequestBody String json){
         PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("short");
         PageResponse<Material> response = materialService.queryMaterialListByPage(request);
         return response;
     }
