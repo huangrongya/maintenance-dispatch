@@ -36,4 +36,11 @@ public class Constant {
 
     /**区域类型：工位**/
     public static byte AREA_TYPE_WORK_STATION = 1;
+
+    /**已进厂**/
+    public static int[] STATUS_ALREADY_GET_IN_FACTORY = {1,2, 3, 4, 5, 6, 7, 8, 9};
+    /**未进厂**/
+    public static int[] STATUS_TO_GET_IN_FACTORY = {0};
+    /**待交车**/
+    public static int[] STATUS_TO_BE_EXCHANGE = {0, 1};
 }

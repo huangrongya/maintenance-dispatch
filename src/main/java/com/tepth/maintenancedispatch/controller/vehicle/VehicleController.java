@@ -66,6 +66,53 @@ public class VehicleController {
 
     /**
      * @Author royle.huang
+     * @Date 2019/2/28 18:46
+     * @Description 未确认
+     **/
+    @PostMapping("/unconfirmed")
+    public PageResponse<VehicleVo> queryVehicleUnconfirmedByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("unconfirmed");
+        PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 18:47
+     * @Description 未进厂
+     **/
+    @PostMapping("/out")
+    public PageResponse<VehicleVo> queryVehicleOutByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("out");
+        PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 18:47
+     * @Description 已进厂
+     **/
+    @PostMapping("/in")
+    public PageResponse<VehicleVo> queryVehicleInByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("in");
+        PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
+        return response;
+    }
+
+    @PostMapping("/unexchanged")
+    public PageResponse<VehicleVo> queryVehicleUnExchangedByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("unexchanged");
+        PageResponse<VehicleVo> response = vehicleService.queryVehicleListByPage(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
      * @Date 2019/2/28 10:38
      * @Description 等待出厂的车辆列表
      **/

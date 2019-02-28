@@ -1,5 +1,6 @@
 package com.tepth.maintenancedispatch.service.vehicle.impl;
 
+import com.tepth.maintenancedispatch.comm.Constant;
 import com.tepth.maintenancedispatch.comm.Global;
 import com.tepth.maintenancedispatch.comm.QueryPage;
 import com.tepth.maintenancedispatch.comm.RspCodeEnum;
@@ -103,6 +104,18 @@ public class VehicleServiceImpl implements IVehicleService {
         }
         if ("waiting".equals(request.getKeyWord())){
             map.put("waiting", "waiting");
+        }
+        if ("unconfirmed".equals(request.getKeyWord())){
+            map.put("unconfirmed", "unconfirmed");
+        }
+        if ("in".equals(request.getKeyWord())){
+            map.put("idIn", Constant.STATUS_ALREADY_GET_IN_FACTORY);
+        }
+        if ("out".equals(request.getKeyWord())){
+            map.put("idIn", Constant.STATUS_TO_GET_IN_FACTORY);
+        }
+        if ("unexchanged".equals(request.getKeyWord())){
+            map.put("idIn", Constant.STATUS_TO_BE_EXCHANGE);
         }
         List<VehicleVo> list = vehicleMapper.queryListByPage(map);
         long total = vehicleMapper.queryListByPageCount(map);

@@ -282,6 +282,23 @@
       limit #{queryPage.limitStart} , #{queryPage.limitEnd}
     </if>
   </sql>
+  <sql id="queryCondition">
+    <if test="waiting != null">
+      and r.status = 1
+    </if>
+    <if test="finish != null">
+      and r.status = 7
+    </if>
+    <if test="unconfirmed != null">
+      and r.factory_area_id is null
+    </if>
+    <if test="idIn != null">
+      and r.status in
+      <foreach collection="idIn" separator="," open="(" close=")" item="item">
+        #{item}
+      </foreach>
+    </if>
+  </sql>
   <resultMap id="VehicleVoMap" type="com.tepth.maintenancedispatch.dto.inner.VehicleVo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="vehicle_no" jdbcType="VARCHAR" property="vehicleNo" />
@@ -333,12 +350,7 @@
       left join tb_organization o on o.id = vl.organization_id
       where
       r.state = 1 and r.org_maintenance_id = #{organizationId}
-      <if test="waiting != null">
-        and r.status = 1
-      </if>
-      <if test="finish != null">
-        and r.status = 7
-      </if>
+      <include refid="queryCondition"/>
       <include refid="limit"/>
   </select>
 
@@ -351,11 +363,6 @@
     left join tb_organization o on o.id = vl.organization_id
     where
     r.state = 1 and r.org_maintenance_id = #{organizationId}
-    <if test="waiting != null">
-      and r.status = 1
-    </if>
-    <if test="finish != null">
-      and r.status = 7
-    </if>
+    <include refid="queryCondition"/>
   </select>
 </mapper>
