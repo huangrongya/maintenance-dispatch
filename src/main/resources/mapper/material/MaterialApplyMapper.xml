@@ -345,6 +345,37 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
+  <!-- 公共的分页 -->
+  <sql id="limit">
+    <if test="queryPage != null">
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
+  <!--排序的分页-->
+  <sql id="orderLimit">
+    <if test="queryPage != null">
+      <if test="queryPage.order != null and queryPage.sort != null">
+        order by ${queryPage.sort} ${queryPage.order}
+      </if>
+      limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+    </if>
+  </sql>
+
+  <sql id="query_list">
+    a.id,
+    a.apply_time applyTime,
+    a.apply_amount applyAmount,
+    b.`name` organizationName,
+    c.id workerId,
+    c.user_name workerName,
+    d.id vehicleId,
+    d.vehicle_no vehicleNo,
+    e.id materialId,
+    e.material_no materialNo,
+    e.material_name materialName,
+    e.head_img_url materialImg
+  </sql>
   <select id="selectCostByDate" resultType="double">
     SELECT
     ifnull((
@@ -396,5 +427,39 @@
     ), 0)
     FROM
     DUAL
+  </select>
+
+  <select id="queryListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.Material">
+    SELECT
+      <include refid="query_list"/>
+    FROM
+        tb_material_apply a
+    LEFT JOIN tb_organization b ON a.organization_id = b.id
+    LEFT JOIN tb_user c ON a.user_id = c.id
+    LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
+    LEFT JOIN tb_components_parts e ON e.id = a.parts_id
+    WHERE a.parts_type = 1 and a.organization_id = #{organizationId}
+    UNION ALL
+    SELECT
+        <include refid="query_list"/>
+    FROM
+        tb_material_apply a
+    LEFT JOIN tb_organization b ON a.organization_id = b.id
+    LEFT JOIN tb_user c ON a.user_id = c.id
+    LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
+    LEFT JOIN tb_components_parts e ON e.id = a.parts_id
+    WHERE a.parts_type = 2 and a.organization_id = #{organizationId}
+    <include refid="limit"/>
+  </select>
+
+  <select id="queryListByPageCount" resultType="long">
+    select count(1)
+      FROM
+        tb_material_apply a
+    LEFT JOIN tb_organization b ON a.organization_id = b.id
+    LEFT JOIN tb_user c ON a.user_id = c.id
+    LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
+    LEFT JOIN tb_components_parts e ON e.id = a.parts_id
+    where a.organization_id = #{organizationId}
   </select>
 </mapper>

@@ -56,6 +56,19 @@ public class WorkerController {
 
     /**
      * @Author royle.huang
+     * @Date 2019/2/28 15:02
+     * @Description 空闲人员列表
+     **/
+    @PostMapping("/idle")
+    public BaseResponse queryWorkerListByPageIdle(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        request.setKeyWord("idle");
+        PageResponse<Worker> response = workerService.queryWorkerListByPage(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
      * @Date 2019/2/15 17:11
      * @Description 查询主页面显示的技工信息
      **/

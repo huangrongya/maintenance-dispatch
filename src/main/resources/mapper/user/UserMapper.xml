@@ -387,8 +387,14 @@
     from tb_user a
     left join tb_user_role b on a.id = b.user_id
     left join tb_organization c on c.id = a.organization_id
-    where b.role_id = #{roleId,jdbcType=INTEGER}
+    where b.role_id = #{roleId,jdbcType=INTEGER} and a.online_status = 1
     and (a.organization_id = #{organizationId} or c.p_organization_id like concat('%/', #{organizationId}))
+    <if test="workingId != null">
+      and a.id not in
+      <foreach collection="workingId" item="item" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
     <include refid="limit"/>
   </select>
 
@@ -397,8 +403,14 @@
     from tb_user a
     left join tb_user_role b on a.id = b.user_id
     left join tb_organization c on c.id = a.organization_id
-    where b.role_id = #{roleId,jdbcType=INTEGER}
+    where b.role_id = #{roleId,jdbcType=INTEGER} and a.online_status = 1
     and (a.organization_id = #{organizationId} or c.p_organization_id like concat('%/', #{organizationId}))
+    <if test="workingId != null">
+      and a.id not in
+      <foreach collection="workingId" item="item" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
   </select>
 
   <select id="queryDriverListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.Driver">

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.tepth.maintenancedispatch.dto.inner.Material;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -35,4 +36,18 @@ public interface MaterialApplyMapper {
     int updateByPrimaryKey(MaterialApply record);
 
     Double selectCostByDate(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 11:10
+     * @Description 分页查询物料列表
+     **/
+    List<Material> queryListByPage(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 11:10
+     * @Description 物料总数
+     **/
+    long queryListByPageCount(Map<String, Object> map);
 }

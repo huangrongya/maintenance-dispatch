@@ -1,13 +1,15 @@
 package com.tepth.maintenancedispatch.service.material.impl;
 
 import com.tepth.maintenancedispatch.comm.Constant;
+import com.tepth.maintenancedispatch.comm.Global;
+import com.tepth.maintenancedispatch.comm.QueryPage;
 import com.tepth.maintenancedispatch.dao.mapper.material.MaterialApplyMapper;
 import com.tepth.maintenancedispatch.dao.model.material.MaterialApply;
 import com.tepth.maintenancedispatch.dao.model.material.MaterialApplyExample;
 import com.tepth.maintenancedispatch.dto.GetMaterialInfoResponse;
-import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
-import com.tepth.maintenancedispatch.dto.inner.UserInfo;
+import com.tepth.maintenancedispatch.dto.inner.*;
 import com.tepth.maintenancedispatch.service.material.IMaterialService;
+import com.tepth.maintenancedispatch.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,22 @@ public class MaterialServiceImpl implements IMaterialService {
         Double cost = materialApplyMapper.selectCostByDate(paramMap);
         response.setCost(cost);
 
+        return response;
+    }
+
+    @Override
+    public PageResponse<Material> queryMaterialListByPage(PageRequest request) {
+        PageResponse<Material> response = new PageResponse<>();
+        UserInfo userInfo = request.getUser();
+        QueryPage page = Global.getQueryPage(request);
+        Map<String, Object> map = new HashMap<>();
+        map.put("queryPage", page);
+        map.put("organizationId", userInfo.getOrganizationId());
+        List<Material> list = materialApplyMapper.queryListByPage(map);
+        long total = materialApplyMapper.queryListByPageCount(map);
+        response.setPageList(list);
+        response.setTotalCount(total);
+        response.setTotalPage(PageUtil.getTotalPage(total, page.getPageSize()));
         return response;
     }
 }

@@ -3,6 +3,9 @@ package com.tepth.maintenancedispatch.controller.material;
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.dto.GetMaterialInfoResponse;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
+import com.tepth.maintenancedispatch.dto.inner.Material;
+import com.tepth.maintenancedispatch.dto.inner.PageRequest;
+import com.tepth.maintenancedispatch.dto.inner.PageResponse;
 import com.tepth.maintenancedispatch.service.material.IMaterialService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,18 @@ public class MaterialController {
     public GetMaterialInfoResponse queryMaterialCountMainPage(@RequestBody String json){
         BaseRequest request = JSONObject.parseObject(json, BaseRequest.class);
         GetMaterialInfoResponse response = materialService.queryMaterialCountMainPage(request);
+        return response;
+    }
+    
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 10:44
+     * @Description 领料列表
+     **/
+    @PostMapping("/list")
+    public PageResponse<Material> queryMaterialListByPage(@RequestBody String json){
+        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
+        PageResponse<Material> response = materialService.queryMaterialListByPage(request);
         return response;
     }
 }

@@ -717,13 +717,13 @@
         left join tb_organization b on b.id = a.org_group_id
         left join tb_user c on c.id = a.user_id
         left join tb_vehicle d on d.id = a.vehicle_id
-        left join tb_factory_area e on a.factory_area_id
+        left join tb_factory_area e on a.factory_area_id = e.id
   </sql>
   <select id="queryListByPageWithProcessStatus" resultMap="BaseResultMap">
     select
     <include refid="repair_vo_list"/>
     where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
-    order by gmt_create desc
+    order by a.gmt_create desc
     <include refid="limit"/>
   </select>
 
@@ -734,7 +734,7 @@
         left join tb_organization b on b.id = a.org_group_id
         left join tb_user c on c.id = a.user_id
         left join tb_vehicle d on d.id = a.vehicle_id
-        left join tb_factory_area e on a.factory_area_id
+        left join tb_factory_area e on a.factory_area_id = e.id
     where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
   </select>
 
@@ -761,9 +761,9 @@
   <select id="queryListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.RepairVO">
     select
     <include refid="repair_vo_list"/>
-    where a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
+    where a.category = 1 and a.state = 1
     <include refid="queryCondition"/>
-    order by gmt_create desc
+    order by a.gmt_create desc
     <include refid="limit"/>
   </select>
 
@@ -773,7 +773,8 @@
     left join tb_organization b on b.id = a.org_group_id
     left join tb_user c on c.id = a.user_id
     left join tb_vehicle d on d.id = a.vehicle_id
-    where a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
+    left join tb_factory_area e on a.factory_area_id = e.id
+    where a.category = 1 and a.state = 1
     <include refid="queryCondition"/>
   </select>
 
