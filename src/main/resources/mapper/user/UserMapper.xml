@@ -400,4 +400,33 @@
     where b.role_id = #{roleId,jdbcType=INTEGER}
     and (a.organization_id = #{organizationId} or c.p_organization_id like concat('%/', #{organizationId}))
   </select>
+
+  <select id="queryDriverListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.Driver">
+    SELECT
+    a.id,
+    a.job_no jobNo,
+    a.mobile_no mobileNo,
+    a.user_name userName,
+    a.head_img_url headImgUrl,
+    c.`name` organizationName,
+    d.vehicle_no vehicleNo
+    FROM
+    tb_user a
+    LEFT JOIN tb_repair b ON a.id = b.user_id
+    LEFT JOIN tb_organization c ON c.id = a.organization_id
+    LEFT JOIN tb_vehicle d ON d.id = b.vehicle_id
+    WHERE b.`status` != 1 AND b.`status` != 7
+    <include refid="limit"/>
+  </select>
+
+  <select id="queryDriverListByPageCount" resultType="long">
+    SELECT
+	count(1)
+    FROM
+      tb_user a
+    LEFT JOIN tb_repair b ON a.id = b.user_id
+    LEFT JOIN tb_organization c ON c.id = a.organization_id
+    LEFT JOIN tb_vehicle d ON d.id = b.vehicle_id
+    WHERE b.`status` != 1 AND b.`status` != 7
+  </select>
 </mapper>

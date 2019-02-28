@@ -5,6 +5,7 @@ import com.tepth.maintenancedispatch.dao.model.user.UserExample;
 import java.util.List;
 import java.util.Map;
 
+import com.tepth.maintenancedispatch.dto.inner.Driver;
 import com.tepth.maintenancedispatch.dto.inner.Worker;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -64,4 +65,18 @@ public interface UserMapper {
     Long queryWorkerListByPageCount(Map<String, Object> map);
 
     long countIdleWorker(@Param("organizationId") Integer organizationId, @Param("roleId") Integer roleId);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 9:46
+     * @Description 分页查询厂区司机列表
+     **/
+    List<Driver> queryDriverListByPage(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 9:46
+     * @Description 分页查询司机列表总条数
+     **/
+    long queryDriverListByPageCount(Map<String, Object> map);
 }

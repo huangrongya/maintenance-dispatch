@@ -676,8 +676,8 @@
     <if test="workerId != null">
       and (a.worker_id like concat('%,', #{workerId}, ',%') or a.worker_id = like concat('%,', #{workerId}) or a.worker_id = like concat(#{workerId}, ',%'))
     </if>
-    <if test="vehicle_id != null">
-      and (a.vehicleId = #{vehicleId})
+    <if test="vehicleId != null">
+      and (a.vehicle_id = #{vehicleId})
     </if>
     <if test="keyword != null and keyword.trim() != ''">
       and (
@@ -729,13 +729,34 @@
 
   <select id="queryListByPageCountWithProcessStatus" resultType="long">
     select
-    <foreach collection="statusArr" separator=")+(" item="item" open="((" close="))">
-      select count(1)
-      from tb_repair a
-      where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
-    </foreach>
-    from dual
+    count(1)
+    from tb_repair a
+        left join tb_organization b on b.id = a.org_group_id
+        left join tb_user c on c.id = a.user_id
+        left join tb_vehicle d on d.id = a.vehicle_id
+        left join tb_factory_area e on a.factory_area_id
+    where a.job_process_status = #{processStatus} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1
   </select>
+
+  <!--<select id="queryListByPageWithStatusArr" resultMap="BaseResultMap">-->
+    <!--<foreach collection="statusArr" separator="union all" item="item">-->
+      <!--select-->
+      <!--<include refid="Base_Column_List"/>-->
+      <!--from tb_repair a-->
+      <!--where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1-->
+    <!--</foreach>-->
+    <!--order by gmt_create desc-->
+    <!--<include refid="limit"/>-->
+  <!--</select>-->
+  <!--<select id="queryListByPageCountWithStatusArr" resultType="long">-->
+    <!--select-->
+    <!--<foreach collection="statusArr" separator=")+(" item="item" open="((" close="))">-->
+      <!--select count(1)-->
+      <!--from tb_repair a-->
+      <!--where a.status = #{item} and a.category = 1 and a.org_maintenance_id = #{organizationId} and a.state = 1-->
+    <!--</foreach>-->
+    <!--from dual-->
+  <!--</select>-->
 
   <select id="queryListByPage" resultType="com.tepth.maintenancedispatch.dto.inner.RepairVO">
     select

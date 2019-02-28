@@ -82,7 +82,7 @@ public class RepairServiceImpl implements IRepairService {
         map.put("endDate", request.getEndDate());
         map.put("workerId", request.getWorkerId());
         map.put("driverId", request.getDriverId());
-        map.put("vehicle_id", request.getVehicleId());
+        map.put("vehicleId", request.getVehicleId());
         List<RepairVO> repairList = repairMapper.queryListByPage(map);
         long total = repairMapper.queryListByPageCount(map);
         response.setPageList(repairList);
@@ -197,6 +197,7 @@ public class RepairServiceImpl implements IRepairService {
                     plans.addAll(list);
                 }
             }
+            repairDetail.setWorks(plans);
             //TODO 操作记录 领料记录
         }
         response.setRepairDetail(repairDetail);
