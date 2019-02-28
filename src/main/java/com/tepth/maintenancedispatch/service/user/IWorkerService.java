@@ -1,5 +1,6 @@
 package com.tepth.maintenancedispatch.service.user;
 
+import com.tepth.maintenancedispatch.dto.GetStationWorkerRequest;
 import com.tepth.maintenancedispatch.dto.GetWorkerInfoResponse;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
 import com.tepth.maintenancedispatch.dto.inner.PageRequest;
@@ -26,4 +27,11 @@ public interface IWorkerService {
      * @Description 查询技工列表
      **/
     PageResponse<Worker> queryWorkerListByPage(PageRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 16:49
+     * @Description 工位技工列表
+     **/
+    PageResponse<Worker> queryWorkerListWorkStation(GetStationWorkerRequest request);
 }

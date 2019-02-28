@@ -2,6 +2,7 @@ package com.tepth.maintenancedispatch.controller.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.dto.GetRepairListPagingRequest;
+import com.tepth.maintenancedispatch.dto.GetStationWorkerRequest;
 import com.tepth.maintenancedispatch.dto.GetWorkerInfoResponse;
 import com.tepth.maintenancedispatch.dto.inner.*;
 import com.tepth.maintenancedispatch.service.repair.IRepairService;
@@ -51,6 +52,18 @@ public class WorkerController {
     public BaseResponse queryWorkerListByPage(@RequestBody String json){
         PageRequest request = JSONObject.parseObject(json, PageRequest.class);
         PageResponse<Worker> response = workerService.queryWorkerListByPage(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 16:44
+     * @Description 工位作业人员列表
+     **/
+    @PostMapping("/area")
+    public PageResponse<Worker> queryWorkerListWorkStation(@RequestBody String json){
+        GetStationWorkerRequest request = JSONObject.parseObject(json, GetStationWorkerRequest.class);
+        PageResponse<Worker> response = workerService.queryWorkerListWorkStation(request);
         return response;
     }
 

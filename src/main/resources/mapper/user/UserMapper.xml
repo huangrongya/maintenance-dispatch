@@ -395,6 +395,12 @@
         #{item}
       </foreach>
     </if>
+    <if test="workerIds != null">
+      and a.id in
+      <foreach collection="workerIds" item="item" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
     <include refid="limit"/>
   </select>
 
@@ -408,6 +414,12 @@
     <if test="workingId != null">
       and a.id not in
       <foreach collection="workingId" item="item" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="workerIds != null">
+      and a.id in
+      <foreach collection="workerIds" item="item" open="(" close=")" separator=",">
         #{item}
       </foreach>
     </if>
