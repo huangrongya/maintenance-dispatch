@@ -61,9 +61,9 @@ public class MaterialServiceImpl implements IMaterialService {
         QueryPage page = Global.getQueryPage(request);
         Map<String, Object> map = new HashMap<>();
         map.put("queryPage", page);
-        if ("short".equals(request.getKeyWord())){
-            map.put("materialStatus", 1);
-        }
+        map.put("partsId", request.getPartsId());
+        map.put("partsType", request.getPartsType());
+        map.put("materialStatus", request.getMaterialStatus());
         map.put("startDate", request.getStartDate());
         map.put("endDate", request.getEndDate());
         map.put("vehicleNo", request.getVehicleNo());

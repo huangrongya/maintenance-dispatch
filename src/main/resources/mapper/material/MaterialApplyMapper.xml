@@ -368,6 +368,9 @@
     a.apply_amount applyAmount,
     a.auditing_status auditingStatus,
     a.material_status materialStatus,
+    a.parts_type partsType,
+    a.parts_id partsId,
+    now()-a.apply_time continued,
     b.`name` organizationName,
     c.id workerId,
     c.user_name workerName,
@@ -382,7 +385,7 @@
 
   <sql id="queryCondition">
     <if test="materialStatus != null">
-      a.material_status = #{materialStatus}
+      and a.material_status = #{materialStatus}
     </if>
     <if test="startDate != null">
       <![CDATA[  and date (a.apply_time) >= date(#{startDate}) ]]>
@@ -392,6 +395,12 @@
     </if>
     <if test="vehicleNo != null">
       and d.vehicle_no = #{vehicleNo}
+    </if>
+    <if test="partsId != null and partsType == 1">
+      and a.parts_id = #{partsId} and a.parts_type = 1
+    </if>
+    <if test="partsId != null and partsType == 2">
+      and a.parts_id = #{partsId} and a.parts_type = 2
     </if>
   </sql>
   <select id="selectCostByDate" resultType="double">

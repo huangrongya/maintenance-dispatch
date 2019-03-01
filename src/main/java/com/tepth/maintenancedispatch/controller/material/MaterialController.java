@@ -1,6 +1,7 @@
 package com.tepth.maintenancedispatch.controller.material;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tepth.maintenancedispatch.comm.ErrorConstant;
 import com.tepth.maintenancedispatch.dto.GetMaterialListRequest;
 import com.tepth.maintenancedispatch.dto.GetCostListResponse;
 import com.tepth.maintenancedispatch.dto.GetMaterialInfoResponse;
@@ -50,7 +51,7 @@ public class MaterialController {
     @PostMapping("/lack")
     public PageResponse<Material> queryMaterialShortListByPage(@RequestBody String json){
         GetMaterialListRequest request = JSONObject.parseObject(json, GetMaterialListRequest.class);
-        request.setKeyWord("lack");
+        request.setMaterialStatus(1);
         PageResponse<Material> response = materialService.queryMaterialListByPage(request);
         return response;
     }
@@ -84,5 +85,34 @@ public class MaterialController {
      * @Date 2019/3/1 10:05
      * @Description 缺料待采列表
      **/
+    @PostMapping("/waiting")
+    public PageResponse<Material> queryMaterialWaitingListByPage(@RequestBody String json){
+        GetMaterialListRequest request = JSONObject.parseObject(json, GetMaterialListRequest.class);
+        if (request.getPartsId()==null || request.getPartsType()==null){
+            PageResponse response = new PageResponse();
+            response.setCode(ErrorConstant.PARAM_INCOMPLETE_CODE);
+            response.setMsg(ErrorConstant.PARAM_INCOMPLETE_MSG);
+            return response;
+        }
+        request.setMaterialStatus(1);
+        PageResponse<Material> response = materialService.queryMaterialListByPage(request);
+        return response;
+    }
+
+
+    @PostMapping("/arrive")
+    public PageResponse<Material> queryMaterialArriveListByPage(@RequestBody String json){
+        GetMaterialListRequest request = JSONObject.parseObject(json, GetMaterialListRequest.class);
+        if (request.getPartsId()==null || request.getPartsType()==null){
+            PageResponse response = new PageResponse();
+            response.setCode(ErrorConstant.PARAM_INCOMPLETE_CODE);
+            response.setMsg(ErrorConstant.PARAM_INCOMPLETE_MSG);
+            return response;
+        }
+        request.setMaterialStatus(5);
+        PageResponse<Material> response = materialService.queryMaterialListByPage(request);
+        return response;
+    }
+
 
 }
