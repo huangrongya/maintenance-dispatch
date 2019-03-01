@@ -6,7 +6,9 @@ import com.tepth.maintenancedispatch.comm.QueryPage;
 import com.tepth.maintenancedispatch.dao.mapper.material.MaterialApplyMapper;
 import com.tepth.maintenancedispatch.dao.model.material.MaterialApply;
 import com.tepth.maintenancedispatch.dao.model.material.MaterialApplyExample;
+import com.tepth.maintenancedispatch.dto.GetCostListResponse;
 import com.tepth.maintenancedispatch.dto.GetMaterialInfoResponse;
+import com.tepth.maintenancedispatch.dto.GetMaterialListRequest;
 import com.tepth.maintenancedispatch.dto.inner.*;
 import com.tepth.maintenancedispatch.service.material.IMaterialService;
 import com.tepth.maintenancedispatch.util.PageUtil;
@@ -53,7 +55,7 @@ public class MaterialServiceImpl implements IMaterialService {
     }
 
     @Override
-    public PageResponse<Material> queryMaterialListByPage(PageRequest request) {
+    public PageResponse<Material> queryMaterialListByPage(GetMaterialListRequest request) {
         PageResponse<Material> response = new PageResponse<>();
         UserInfo userInfo = request.getUser();
         QueryPage page = Global.getQueryPage(request);
@@ -62,12 +64,43 @@ public class MaterialServiceImpl implements IMaterialService {
         if ("short".equals(request.getKeyWord())){
             map.put("materialStatus", 1);
         }
+        map.put("startDate", request.getStartDate());
+        map.put("endDate", request.getEndDate());
+        map.put("vehicleNo", request.getVehicleNo());
         map.put("organizationId", userInfo.getOrganizationId());
         List<Material> list = materialApplyMapper.queryListByPage(map);
         long total = materialApplyMapper.queryListByPageCount(map);
         response.setPageList(list);
         response.setTotalCount(total);
         response.setTotalPage(PageUtil.getTotalPage(total, page.getPageSize()));
+        return response;
+    }
+
+    @Override
+    public GetCostListResponse<Material> queryCostList(GetMaterialListRequest request) {
+        GetCostListResponse<Material> response = new GetCostListResponse<>();
+        if (request.getStartDate()==null){
+            request.setStartDate(new Date());
+        }
+        PageResponse<Material> pageResponse = queryMaterialListByPage(request);
+        //计算花费
+        List<Material> materials = pageResponse.getPageList();
+        double cost = 0d;
+        if (!materials.isEmpty()){
+            for (Material material : materials) {
+                if (material.getApplyAmount() != null && material.getPrice() != null){
+                    cost+=material.getApplyAmount()*material.getPrice();
+                }
+            }
+        }
+
+        response.setCost(cost);
+
+        long total = pageResponse.getTotalCount();
+        long page = pageResponse.getTotalPage();
+        response.setPageList(materials);
+        response.setTotalCount(total);
+        response.setTotalPage(page);
         return response;
     }
 }

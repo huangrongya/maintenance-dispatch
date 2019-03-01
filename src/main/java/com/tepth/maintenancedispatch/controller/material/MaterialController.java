@@ -1,6 +1,8 @@
 package com.tepth.maintenancedispatch.controller.material;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tepth.maintenancedispatch.dto.GetMaterialListRequest;
+import com.tepth.maintenancedispatch.dto.GetCostListResponse;
 import com.tepth.maintenancedispatch.dto.GetMaterialInfoResponse;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
 import com.tepth.maintenancedispatch.dto.inner.Material;
@@ -43,13 +45,27 @@ public class MaterialController {
     /**
      * @Author royle.huang
      * @Date 2019/2/28 10:44
-     * @Description 领料列表
+     * @Description 缺料列表
      **/
-    @PostMapping("/short")
+    @PostMapping("/lack")
     public PageResponse<Material> queryMaterialShortListByPage(@RequestBody String json){
-        PageRequest request = JSONObject.parseObject(json, PageRequest.class);
-        request.setKeyWord("short");
+        GetMaterialListRequest request = JSONObject.parseObject(json, GetMaterialListRequest.class);
+        request.setKeyWord("lack");
         PageResponse<Material> response = materialService.queryMaterialListByPage(request);
         return response;
     }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 19:37
+     * @Description 物料成本列表（默认当天）
+     **/
+    @PostMapping("cost")
+    public GetCostListResponse<Material> queryCostList(@RequestBody String json){
+        GetMaterialListRequest request = JSONObject.parseObject(json, GetMaterialListRequest.class);
+        GetCostListResponse<Material> response = materialService.queryCostList(request);
+        return response;
+
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.tepth.maintenancedispatch.service.material;
 
+import com.tepth.maintenancedispatch.dto.GetCostListResponse;
 import com.tepth.maintenancedispatch.dto.GetMaterialInfoResponse;
+import com.tepth.maintenancedispatch.dto.GetMaterialListRequest;
 import com.tepth.maintenancedispatch.dto.inner.BaseRequest;
 import com.tepth.maintenancedispatch.dto.inner.Material;
 import com.tepth.maintenancedispatch.dto.inner.PageRequest;
@@ -24,5 +26,12 @@ public interface IMaterialService {
      * @Date 2019/2/28 11:03
      * @Description 分页查询物料列表
      **/
-    PageResponse<Material> queryMaterialListByPage(PageRequest request);
+    PageResponse<Material> queryMaterialListByPage(GetMaterialListRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/2/28 19:52
+     * @Description 查询物料列表 包含成本
+     **/
+    GetCostListResponse<Material> queryCostList(GetMaterialListRequest request);
 }

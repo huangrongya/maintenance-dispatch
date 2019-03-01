@@ -374,12 +374,22 @@
     e.id materialId,
     e.material_no materialNo,
     e.material_name materialName,
-    e.head_img_url materialImg
+    e.head_img_url materialImg,
+    e.tax_unit_price price
   </sql>
 
   <sql id="queryCondition">
-    <if test="short != null">
+    <if test="materialStatus != null">
       a.material_status = #{materialStatus}
+    </if>
+    <if test="startDate != null">
+      <![CDATA[  and date (a.apply_time) >= date(#{startDate}) ]]>
+    </if>
+    <if test="endDate != null">
+      <![CDATA[  and date (a.apply_time) <= date(#{endDate}) ]]>
+    </if>
+    <if test="vehicleNo != null">
+      and d.vehicle_no = #{vehicleNo}
     </if>
   </sql>
   <select id="selectCostByDate" resultType="double">
@@ -392,44 +402,22 @@
     FROM
     tb_material_apply a
     LEFT JOIN tb_components_parts b ON a.parts_id = b.id
-    LEFT JOIN tb_vehicle v ON a.vehicle_id = v.id
+    LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
     WHERE
-    a.parts_type = 2
-    <if test="startDate != null">
-        <![CDATA[  and date (a.arrival_time) >= date(#{startDate}) ]]>
-    </if>
-    <if test="endDate != null">
-        <![CDATA[  and date (a.arrival_time) <= date(#{endDate}) ]]>
-    </if>
-    <if test="organizationId != null">
-        and a.organization_id = #{organizationId}
-    </if>
-      <if test="vehicleNo != null">
-          and a.vehicle_no = #{vehicleNo}
-      </if>
+    a.parts_type = 1 and a.organization_id = #{organizationId}
+    <include refid="queryCondition"/>
     ),0) + ifnull((
     SELECT
     SUM(
-    a1.apply_amount * c.tax_unit_price
+    a.apply_amount * c.tax_unit_price
     )
     FROM
-    tb_material_apply a1
-    LEFT JOIN tb_consumptive_material c ON a1.parts_id = c.id
-      LEFT JOIN tb_vehicle v1 ON a1.vehicle_id = v1.id
+    tb_material_apply a
+    LEFT JOIN tb_consumptive_material b ON a.parts_id = b.id
+      LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
     WHERE
-    a1.parts_type = 1
-    <if test="startDate != null">
-        <![CDATA[  and date (a1.arrival_time) >= date(#{startDate}) ]]>
-    </if>
-    <if test="endDate != null">
-        <![CDATA[  and date (a1.arrival_time) <= date(#{endDate}) ]]>
-    </if>
-      <if test="organizationId != null">
-          and a1.organization_id = #{organizationId}
-      </if>
-      <if test="vehicleNo != null">
-          and a1.vehicle_no = #{vehicleNo}
-      </if>
+    a.parts_type = 2 and a.organization_id = #{organizationId}
+    <include refid="queryCondition"/>
     ), 0)
     FROM
     DUAL
@@ -445,16 +433,18 @@
     LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
     LEFT JOIN tb_components_parts e ON e.id = a.parts_id
     WHERE a.parts_type = 1 and a.organization_id = #{organizationId}
+      <include refid="queryCondition"/>
     UNION ALL
     SELECT
-        <include refid="query_list"/>
+      <include refid="query_list"/>
     FROM
         tb_material_apply a
     LEFT JOIN tb_organization b ON a.organization_id = b.id
     LEFT JOIN tb_user c ON a.user_id = c.id
     LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
-    LEFT JOIN tb_components_parts e ON e.id = a.parts_id
+    LEFT JOIN tb_consumptive_material e ON e.id = a.parts_id
     WHERE a.parts_type = 2 and a.organization_id = #{organizationId}
+    <include refid="queryCondition"/>
     <include refid="limit"/>
   </select>
 
@@ -465,7 +455,7 @@
     LEFT JOIN tb_organization b ON a.organization_id = b.id
     LEFT JOIN tb_user c ON a.user_id = c.id
     LEFT JOIN tb_vehicle d ON a.vehicle_id = d.id
-    LEFT JOIN tb_components_parts e ON e.id = a.parts_id
     where a.organization_id = #{organizationId}
+    <include refid="queryCondition"/>
   </select>
 </mapper>

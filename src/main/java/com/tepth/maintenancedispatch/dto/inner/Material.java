@@ -18,6 +18,7 @@ public class Material {
      * 申请数量
      */
     private Short applyAmount;
+    private Double price;
 
     /**
      * 用户id(申请技工)
@@ -43,5 +44,6 @@ public class Material {
     private String materialNo;
     private String materialName;
     private String materialImg;
+
 
 }
