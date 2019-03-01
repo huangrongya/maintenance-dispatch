@@ -8,6 +8,10 @@ import java.util.Date;
 public class Material {
 
     private Integer id;
+    /**审核状态：1-待审批、2-已审批**/
+    private Integer auditingStatus;
+    /**领用状态：0-领料申请中、1-待料中、2-已领用、3-已退料 4、退料申请中**/
+    private Integer materialStatus;
 
     /**
      * 申请时间

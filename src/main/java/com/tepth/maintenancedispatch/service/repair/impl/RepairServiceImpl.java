@@ -1,6 +1,7 @@
 package com.tepth.maintenancedispatch.service.repair.impl;
 
 import com.tepth.maintenancedispatch.comm.*;
+import com.tepth.maintenancedispatch.dao.mapper.material.MaterialApplyMapper;
 import com.tepth.maintenancedispatch.dao.mapper.repair.FaultPhenomenonMapper;
 import com.tepth.maintenancedispatch.dao.mapper.repair.RepairMapper;
 import com.tepth.maintenancedispatch.dao.mapper.vehicle.VehicleAlarmMapper;
@@ -33,6 +34,8 @@ public class RepairServiceImpl implements IRepairService {
     FaultPhenomenonMapper faultPhenomenonMapper;
     @Autowired
     VehicleAlarmMapper vehicleAlarmMapper;
+    @Autowired
+    MaterialApplyMapper materialApplyMapper;
 
     @Override
     public PageResponse<RepairVO> queryRepairListByPageStatusArr(GetRepairListPagingRequest request) {
@@ -202,7 +205,11 @@ public class RepairServiceImpl implements IRepairService {
                 }
             }
             repairDetail.setWorks(plans);
-            //TODO 操作记录 领料记录
+            //领料记录
+            List<Material> materials = materialApplyMapper.queryMaterialByRepairId(repairDetail.getId());
+            repairDetail.setMaterials(materials);
+            //TODO 操作记录
+
         }
         response.setRepairDetail(repairDetail);
         return response;

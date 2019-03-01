@@ -50,4 +50,11 @@ public interface MaterialApplyMapper {
      * @Description 物料总数
      **/
     long queryListByPageCount(Map<String, Object> map);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/3/1 13:51
+     * @Description 通过维修单id查询物料
+     **/
+    List<Material> queryMaterialByRepairId(Integer repairId);
 }

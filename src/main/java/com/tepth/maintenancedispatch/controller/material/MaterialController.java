@@ -65,7 +65,24 @@ public class MaterialController {
         GetMaterialListRequest request = JSONObject.parseObject(json, GetMaterialListRequest.class);
         GetCostListResponse<Material> response = materialService.queryCostList(request);
         return response;
-
     }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/3/1 9:38
+     * @Description 当前工位物料列表
+     **/
+    @PostMapping("/area")
+    public PageResponse<Material> queryMaterialListArea(@RequestBody String json){
+        GetMaterialListRequest request = JSONObject.parseObject(json, GetMaterialListRequest.class);
+        GetCostListResponse<Material> response = materialService.queryMaterialListArea(request);
+        return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/3/1 10:05
+     * @Description 缺料待采列表
+     **/
 
 }

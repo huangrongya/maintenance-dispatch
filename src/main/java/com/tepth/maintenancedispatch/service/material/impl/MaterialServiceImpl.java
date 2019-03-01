@@ -103,4 +103,11 @@ public class MaterialServiceImpl implements IMaterialService {
         response.setTotalPage(page);
         return response;
     }
+
+    @Override
+    public GetCostListResponse<Material> queryMaterialListArea(GetMaterialListRequest request) {
+
+        //TODO 物料库存
+        return null;
+    }
 }

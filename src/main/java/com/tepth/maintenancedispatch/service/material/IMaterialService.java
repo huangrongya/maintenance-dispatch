@@ -34,4 +34,11 @@ public interface IMaterialService {
      * @Description 查询物料列表 包含成本
      **/
     GetCostListResponse<Material> queryCostList(GetMaterialListRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/3/1 9:49
+     * @Description 查询当前工位物料列表
+     **/
+    GetCostListResponse<Material> queryMaterialListArea(GetMaterialListRequest request);
 }

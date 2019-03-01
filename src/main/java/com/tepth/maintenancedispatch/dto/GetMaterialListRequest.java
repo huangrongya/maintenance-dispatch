@@ -15,4 +15,5 @@ public class GetMaterialListRequest extends PageRequest {
     private Date startDate;
     private Date endDate;
     private String vehicleNo;
+    private Integer areaId;
 }

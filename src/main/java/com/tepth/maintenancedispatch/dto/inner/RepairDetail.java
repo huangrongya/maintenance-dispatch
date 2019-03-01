@@ -175,5 +175,7 @@ public class RepairDetail {
     List<Phenomenon> faults;
     /**作业项**/
     List<RepairPlan> works;
+    /**领料记录**/
+    List<Material> materials;
 
 }
