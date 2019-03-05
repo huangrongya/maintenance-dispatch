@@ -62,7 +62,7 @@ public class LoginServiceImpl implements ILoginService {
         requestHeaders.set("Content-Type", "application/json;charset=utf-8");
         requestHeaders.setAcceptCharset(Arrays.asList(Charset.forName("utf-8")));
         HttpEntity<String> requestEntity = new HttpEntity<>(jsonObject.toJSONString(), requestHeaders);
-        String responseStr = HttpUtil.commHttpRequest(url, HttpMethod.GET, requestEntity, String.class);
+        String responseStr = HttpUtil.commHttpRequest(url, HttpMethod.POST, requestEntity, String.class);
         JSONObject responseJson = JSONObject.parseObject(responseStr, JSONObject.class);
         //错误码处理 角色限制
         String code = responseJson.getString("rspCode");
