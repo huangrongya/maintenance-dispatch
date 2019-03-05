@@ -74,6 +74,7 @@ public class LoginServiceImpl implements ILoginService {
         for (JSONObject role : roles) {
             if (Constant.ROLE_ID_MAINTENANCE_DISPATCHER == role.getInteger("roleId")){
                 rightRole = true;
+                break;
             }
         }
         if (!rightRole){
