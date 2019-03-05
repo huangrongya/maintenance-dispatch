@@ -24,7 +24,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 url:
-  login: http://127.0.0.1:8081/common/login
+  login: http://47.102.119.147:8764/user/login
   fault:
     search: http://127.0.0.1:8081/driver/searchFault
     add: http://127.0.0.1:8081/driver/addFault

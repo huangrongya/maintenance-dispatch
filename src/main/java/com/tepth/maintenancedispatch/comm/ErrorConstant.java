@@ -9,8 +9,8 @@ public class ErrorConstant {
 
     //不存在
     //请求错误
-    public static Integer USER_NOT_EXIST_CODE= 404000;
-    public static String USER_NOT_EXIST_MSG= "user not exist";
+    public static Integer USER_ROLE_ERROR_CODE= 404000;
+    public static String USER_ROLE_ERROR_MSG= "用户不是机调员";
     public static Integer DATABASE_NO_DATA_CODE= 404001;
     public static String DATABASE_NO_DATA_MSG= "database no data";
 
