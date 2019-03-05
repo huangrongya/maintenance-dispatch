@@ -72,7 +72,13 @@ public class MaintenanceFactoryImpl implements IMaintenanceFactoryService {
     public GetGroupListResponse queryOrgGroupListByOrgId(Integer organizationId) {
         GetGroupListResponse response = new GetGroupListResponse();
         List<Organization> organizationList = organizationMapper.queryOrgGroupByPid(organizationId);
-        response.setGroupList(organizationList);
+        List<GroupVO> list = new ArrayList<>();
+        for (Organization organization : organizationList) {
+            GroupVO groupVO = new GroupVO();
+            groupVO.setId(organization.getId());
+            groupVO.setName(organization.getName());
+        }
+        response.setGroupList(list);
         return response;
     }
 

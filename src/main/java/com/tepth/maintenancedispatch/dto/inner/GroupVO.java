@@ -18,25 +18,6 @@ public class GroupVO {
      */
     private String name;
 
-    /**
-     * 组织编码
-     */
-    private String organizationNo;
-
-    /**
-     * 简称
-     */
-    private String shortName;
-
-    /**
-     * 备注
-     */
-    private String remark;
-
-    /**
-     * 机构类型：0-总公司 1-分公司 2-维修厂 3-小修组 4-保养组 5-驻站点 6-工位
-     */
-    private Byte orgType;
 
     /**
      * @Author royle.huang
