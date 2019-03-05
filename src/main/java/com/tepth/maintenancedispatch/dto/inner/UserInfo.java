@@ -26,10 +26,6 @@ public class UserInfo {
      */
     private String jobNo;
 
-    /**
-     * 密码
-     */
-    private String password;
 
     /**
      * 手机号
@@ -51,20 +47,6 @@ public class UserInfo {
      */
     private String scheduling;
 
-    /**
-     * 在岗状态：1-在岗 2-空闲 3-下班
-     */
-    private Byte onlineStatus;
-
-    /**
-     * 设置人
-     */
-    private Integer operateUserId;
-
-    /**
-     * 设置时间
-     */
-    private Date operateTime;
 
     /**
      * 组织机构id
