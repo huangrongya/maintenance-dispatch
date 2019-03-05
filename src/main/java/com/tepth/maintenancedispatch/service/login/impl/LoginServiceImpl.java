@@ -1,5 +1,6 @@
 package com.tepth.maintenancedispatch.service.login.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.comm.Constant;
 import com.tepth.maintenancedispatch.comm.ErrorConstant;
@@ -70,9 +71,10 @@ public class LoginServiceImpl implements ILoginService {
             throw new ServiceException(RspCodeEnum.USER_ERROR_LOGIN.getCode(), RspCodeEnum.USER_ERROR_LOGIN.getDesc());
         }
         JSONObject records = responseJson.getJSONObject("records");
-        JSONObject[] roles = (JSONObject[]) records.get("roles");
+        JSONArray roles = records.getJSONArray("roles");
         boolean rightRole = false;
-        for (JSONObject role : roles) {
+        for (Object object : roles) {
+            JSONObject role = (JSONObject) object;
             if (Constant.ROLE_ID_MAINTENANCE_DISPATCHER == role.getInteger("roleId")){
                 rightRole = true;
                 break;
