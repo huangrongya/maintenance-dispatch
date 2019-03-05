@@ -69,7 +69,8 @@ public class LoginServiceImpl implements ILoginService {
         if (!RspCodeEnum.SUCCESS.getCode().equals(code)){
             throw new ServiceException(RspCodeEnum.USER_ERROR_LOGIN.getCode(), RspCodeEnum.USER_ERROR_LOGIN.getDesc());
         }
-        JSONObject[] roles = (JSONObject[]) responseJson.get("roles");
+        JSONObject records = responseJson.getJSONObject("records");
+        JSONObject[] roles = (JSONObject[]) records.get("roles");
         boolean rightRole = false;
         for (JSONObject role : roles) {
             if (Constant.ROLE_ID_MAINTENANCE_DISPATCHER == role.getInteger("roleId")){
