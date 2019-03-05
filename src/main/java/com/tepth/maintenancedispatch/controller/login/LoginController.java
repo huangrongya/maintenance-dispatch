@@ -23,8 +23,8 @@ public class LoginController {
     @PostMapping("login")
     public BaseResponse login(@RequestBody String json){
         JSONObject jsonObject = JSONObject.parseObject(json);
-        String loginName = (String) jsonObject.get("loginName");
-        String pwd = (String) jsonObject.get("pwd");
+        String loginName = (String) jsonObject.get("jobNo");
+        String pwd = (String) jsonObject.get("password");
         UserLoginResponse response = loginService.login(loginName, pwd);
 
         //

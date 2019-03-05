@@ -23,11 +23,15 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+#自定义值
 url:
   login: http://47.102.119.147:8764/user/login
   fault:
     search: http://127.0.0.1:8081/driver/searchFault
     add: http://127.0.0.1:8081/driver/addFault
+  alarm:
+    type: http://106.15.53.204:12219/alarmV2/alarmTypes
+    history: http://106.15.53.204:12219/alarmV2/alarmHistorys
 
 # eureka
 eureka:

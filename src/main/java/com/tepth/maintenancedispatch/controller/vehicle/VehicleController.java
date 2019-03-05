@@ -31,10 +31,20 @@ public class VehicleController {
      * @Description 报警记录
      **/
     @PostMapping("/alarm")
-    public PageResponse<Alarm> queryAlarmListByPage(@RequestBody String json){
+    public String queryAlarmListByPage(@RequestBody String json){
         GetAlarmListRequest request = JSONObject.parseObject(json, GetAlarmListRequest.class);
-        PageResponse<Alarm> response = repairService.queryAlarmListByPage(request);
+        String response = repairService.queryAlarmListByPage(request);
         return response;
+    }
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/3/5 10:07
+     * @Description 报警类型
+     **/
+    @PostMapping("/alarm/type")
+    public String queryAlarmType(){
+        return repairService.queryAlarmType();
     }
 
 

@@ -1,5 +1,6 @@
 package com.tepth.maintenancedispatch.service.repair.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.tepth.maintenancedispatch.comm.*;
 import com.tepth.maintenancedispatch.dao.mapper.material.MaterialApplyMapper;
 import com.tepth.maintenancedispatch.dao.mapper.repair.FaultPhenomenonMapper;
@@ -11,12 +12,18 @@ import com.tepth.maintenancedispatch.dto.inner.*;
 import com.tepth.maintenancedispatch.exception.ServiceException;
 import com.tepth.maintenancedispatch.service.repair.IRepairService;
 import com.tepth.maintenancedispatch.util.CommonUtil;
+import com.tepth.maintenancedispatch.util.HttpUtil;
 import com.tepth.maintenancedispatch.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -36,6 +43,16 @@ public class RepairServiceImpl implements IRepairService {
     VehicleAlarmMapper vehicleAlarmMapper;
     @Autowired
     MaterialApplyMapper materialApplyMapper;
+
+    @Value("${url.alarm.type}")
+    String alarmTypeUrl;
+    @Value("${url.alarm.history}")
+    String alarmHistoryUrl;
+
+    private String appId = "vmApi2";
+    private String authKey = "C85756EDA6EF41E983985836BCFC5BA2";
+    private String workCode = "TepthV201";
+    private String sourceType = "Bus_CQ";
 
     @Override
     public PageResponse<RepairVO> queryRepairListByPageStatusArr(GetRepairListPagingRequest request) {
@@ -216,16 +233,43 @@ public class RepairServiceImpl implements IRepairService {
     }
 
     @Override
-    public PageResponse<Alarm> queryAlarmListByPage(GetAlarmListRequest request) {
-        PageResponse<Alarm> response = new PageResponse<>();
+    public String queryAlarmListByPage(GetAlarmListRequest request) {
 
-        QueryPage page = Global.getQueryPage(request);
-        Map<String, Object> map = new HashMap<>();
-        map.put("queryPage", page);
-        map.put("vehicleId", request.getVehicleId());
+        String[] listVehicleCode = {request.getVehicleNo()};
+        Date startDate = request.getStartDate();
+        Date endDate = request.getEndDate();
+        Integer alarmLevel = request.getAlarmLevel();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("appId", appId);
+        jsonObject.put("authKey", authKey);
+        jsonObject.put("workCode", workCode);
+        jsonObject.put("sourceType", sourceType);
+        jsonObject.put("listVehicleCode", listVehicleCode);
+        jsonObject.put("startDate", startDate);
+        jsonObject.put("endDate", endDate);
+        jsonObject.put("alarmLevel", alarmLevel);
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set("Content-Type", "application/json;charset=utf-8");
+        requestHeaders.setAcceptCharset(Arrays.asList(Charset.forName("utf-8")));
+        HttpEntity<String> requestEntity = new HttpEntity<>(jsonObject.toJSONString(), requestHeaders);
+        String responseStr = HttpUtil.commHttpRequest(alarmHistoryUrl, HttpMethod.POST, requestEntity, String.class);
 
-        //TODO 调用.net接口 查询报警列表
+        return responseStr;
+    }
 
-        return response;
+    @Override
+    public String queryAlarmType() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("appId", appId);
+        jsonObject.put("authKey", authKey);
+        jsonObject.put("workCode", workCode);
+        jsonObject.put("sourceType", sourceType);
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set("Content-Type", "application/json;charset=utf-8");
+        requestHeaders.setAcceptCharset(Arrays.asList(Charset.forName("utf-8")));
+        HttpEntity<String> requestEntity = new HttpEntity<>(jsonObject.toJSONString(), requestHeaders);
+        String responseStr = HttpUtil.commHttpRequest(alarmTypeUrl, HttpMethod.POST, requestEntity, String.class);
+        System.out.println(responseStr);
+        return responseStr;
     }
 }

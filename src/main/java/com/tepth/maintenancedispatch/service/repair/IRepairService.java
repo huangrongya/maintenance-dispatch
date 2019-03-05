@@ -68,5 +68,13 @@ public interface IRepairService {
      * @Date 2019/2/27 10:38
      * @Description 获取报警记录列表
      **/
-    PageResponse<Alarm> queryAlarmListByPage(GetAlarmListRequest request);
+    String queryAlarmListByPage(GetAlarmListRequest request);
+
+    /**
+     * @Author royle.huang
+     * @Date 2019/3/5 10:08
+     * @Description 查询预警类型
+     **/
+    String queryAlarmType();
+
 }

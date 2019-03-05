@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BaseResponse {
 
-    private int code=0;
+    private int code=200;
 
     private String msg;
 }
